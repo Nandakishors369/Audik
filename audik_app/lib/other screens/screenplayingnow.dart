@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:marquee/marquee.dart';
 
 class playingNow extends StatefulWidget {
   const playingNow({super.key});
@@ -19,12 +20,17 @@ class _playingNowState extends State<playingNow> {
   bool isplaying = true;
   void initState() {
     super.initState();
+    setState(() {});
     player.open(
         Playlist(audios: [
-          Audio("assets/Ruth-B-Dandelions.mp3"),
-          Audio('assets/Rosa_Linn_-_SNAP_9jaBam.com.mp3')
+          Audio("assets/Ruth-B-Dandelions.mp3",
+              metas: Metas(title: "Dandelions - Ruth B.", artist: "Ruth B.")),
+          Audio('assets/Rosa_Linn_-_SNAP_9jaBam.com.mp3',
+              metas: Metas(title: "SNAP - Rosa Linn", artist: "Rosa Linn")),
         ]),
         showNotification: true);
+    player.play();
+    setState(() {});
   }
 
   void PlayPauseButton() async {
@@ -65,7 +71,7 @@ class _playingNowState extends State<playingNow> {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Text(
-                          "Now Playng",
+                          "Now Playing",
                           style: GoogleFonts.montserrat(
                               textStyle: const TextStyle(
                                   fontSize: 32,
@@ -114,9 +120,10 @@ class _playingNowState extends State<playingNow> {
                   padding: const EdgeInsets.fromLTRB(15, 0, 15, 15),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.center,
+                    mainAxisSize: MainAxisSize.min,
                     children: [
                       Text(
-                        "Name of the song",
+                        player.getCurrentAudioTitle,
                         style: GoogleFonts.montserrat(
                             textStyle: TextStyle(
                                 fontSize: 22,
