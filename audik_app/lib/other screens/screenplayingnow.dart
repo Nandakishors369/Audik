@@ -18,19 +18,40 @@ class _playingNowState extends State<playingNow> {
   Duration duration = Duration.zero;
   Duration position = Duration.zero;
   bool isplaying = true;
+  late String head;
   void initState() {
     super.initState();
-    setState(() {});
+
+    print("hi");
+
     player.open(
         Playlist(audios: [
           Audio("assets/Ruth-B-Dandelions.mp3",
-              metas: Metas(title: "Dandelions - Ruth B.", artist: "Ruth B.")),
+              metas: Metas(
+                title: "Dandelions - Ruth B.",
+                artist: "Ruth B.",
+              )),
           Audio('assets/Rosa_Linn_-_SNAP_9jaBam.com.mp3',
               metas: Metas(title: "SNAP - Rosa Linn", artist: "Rosa Linn")),
         ]),
         showNotification: true);
-    player.play();
-    setState(() {});
+    player.pause();
+    header();
+    print("done");
+
+    setState(() {
+      print("hmmmmmm");
+      player.pause();
+    });
+    print("bye");
+  }
+
+  @override
+  void dispose() {
+    print("helloooooo");
+    // TODO: implement dispose
+    super.dispose();
+    player.stop();
   }
 
   void PlayPauseButton() async {
@@ -47,8 +68,16 @@ class _playingNowState extends State<playingNow> {
     }
   }
 
+  void header() {
+    setState(() {
+      head = player.getCurrentAudioTitle;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
+    final height = MediaQuery.of(context).size.height;
+    final width = MediaQuery.of(context).size.width;
     return Scaffold(
       backgroundColor: Color.fromARGB(255, 21, 21, 21),
       body: SafeArea(
@@ -123,7 +152,7 @@ class _playingNowState extends State<playingNow> {
                     mainAxisSize: MainAxisSize.min,
                     children: [
                       Text(
-                        player.getCurrentAudioTitle,
+                        "From Assets" /* player.getCurrentAudioTitle */,
                         style: GoogleFonts.montserrat(
                             textStyle: TextStyle(
                                 fontSize: 22,
@@ -212,6 +241,31 @@ class _playingNowState extends State<playingNow> {
                           }
                         },
                         icon: Icon(Icons.skip_next),
+                        color: Colors.white,
+                      ),
+                    ],
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.fromLTRB(15, 15, 15, 15),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      IconButton(
+                          onPressed: () {},
+                          icon: Icon(
+                            Icons.loop_sharp,
+                            color: Colors.white,
+                          )),
+                      SizedBox(
+                        width: 45,
+                      ),
+                      SizedBox(
+                        width: 45,
+                      ),
+                      IconButton(
+                        onPressed: () {},
+                        icon: Icon(Icons.shuffle),
                         color: Colors.white,
                       ),
                     ],
