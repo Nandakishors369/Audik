@@ -61,42 +61,49 @@ class librarySearch extends StatelessWidget {
                     MaterialPageRoute(
                         builder: ((context) => ScreenFavorite())));
               },
-              child: Container(
-                height: 60,
-                width: 400,
-                decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(8),
-                    color: Color.fromARGB(255, 0, 0, 0)),
-                child: Row(
-                  children: [
-                    SizedBox(
-                      width: 20,
+              child: Padding(
+                padding: const EdgeInsets.fromLTRB(10, 0, 10, 0),
+                child: Container(
+                  height: 60,
+                  width: MediaQuery.of(context).size.width,
+                  decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(8),
+                      color: Color.fromARGB(255, 0, 0, 0)),
+                  child: Padding(
+                    padding: const EdgeInsets.fromLTRB(10, 0, 10, 0),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Row(
+                          children: [
+                            Icon(
+                              Icons.favorite_border,
+                              color: Colors.white,
+                            ),
+                            SizedBox(
+                              width: 15,
+                            ),
+                            Text("Favorite Tracks",
+                                style: GoogleFonts.montserrat(
+                                  textStyle: const TextStyle(
+                                      fontSize: 15,
+                                      color: Colors.white,
+                                      fontWeight: FontWeight.w700),
+                                )),
+                          ],
+                        ),
+
+                        /* SizedBox(
+                          width: 190,
+                        ), */
+                        Icon(
+                          Icons.arrow_forward_ios,
+                          color: Colors.white,
+                          size: 20,
+                        )
+                      ],
                     ),
-                    Icon(
-                      Icons.favorite_border,
-                      color: Colors.white,
-                    ),
-                    SizedBox(
-                      width: 15,
-                    ),
-                    Text(
-                      "Favorite Tracks",
-                      style: GoogleFonts.montserrat(
-                        textStyle: const TextStyle(
-                            fontSize: 15,
-                            color: Colors.white,
-                            fontWeight: FontWeight.w700),
-                      ),
-                    ),
-                    SizedBox(
-                      width: 190,
-                    ),
-                    Icon(
-                      Icons.arrow_forward_ios,
-                      color: Colors.white,
-                      size: 20,
-                    )
-                  ],
+                  ),
                 ),
               ),
             ),
@@ -106,23 +113,27 @@ class librarySearch extends StatelessWidget {
             GestureDetector(
               onTap: () => Navigator.push(context,
                   MaterialPageRoute(builder: ((context) => addPlaylist()))),
-              child: Row(
-                children: [
-                  headings("Playlist"),
-                  SizedBox(
-                    width: 265,
-                  ),
-                  Icon(
-                    Icons.arrow_forward_ios,
-                    color: Colors.white,
-                    size: 20,
-                  )
-                ],
+              child: Padding(
+                padding: const EdgeInsets.fromLTRB(0, 0, 20, 0),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    headings("Playlist"),
+                    /*  SizedBox(
+                      width: 265,
+                    ), */
+                    Icon(
+                      Icons.arrow_forward_ios,
+                      color: Colors.white,
+                      size: 20,
+                    )
+                  ],
+                ),
               ),
             ),
             play(),
             SizedBox(
-              height: 15,
+              height: 10,
             ),
             headings("Folders"),
             play()
@@ -236,8 +247,9 @@ class _playingCardState extends State<playingCard> {
         width: 50,
       ),
       title: Marquee(
-        text: "hello",
+        text: "Working on it - User ",
         style: TextStyle(color: Colors.white),
+        blankSpace: 80,
       ),
       trailing: Row(
         mainAxisSize: MainAxisSize.min,

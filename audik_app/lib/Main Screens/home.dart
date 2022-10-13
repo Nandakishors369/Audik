@@ -25,7 +25,10 @@ class _homeScreenState extends State<homeScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       bottomSheet: Container(
-          height: 60, width: 500, color: Colors.black, child: playingCard()),
+          height: 60,
+          width: MediaQuery.of(context).size.width,
+          color: Colors.black,
+          child: playingCard()),
       backgroundColor: const Color.fromARGB(255, 21, 21, 21),
       body: SafeArea(
         child: SingleChildScrollView(
