@@ -135,7 +135,7 @@ class _SettingScreenState extends State<SettingScreen> {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Text(
-                    "Share The App",
+                    "Share This App",
                     style: GoogleFonts.montserrat(
                         textStyle: const TextStyle(
                       fontSize: 20,
