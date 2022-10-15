@@ -10,6 +10,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
 import 'package:google_fonts/google_fonts.dart';
+import 'package:on_audio_query/on_audio_query.dart';
 
 import '../other screens/screenplayingnow.dart';
 
@@ -21,6 +22,11 @@ class homeScreen extends StatefulWidget {
 }
 
 class _homeScreenState extends State<homeScreen> {
+  final OnAudioQuery _audioQuery = OnAudioQuery();
+  songName() async {
+    List<SongModel> songlisting = await _audioQuery.querySongs();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -97,7 +103,7 @@ class _homeScreenState extends State<homeScreen> {
                 child: Row(
                   children: [
                     Text(
-                      "Mostly Played",
+                      "Your Dashboard",
                       style: GoogleFonts.montserrat(
                         textStyle: const TextStyle(
                             fontSize: 23,
@@ -247,6 +253,7 @@ class _homeScreenState extends State<homeScreen> {
                 child: Image.asset(
                   "assets/Music Brand and App Logo (1).png",
                   width: 132,
+                  //height: 132,
                 ),
               ),
             ),

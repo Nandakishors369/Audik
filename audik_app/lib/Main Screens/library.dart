@@ -250,6 +250,7 @@ class _playingCardState extends State<playingCard> {
         text: "Working on it - User ",
         style: TextStyle(color: Colors.white),
         blankSpace: 80,
+        pauseAfterRound: Duration(seconds: 2),
       ),
       trailing: Row(
         mainAxisSize: MainAxisSize.min,

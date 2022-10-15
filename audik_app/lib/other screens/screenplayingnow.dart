@@ -35,8 +35,7 @@ class _playingNowState extends State<playingNow> {
               metas: Metas(title: "SNAP - Rosa Linn", artist: "Rosa Linn")),
         ]),
         showNotification: true);
-    player.pause();
-    header();
+
     print("done");
 
     setState(() {
@@ -66,12 +65,6 @@ class _playingNowState extends State<playingNow> {
         isplaying = true;
       });
     }
-  }
-
-  void header() {
-    setState(() {
-      head = player.getCurrentAudioTitle;
-    });
   }
 
   @override
@@ -138,9 +131,12 @@ class _playingNowState extends State<playingNow> {
                 ),
                 Image.asset(
                   "assets/Music Brand and App Logo (1).png",
-                  width: 320,
+                  /* width: 320,
                   height: 320,
-                  fit: BoxFit.fill,
+                  fit: BoxFit.fill, */
+                  fit: BoxFit.contain,
+                  height: 320,
+                  width: 320,
                 ),
                 SizedBox(
                   height: 32,
@@ -152,7 +148,7 @@ class _playingNowState extends State<playingNow> {
                     mainAxisSize: MainAxisSize.min,
                     children: [
                       Text(
-                        "From Assets" /* player.getCurrentAudioTitle */,
+                        player.getCurrentAudioTitle,
                         style: GoogleFonts.montserrat(
                             textStyle: TextStyle(
                                 fontSize: 22,
