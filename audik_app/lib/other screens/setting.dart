@@ -13,13 +13,9 @@ class SettingScreen extends StatefulWidget {
 }
 
 class _SettingScreenState extends State<SettingScreen> {
-  final OnAudioQuery _audioQuery = OnAudioQuery();
-  songName() async {
-    List<SongModel> songlisting = await _audioQuery.querySongs();
-  }
-
   @override
   Widget build(BuildContext context) {
+    final OnAudioQuery _audioQuery = OnAudioQuery();
     return Scaffold(
       backgroundColor: Color.fromARGB(255, 138, 138, 138),
       body: SafeArea(
@@ -29,6 +25,8 @@ class _SettingScreenState extends State<SettingScreen> {
             mainAxisSize: MainAxisSize.min,
             children: [
               favoritesHomeListing(),
+              favoritesHomeListing(),
+              // test(),
               FutureBuilder<List<SongModel>>(
                 future: _audioQuery.querySongs(
                   sortType: null,
@@ -139,6 +137,7 @@ class _SettingScreenState extends State<SettingScreen> {
     );
   }
 }
+
 
 
 /* Column(
