@@ -47,6 +47,8 @@ class _homeScreenState extends State<homeScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final height = MediaQuery.of(context).size.height;
+    final width = MediaQuery.of(context).size.width;
     return Scaffold(
       bottomSheet: Container(
           height: 60,
@@ -121,7 +123,7 @@ class _homeScreenState extends State<homeScreen> {
                 child: Row(
                   children: [
                     Text(
-                      "Your Dashboard",
+                      "Your DashBord",
                       style: GoogleFonts.montserrat(
                         textStyle: const TextStyle(
                             fontSize: 23,
@@ -132,7 +134,7 @@ class _homeScreenState extends State<homeScreen> {
                   ],
                 ),
               ),
-              mostlyPlayed(),
+              recentsCard(),
               Padding(
                 padding: const EdgeInsets.fromLTRB(25, 5, 0, 4),
                 child: Row(
@@ -249,6 +251,8 @@ class _homeScreenState extends State<homeScreen> {
 
   //----------------------------------------MOSTLY-PLAYED-CARD--------------------------------------------------
   mostlyPlayedCard() {
+    final height = MediaQuery.of(context).size.height;
+    final width = MediaQuery.of(context).size.width;
     return GestureDetector(
       onTap: () {
         Navigator.push(
@@ -279,7 +283,7 @@ class _homeScreenState extends State<homeScreen> {
               height: 15,
             ),
             Text(
-              "Name here",
+              "$height",
               style: GoogleFonts.montserrat(
                   textStyle: const TextStyle(
                       fontSize: 13.43,
@@ -288,6 +292,68 @@ class _homeScreenState extends State<homeScreen> {
             )
           ],
         ),
+      ),
+    );
+  }
+
+  //----------------------------------------Recents Card--------------------------------------------------
+  recentsCard() {
+    final height = MediaQuery.of(context).size.height;
+    final width = MediaQuery.of(context).size.width;
+    return Padding(
+      padding: const EdgeInsets.all(15.0),
+      child: Row(
+        children: [
+          Container(
+            decoration: BoxDecoration(
+                gradient: LinearGradient(
+                    begin: Alignment.topLeft,
+                    end: Alignment.bottomRight,
+                    colors: [
+                      Color.fromARGB(255, 0, 0, 255),
+                      Color.fromARGB(255, 31, 31, 255),
+                      Color.fromARGB(255, 73, 73, 255),
+                      Color.fromARGB(255, 120, 121, 255),
+                      Color.fromARGB(255, 163, 163, 255),
+                      Color.fromARGB(255, 191, 191, 255)
+                    ]),
+                color: Colors.green,
+                borderRadius: BorderRadius.all(Radius.circular(10))),
+            width: width * 0.449,
+            height: height * 0.16,
+          ),
+          SizedBox(
+            width: width * 0.03,
+          ),
+          Container(
+            child: Text(
+              'working on it',
+              style: GoogleFonts.montserrat(
+                textStyle: const TextStyle(
+                    fontSize: 20,
+                    color: Colors.white,
+                    fontWeight: FontWeight.bold),
+              ),
+            ),
+            width: width * 0.449,
+            height: height * 0.16,
+            decoration: BoxDecoration(
+                gradient: LinearGradient(
+                    begin: Alignment.topLeft,
+                    end: Alignment.bottomRight,
+                    colors: [
+                      Color.fromARGB(255, 0, 0, 255),
+                      Color.fromARGB(255, 31, 31, 255),
+                      Color.fromARGB(255, 73, 73, 255),
+                      Color.fromARGB(255, 120, 121, 255),
+                      Color.fromARGB(255, 163, 163, 255),
+                      Color.fromARGB(255, 191, 191, 255)
+                      //
+                    ]),
+                color: Colors.green,
+                borderRadius: BorderRadius.all(Radius.circular(10))),
+          ),
+        ],
       ),
     );
   }
