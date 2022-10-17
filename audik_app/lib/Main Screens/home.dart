@@ -1,4 +1,6 @@
+import 'package:assets_audio_player/assets_audio_player.dart';
 import 'package:audik_app/Main%20Screens/library.dart';
+import 'package:audik_app/Model/songModel.dart';
 import 'package:audik_app/Playlist/playlistscreen.dart';
 import 'package:audik_app/Playlist/songtoplaylist.dart';
 import 'package:audik_app/other%20screens/setting.dart';
@@ -10,6 +12,8 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
 import 'package:google_fonts/google_fonts.dart';
+import 'package:hive/hive.dart';
+import 'package:hive_flutter/adapters.dart';
 import 'package:on_audio_query/on_audio_query.dart';
 
 import '../basic operations/allSongsListing.dart';
@@ -23,6 +27,24 @@ class homeScreen extends StatefulWidget {
 }
 
 class _homeScreenState extends State<homeScreen> {
+  final box = SongBox.getInstance();
+  List<Audio> convertAudios = [];
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    List<Songs> dbSongs = box.values.toList();
+
+    for (var item in dbSongs) {
+      convertAudios.add(Audio.file(item.songurl!,
+          metas: Metas(
+              title: item.songname,
+              artist: item.artist,
+              id: item.id.toString())));
+    }
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -127,7 +149,7 @@ class _homeScreenState extends State<homeScreen> {
                   ],
                 ),
               ),
-              AllSongs()
+              getAllSongs()
             ],
           ),
         ),
@@ -355,22 +377,135 @@ class _homeScreenState extends State<homeScreen> {
       ),
     );
   }
+
+  //----------------------------------------All Songs Listing From DB--------------------------------------------------
+  getAllSongs() {
+    return ValueListenableBuilder<Box<Songs>>(
+        valueListenable: box.listenable(),
+        builder: (context, Box<Songs> allsongbox, child) {
+          List<Songs> allDbSongs = allsongbox.values.toList();
+
+          if (allDbSongs.isEmpty) {
+            return Center(
+              child: Text(
+                "Songs Not Found",
+                style: GoogleFonts.montserrat(
+                    textStyle: const TextStyle(
+                        fontSize: 13.43,
+                        color: Colors.white,
+                        fontWeight: FontWeight.w500)),
+              ),
+            );
+          }
+          if (allsongbox == null) {
+            return Center(
+              child: CircularProgressIndicator(),
+            );
+          }
+          return ListView.builder(
+              physics: const NeverScrollableScrollPhysics(),
+              shrinkWrap: true,
+              itemCount: allDbSongs.length,
+              itemBuilder: (context, index) {
+                Songs songs = allDbSongs[index];
+                return Padding(
+                  padding: const EdgeInsets.fromLTRB(0, 5, 0, 2),
+                  child: ListTile(
+                    onTap: (() {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: ((context) => playingNow()),
+                        ),
+                      );
+                    }),
+                    leading: QueryArtworkWidget(
+                      artworkFit: BoxFit.cover,
+                      id: songs.id!,
+                      type: ArtworkType.AUDIO,
+                      artworkQuality: FilterQuality.high,
+                      size: 2000,
+                      quality: 100,
+                      artworkBorder: BorderRadius.circular(50),
+                      nullArtworkWidget: ClipRRect(
+                        borderRadius:
+                            const BorderRadius.all(Radius.circular(50)),
+                        child: Image.asset(
+                          'assets/Music Brand and App Logo (1).png',
+                          fit: BoxFit.cover,
+                        ),
+                      ),
+                    ),
+                    title: SingleChildScrollView(
+                      child: Text(
+                        songs.songname!,
+                        maxLines: 1,
+                        overflow: TextOverflow.ellipsis,
+                        style: GoogleFonts.montserrat(
+                          textStyle: const TextStyle(
+                              fontSize: 13.43,
+                              color: Colors.white,
+                              fontWeight: FontWeight.w500),
+                        ),
+                      ),
+                    ),
+                    trailing: IconButton(
+                      onPressed: (() {
+                        showModalBottomSheet(
+                          backgroundColor: Colors.black,
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.vertical(
+                              top: Radius.circular(20),
+                            ),
+                          ),
+                          context: context,
+                          builder: ((context) {
+                            return SizedBox(
+                              height: 120,
+                              child: Column(
+                                children: [
+                                  TextButton(
+                                      onPressed: () {
+                                        Navigator.push(
+                                            context,
+                                            MaterialPageRoute(
+                                                builder: ((context) =>
+                                                    songtoPlaylist())));
+                                      },
+                                      child: Text("Add to Playlist")),
+                                  SizedBox(
+                                    height: 10,
+                                  ),
+                                  TextButton(
+                                      onPressed: () {
+                                        Navigator.pop(context);
+                                        addtoFavorites();
+                                      },
+                                      child: Text("Add to Favorites"))
+                                ],
+                              ),
+                            );
+                          }),
+                        );
+                      }),
+                      icon: const Icon(
+                        Icons.more_vert,
+                        color: Colors.grey,
+                      ),
+                    ),
+                  ),
+                );
+              });
+        });
+  }
 }
 
+ 
 
 
 
-/* void requestStoragePermission() async {
-    if (!kIsWeb) {
-      bool permissionStatus = await _audioQuery.permissionsStatus();
-      if (!permissionStatus) {
-        await _audioQuery.permissionsRequest();
-      }
-      setState(() {});
-    }
-  }
 
-  hello() {
+  /* hello() {
     FutureBuilder<List<SongModel>>(
       future: _audioQuery.querySongs(
         sortType: null,
@@ -405,7 +540,7 @@ class _homeScreenState extends State<homeScreen> {
     );
   }
 }
- */
+ */ 
 
 /* IconButton(
               onPressed: (() {

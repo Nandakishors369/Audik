@@ -1,9 +1,15 @@
 import 'package:audik_app/Main%20Screens/home.dart';
 import 'package:audik_app/Main%20Screens/navigation.dart';
 import 'package:audik_app/Main%20Screens/splash.dart';
+import 'package:audik_app/Model/songModel.dart';
 import 'package:flutter/material.dart';
+import 'package:hive_flutter/adapters.dart';
 
-void main() {
+Future<void> main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Hive.initFlutter();
+  Hive.registerAdapter(SongsAdapter());
+  await Hive.openBox<Songs>(boxname);
   runApp(const MyApp());
 }
 
@@ -15,7 +21,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Audik',
-      home: navigationBar(),
+      home: SplashScreen(),
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),

@@ -1,6 +1,8 @@
 import 'dart:async';
 
+import 'package:assets_audio_player/assets_audio_player.dart';
 import 'package:audik_app/Main%20Screens/home.dart';
+import 'package:audik_app/Model/songModel.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
@@ -16,31 +18,20 @@ class SplashScreen extends StatefulWidget {
   State<SplashScreen> createState() => _SplashScreenState();
 }
 
+final audioQuery = OnAudioQuery();
+final box = SongBox.getInstance();
+
+List<SongModel> fetchSongs = [];
+List<SongModel> allSongs = [];
+List<Audio> fullsongs = [];
+
 class _SplashScreenState extends State<SplashScreen> {
-  final OnAudioQuery _audioQuery = OnAudioQuery();
   @override
   void initState() {
-    // TODO: implement initState
+    requestStoragePermission();
+    gotoHome();
     super.initState();
-    songName() async {
-      print("thudangi");
-      List<SongModel> songlisting = await _audioQuery.querySongs();
-      print("kayinj");
-    }
-
-    Timer(Duration(seconds: 3), (() {
-      Navigator.pushReplacement(
-          context, MaterialPageRoute(builder: (context) => navigationBar()));
-    }));
   }
-  /* @override
-  void initState() {
-    super.initState();
-    Timer(Duration(seconds: 3), (() {
-      Navigator.pushReplacement(
-          context, MaterialPageRoute(builder: (context) => navigationBar()));
-    }));
-  } */
 
   @override
   Widget build(BuildContext context) {
@@ -54,5 +45,36 @@ class _SplashScreenState extends State<SplashScreen> {
         height: 320,
       ))),
     );
+  }
+
+  requestStoragePermission() async {
+    bool permissionStatus = await audioQuery.permissionsStatus();
+    if (!permissionStatus) {
+      await audioQuery.permissionsRequest();
+
+      fetchSongs = await audioQuery.querySongs();
+
+      for (var element in fetchSongs) {
+        if (element.fileExtension == "mp3") {
+          allSongs.add(element);
+        }
+      }
+      allSongs.forEach((element) {
+        box.add(Songs(
+            songname: element.title,
+            artist: element.artist,
+            duration: element.duration,
+            id: element.id,
+            songurl: element.uri));
+      });
+    }
+    setState(() {});
+  }
+
+  Future gotoHome() async {
+    Timer(Duration(seconds: 5), (() {
+      Navigator.pushReplacement(
+          context, MaterialPageRoute(builder: (context) => navigationBar()));
+    }));
   }
 }
