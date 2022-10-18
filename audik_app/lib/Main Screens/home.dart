@@ -7,7 +7,7 @@ import 'package:audik_app/Playlist/playlistscreen.dart';
 import 'package:audik_app/Playlist/songtoplaylist.dart';
 import 'package:audik_app/other%20screens/setting.dart';
 import 'package:audik_app/Main%20Screens/search.dart';
-import 'package:audik_app/basic%20operations/addtofavorites.dart';
+
 
 import 'package:flutter/foundation.dart';
 
@@ -449,10 +449,7 @@ class _homeScreenState extends State<homeScreen> {
                                     height: 10,
                                   ),
                                   TextButton(
-                                      onPressed: () {
-                                        Navigator.pop(context);
-                                        const addtoFavorites();
-                                      },
+                                      onPressed: () {},
                                       child: const Text("Add to Favorites"))
                                 ],
                               ),
