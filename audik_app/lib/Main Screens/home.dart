@@ -53,11 +53,12 @@ class _homeScreenState extends State<homeScreen> {
     final height = MediaQuery.of(context).size.height;
     final width = MediaQuery.of(context).size.width;
     return Scaffold(
-      bottomSheet: Container(
+      bottomSheet: playingCard(),
+      /* Container(
           height: 60,
           width: MediaQuery.of(context).size.width,
           color: Colors.black,
-          child: const playingCard()),
+          child: const playingCard()), */
       backgroundColor: const Color.fromARGB(255, 21, 21, 21),
       body: SafeArea(
         child: SingleChildScrollView(
@@ -229,76 +230,6 @@ class _homeScreenState extends State<homeScreen> {
     );
   }
 
-  //----------------------------------------MOSTLY-PLAYED-LIST-------------------------------------------
-  mostlyPlayed() {
-    String hello;
-    return Padding(
-      padding: const EdgeInsets.fromLTRB(8, 5, 0, 0),
-      child: SizedBox(
-        height: 210,
-        child: ListView.separated(
-            scrollDirection: Axis.horizontal,
-            padding: const EdgeInsets.all(10),
-            itemBuilder: ((context, index) {
-              return mostlyPlayedCard();
-            }),
-            separatorBuilder: ((context, index) {
-              return const SizedBox(
-                width: 10,
-              );
-            }),
-            itemCount: 8),
-      ),
-    );
-  }
-
-  //----------------------------------------MOSTLY-PLAYED-CARD--------------------------------------------------
-  mostlyPlayedCard() {
-    final height = MediaQuery.of(context).size.height;
-    final width = MediaQuery.of(context).size.width;
-    return GestureDetector(
-      onTap: () {
-        /*  Navigator.push(
-          context,
-          MaterialPageRoute(
-            builder: ((context) => const playingNow()),
-          ),
-        ); */
-      },
-      child: Container(
-        height: 10,
-        // width: 132,
-        color: const Color.fromARGB(0, 3, 128, 230),
-        child: Column(
-          children: [
-            Padding(
-              padding: const EdgeInsets.fromLTRB(0, 10, 0, 0),
-              child: ClipRRect(
-                borderRadius: BorderRadius.circular(15),
-                child: Image.asset(
-                  "assets/Music Brand and App Logo (1).png",
-                  width: 132,
-                  //height: 132,
-                ),
-              ),
-            ),
-            const SizedBox(
-              height: 15,
-            ),
-            Text(
-              "$height",
-              style: GoogleFonts.montserrat(
-                  textStyle: const TextStyle(
-                      fontSize: 13.43,
-                      color: Colors.white,
-                      fontWeight: FontWeight.w500)),
-            )
-          ],
-        ),
-      ),
-    );
-  }
-
   //----------------------------------------Recents Card--------------------------------------------------
   recentsCard() {
     final height = MediaQuery.of(context).size.height;
@@ -369,16 +300,7 @@ class _homeScreenState extends State<homeScreen> {
           List<Songs> allDbSongs = allsongbox.values.toList();
           //----------------------------------------If songs are not there--------------------------------------------------
           if (allDbSongs.isEmpty) {
-            return Center(
-              child: Text(
-                "Songs Not Found",
-                style: GoogleFonts.montserrat(
-                    textStyle: const TextStyle(
-                        fontSize: 13.43,
-                        color: Colors.white,
-                        fontWeight: FontWeight.w500)),
-              ),
-            );
+            return Center(child: CircularProgressIndicator());
           }
           //----------------------------------------If the list is null--------------------------------------------------
           if (allsongbox == null) {

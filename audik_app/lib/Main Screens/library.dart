@@ -1,3 +1,4 @@
+import 'package:assets_audio_player/assets_audio_player.dart';
 import 'package:audik_app/Playlist/addplaylist.dart';
 import 'package:audik_app/other%20screens/favorite.dart';
 import 'package:audik_app/Playlist/playlistscreen.dart';
@@ -8,6 +9,7 @@ import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:marquee/marquee.dart';
+import 'package:on_audio_query/on_audio_query.dart';
 
 class librarySearch extends StatelessWidget {
   const librarySearch({super.key});
@@ -233,49 +235,85 @@ class playingCard extends StatefulWidget {
 }
 
 class _playingCardState extends State<playingCard> {
+  AssetsAudioPlayer player = AssetsAudioPlayer.withId('0');
   @override
   Widget build(BuildContext context) {
-    return ListTile(
-      onTap: (() {
-        /* Navigator.push(
-            context, MaterialPageRoute(builder: ((context) => playingNow()))); */
-      }),
-      contentPadding: EdgeInsets.fromLTRB(5, 2, 5, 10),
-      leading: Image.asset(
-        'assets/Music Brand and App Logo (1).png',
-        height: 50,
-        width: 50,
-      ),
-      title: Marquee(
-        text: "Working on it - User ",
-        style: TextStyle(color: Colors.white),
-        blankSpace: 80,
-        pauseAfterRound: Duration(seconds: 2),
-      ),
-      trailing: Row(
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          IconButton(
-              onPressed: () {},
-              icon: Icon(
-                Icons.skip_previous,
-                color: Colors.white,
-              )),
-          IconButton(
-              onPressed: () {},
-              icon: Icon(
-                Icons.play_arrow,
-                color: Colors.white,
-              )),
-          IconButton(
-              onPressed: () {},
-              icon: Icon(
-                Icons.skip_next,
-                color: Colors.white,
-              ))
-        ],
-      ),
-    );
+    return player.builderCurrent(builder: (context, playing) {
+      return Container(
+        height: 60,
+        width: MediaQuery.of(context).size.width,
+        color: Colors.black,
+        child: ListTile(
+          onTap: (() {
+            Navigator.push(context,
+                MaterialPageRoute(builder: ((context) => playingNow())));
+          }),
+          contentPadding: EdgeInsets.fromLTRB(5, 2, 5, 10),
+          leading: QueryArtworkWidget(
+            id: int.parse(playing.audio.audio.metas.id!),
+            type: ArtworkType.AUDIO,
+            artworkWidth: 50,
+            artworkHeight: 50,
+            artworkFit: BoxFit.fill,
+            nullArtworkWidget: ClipRect(
+              child: Image.asset(
+                "assets/Music Brand and App Logo (1).png",
+                fit: BoxFit.cover,
+                width: 50,
+                height: 50,
+              ),
+            ),
+          ),
+          title: Marquee(
+            text: player.getCurrentAudioTitle,
+            style: TextStyle(color: Colors.white),
+            blankSpace: 80,
+            pauseAfterRound: Duration(seconds: 2),
+          ),
+          trailing: PlayerBuilder.isPlaying(
+            player: player,
+            builder: (context, isPlaying) {
+              return Row(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  IconButton(
+                      onPressed: () async {
+                        await player.previous();
+                        setState(() {});
+                        if (isPlaying == false) {
+                          player.pause();
+                        }
+                      },
+                      icon: Icon(
+                        Icons.skip_previous,
+                        color: Colors.white,
+                      )),
+                  IconButton(
+                    onPressed: () {
+                      player.playOrPause();
+                    },
+                    icon: Icon(isPlaying ? Icons.pause : Icons.play_arrow),
+                    color: Colors.white,
+                  ),
+                  IconButton(
+                      onPressed: () async {
+                        await player.next();
+                        setState(() {});
+                        if (isPlaying == false) {
+                          player.pause();
+                        }
+                      },
+                      icon: Icon(
+                        Icons.skip_next,
+                        color: Colors.white,
+                      ))
+                ],
+              );
+            },
+          ),
+        ),
+      );
+    });
 
     /* Padding(
       padding: const EdgeInsets.all(8.0),

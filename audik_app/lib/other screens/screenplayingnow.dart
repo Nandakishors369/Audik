@@ -30,14 +30,14 @@ class _playingNowState extends State<playingNow> {
     setState(() {});
   }
 
-  @override
+  /* @override
   void dispose() {
     print("helloooooo");
     // TODO: implement dispose
     super.dispose();
     player.stop();
   }
-
+ */
   /* void PlayPauseButton() async {
     if (isplaying == true) {
       await player.pause();
