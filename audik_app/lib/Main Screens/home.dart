@@ -1,4 +1,6 @@
 import 'package:assets_audio_player/assets_audio_player.dart';
+import 'package:audik_app/Main%20Screens/Recently%20and%20Mostly/mostlyPlayed.dart';
+import 'package:audik_app/Main%20Screens/Recently%20and%20Mostly/recentlyPlayed.dart';
 import 'package:audik_app/Main%20Screens/library.dart';
 import 'package:audik_app/Model/songModel.dart';
 import 'package:audik_app/Playlist/playlistscreen.dart';
@@ -65,7 +67,7 @@ class _homeScreenState extends State<homeScreen> {
           child: Column(
             children: [
               Container(
-                height: 90,
+                height: height * .096,
                 decoration: const BoxDecoration(
                   color: Color.fromARGB(255, 0, 0, 0),
                   borderRadius: BorderRadius.only(
@@ -79,10 +81,10 @@ class _homeScreenState extends State<homeScreen> {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Text(
-                        "Hello User",
+                        welcomeuser(),
                         style: GoogleFonts.montserrat(
                           textStyle: const TextStyle(
-                              fontSize: 32,
+                              fontSize: 28,
                               color: Colors.white,
                               fontWeight: FontWeight.w700),
                         ),
@@ -127,7 +129,7 @@ class _homeScreenState extends State<homeScreen> {
                 child: Row(
                   children: [
                     Text(
-                      "Your DashBord",
+                      "Your Dashboard",
                       style: GoogleFonts.montserrat(
                         textStyle: const TextStyle(
                             fontSize: 23,
@@ -165,6 +167,8 @@ class _homeScreenState extends State<homeScreen> {
 
   //----------------------------------------FAVORITES-HOME-LIST-------------------------------------------
   favoritesHomeListing() {
+    final height = MediaQuery.of(context).size.height;
+    final width = MediaQuery.of(context).size.width;
     String hello;
     return Padding(
       padding: const EdgeInsets.fromLTRB(8, 5, 0, 0),
@@ -188,6 +192,8 @@ class _homeScreenState extends State<homeScreen> {
 
   //----------------------------------------FAVORITE-CARD--------------------------------------------------
   favoriteCard() {
+    final height = MediaQuery.of(context).size.height;
+    final width = MediaQuery.of(context).size.width;
     return GestureDetector(
       onTap: () {
         Navigator.push(
@@ -213,8 +219,8 @@ class _homeScreenState extends State<homeScreen> {
                 ),
               ),
             ),
-            const SizedBox(
-              height: 15,
+            SizedBox(
+              height: height * 0.016,
             ),
             Text(
               "Name here",
@@ -238,52 +244,99 @@ class _homeScreenState extends State<homeScreen> {
       padding: const EdgeInsets.all(15.0),
       child: Row(
         children: [
-          Container(
-            decoration: const BoxDecoration(
-                gradient: LinearGradient(
-                    begin: Alignment.topLeft,
-                    end: Alignment.bottomRight,
-                    colors: [
-                      Color.fromARGB(255, 0, 0, 255),
-                      Color.fromARGB(255, 31, 31, 255),
-                      Color.fromARGB(255, 73, 73, 255),
-                      Color.fromARGB(255, 120, 121, 255),
-                      Color.fromARGB(255, 163, 163, 255),
-                      Color.fromARGB(255, 191, 191, 255)
-                    ]),
-                color: Colors.green,
-                borderRadius: BorderRadius.all(Radius.circular(10))),
-            width: width * 0.449,
-            height: height * 0.16,
+          GestureDetector(
+            onTap: () {
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => mostlyPlayed(),
+                  ));
+            },
+            child: Container(
+              decoration: const BoxDecoration(
+                  gradient: LinearGradient(
+                      begin: Alignment.topLeft,
+                      end: Alignment.bottomRight,
+                      colors: [
+                        Color.fromARGB(255, 0, 0, 255),
+                        Color.fromARGB(255, 31, 31, 255),
+                        Color.fromARGB(255, 73, 73, 255),
+                        Color.fromARGB(255, 120, 121, 255),
+                        Color.fromARGB(255, 163, 163, 255),
+                        Color.fromARGB(255, 191, 191, 255)
+                      ]),
+                  color: Colors.green,
+                  borderRadius: BorderRadius.all(Radius.circular(10))),
+              width: width * 0.449,
+              height: height * 0.16,
+              child: Column(
+                children: [
+                  SizedBox(
+                    height: height * .065,
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Text(
+                      '''Mostly Played ''',
+                      style: GoogleFonts.montserrat(
+                        textStyle: const TextStyle(
+                            fontSize: 26,
+                            color: Color.fromARGB(255, 255, 255, 255),
+                            fontWeight: FontWeight.bold),
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ),
           ),
           SizedBox(
             width: width * 0.03,
           ),
-          Container(
-            width: width * 0.449,
-            height: height * 0.16,
-            decoration: const BoxDecoration(
-                gradient: LinearGradient(
-                    begin: Alignment.topLeft,
-                    end: Alignment.bottomRight,
-                    colors: [
-                      Color.fromARGB(255, 0, 0, 255),
-                      Color.fromARGB(255, 31, 31, 255),
-                      Color.fromARGB(255, 73, 73, 255),
-                      Color.fromARGB(255, 120, 121, 255),
-                      Color.fromARGB(255, 163, 163, 255),
-                      Color.fromARGB(255, 191, 191, 255)
-                      //
-                    ]),
-                color: Colors.green,
-                borderRadius: BorderRadius.all(Radius.circular(10))),
-            child: Text(
-              '''Recently Played''',
-              style: GoogleFonts.montserrat(
-                textStyle: const TextStyle(
-                    fontSize: 20,
-                    color: Colors.white,
-                    fontWeight: FontWeight.bold),
+          GestureDetector(
+            onTap: () {
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => recentlyPlayed(),
+                  ));
+            },
+            child: Container(
+              width: width * 0.449,
+              height: height * 0.16,
+              decoration: const BoxDecoration(
+                  gradient: LinearGradient(
+                      begin: Alignment.topLeft,
+                      end: Alignment.bottomRight,
+                      colors: [
+                        Color.fromARGB(255, 0, 0, 255),
+                        Color.fromARGB(255, 31, 31, 255),
+                        Color.fromARGB(255, 73, 73, 255),
+                        Color.fromARGB(255, 120, 121, 255),
+                        Color.fromARGB(255, 163, 163, 255),
+                        Color.fromARGB(255, 191, 191, 255)
+                        //
+                      ]),
+                  color: Colors.green,
+                  borderRadius: BorderRadius.all(Radius.circular(10))),
+              child: Column(
+                children: [
+                  SizedBox(
+                    height: height * 0.065,
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Text(
+                      '''Recently Played''',
+                      style: GoogleFonts.montserrat(
+                        textStyle: const TextStyle(
+                            fontSize: 26,
+                            color: Colors.white,
+                            fontWeight: FontWeight.bold),
+                      ),
+                    ),
+                  ),
+                ],
               ),
             ),
           ),
@@ -416,6 +469,21 @@ class _homeScreenState extends State<homeScreen> {
                 );
               });
         });
+  }
+
+  String welcomeuser() {
+    var hour = DateTime.now().hour;
+    if (hour < 12) {
+      return 'Good Morning User !';
+    }
+    if (hour < 16) {
+      return 'Good Afternoon User !';
+    }
+    if (hour < 21) {
+      return 'Good Evening User !';
+    }
+
+    return 'Good Night User !';
   }
 }
 
