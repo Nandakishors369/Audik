@@ -14,7 +14,7 @@ class playingNow extends StatefulWidget {
 }
 
 class _playingNowState extends State<playingNow> {
-  final player = AssetsAudioPlayer();
+  final player = AssetsAudioPlayer.withId('0');
   Duration duration = Duration.zero;
   Duration position = Duration.zero;
   bool isplaying = true;

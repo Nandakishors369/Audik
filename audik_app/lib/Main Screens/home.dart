@@ -27,8 +27,11 @@ class homeScreen extends StatefulWidget {
 }
 
 class _homeScreenState extends State<homeScreen> {
+  late bool isPlaying;
+  late bool playerVisibility;
   final box = SongBox.getInstance();
   List<Audio> convertAudios = [];
+  final AssetsAudioPlayer _audioPlayer = AssetsAudioPlayer.withId('0');
 
   @override
   void initState() {
@@ -54,7 +57,7 @@ class _homeScreenState extends State<homeScreen> {
           height: 60,
           width: MediaQuery.of(context).size.width,
           color: Colors.black,
-          child: playingCard()),
+          child: const playingCard()),
       backgroundColor: const Color.fromARGB(255, 21, 21, 21),
       body: SafeArea(
         child: SingleChildScrollView(
@@ -88,7 +91,7 @@ class _homeScreenState extends State<homeScreen> {
                           Navigator.push(
                             context,
                             MaterialPageRoute(
-                              builder: ((context) => SettingScreen()),
+                              builder: ((context) => const SettingScreen()),
                             ),
                           );
                         },
@@ -189,7 +192,7 @@ class _homeScreenState extends State<homeScreen> {
         Navigator.push(
           context,
           MaterialPageRoute(
-            builder: ((context) => ScreenPlaylist()),
+            builder: ((context) => const ScreenPlaylist()),
           ),
         );
       },
@@ -258,7 +261,7 @@ class _homeScreenState extends State<homeScreen> {
         Navigator.push(
           context,
           MaterialPageRoute(
-            builder: ((context) => playingNow()),
+            builder: ((context) => const playingNow()),
           ),
         );
       },
@@ -305,7 +308,7 @@ class _homeScreenState extends State<homeScreen> {
       child: Row(
         children: [
           Container(
-            decoration: BoxDecoration(
+            decoration: const BoxDecoration(
                 gradient: LinearGradient(
                     begin: Alignment.topLeft,
                     end: Alignment.bottomRight,
@@ -326,18 +329,9 @@ class _homeScreenState extends State<homeScreen> {
             width: width * 0.03,
           ),
           Container(
-            child: Text(
-              'working on it',
-              style: GoogleFonts.montserrat(
-                textStyle: const TextStyle(
-                    fontSize: 20,
-                    color: Colors.white,
-                    fontWeight: FontWeight.bold),
-              ),
-            ),
             width: width * 0.449,
             height: height * 0.16,
-            decoration: BoxDecoration(
+            decoration: const BoxDecoration(
                 gradient: LinearGradient(
                     begin: Alignment.topLeft,
                     end: Alignment.bottomRight,
@@ -352,6 +346,15 @@ class _homeScreenState extends State<homeScreen> {
                     ]),
                 color: Colors.green,
                 borderRadius: BorderRadius.all(Radius.circular(10))),
+            child: Text(
+              '''Recently Played''',
+              style: GoogleFonts.montserrat(
+                textStyle: const TextStyle(
+                    fontSize: 20,
+                    color: Colors.white,
+                    fontWeight: FontWeight.bold),
+              ),
+            ),
           ),
         ],
       ),
@@ -372,14 +375,21 @@ class _homeScreenState extends State<homeScreen> {
         itemBuilder: ((context, index) {
           return ListTile(
             onTap: (() {
+              _audioPlayer.open(
+                  Playlist(audios: convertAudios, startIndex: index),
+                  showNotification: true);
+              setState(() {
+                isPlaying = true;
+                playerVisibility = true;
+              });
               Navigator.push(
                 context,
                 MaterialPageRoute(
-                  builder: ((context) => playingNow()),
+                  builder: ((context) => const playingNow()),
                 ),
               );
             }),
-            leading: CircleAvatar(
+            leading: const CircleAvatar(
               backgroundImage:
                   AssetImage("assets/Music Brand and App Logo (1).png"),
             ),
@@ -398,7 +408,7 @@ class _homeScreenState extends State<homeScreen> {
               onPressed: (() {
                 showModalBottomSheet(
                   backgroundColor: Colors.black,
-                  shape: RoundedRectangleBorder(
+                  shape: const RoundedRectangleBorder(
                     borderRadius: BorderRadius.vertical(
                       top: Radius.circular(20),
                     ),
@@ -415,18 +425,18 @@ class _homeScreenState extends State<homeScreen> {
                                     context,
                                     MaterialPageRoute(
                                         builder: ((context) =>
-                                            songtoPlaylist())));
+                                            const songtoPlaylist())));
                               },
-                              child: Text("Add to Playlist")),
-                          SizedBox(
+                              child: const Text("Add to Playlist")),
+                          const SizedBox(
                             height: 10,
                           ),
                           TextButton(
                               onPressed: () {
                                 Navigator.pop(context);
-                                addtoFavorites();
+                                const addtoFavorites();
                               },
-                              child: Text("Add to Favorites"))
+                              child: const Text("Add to Favorites"))
                         ],
                       ),
                     );
@@ -450,7 +460,7 @@ class _homeScreenState extends State<homeScreen> {
         valueListenable: box.listenable(),
         builder: (context, Box<Songs> allsongbox, child) {
           List<Songs> allDbSongs = allsongbox.values.toList();
-
+          //----------------------------------------If songs are not there--------------------------------------------------
           if (allDbSongs.isEmpty) {
             return Center(
               child: Text(
@@ -463,11 +473,13 @@ class _homeScreenState extends State<homeScreen> {
               ),
             );
           }
+          //----------------------------------------If the list is null--------------------------------------------------
           if (allsongbox == null) {
-            return Center(
+            return const Center(
               child: CircularProgressIndicator(),
             );
           }
+          //----------------------------------------Showing songs in list tile--------------------------------------------------
           return ListView.builder(
               physics: const NeverScrollableScrollPhysics(),
               shrinkWrap: true,
@@ -481,10 +493,11 @@ class _homeScreenState extends State<homeScreen> {
                       Navigator.push(
                         context,
                         MaterialPageRoute(
-                          builder: ((context) => playingNow()),
+                          builder: ((context) => const playingNow()),
                         ),
                       );
                     }),
+                    //----------------------------------------Displaying The Song Image--------------------------------------------------
                     leading: QueryArtworkWidget(
                       artworkFit: BoxFit.cover,
                       id: songs.id!,
@@ -519,7 +532,7 @@ class _homeScreenState extends State<homeScreen> {
                       onPressed: (() {
                         showModalBottomSheet(
                           backgroundColor: Colors.black,
-                          shape: RoundedRectangleBorder(
+                          shape: const RoundedRectangleBorder(
                             borderRadius: BorderRadius.vertical(
                               top: Radius.circular(20),
                             ),
@@ -536,18 +549,18 @@ class _homeScreenState extends State<homeScreen> {
                                             context,
                                             MaterialPageRoute(
                                                 builder: ((context) =>
-                                                    songtoPlaylist())));
+                                                    const songtoPlaylist())));
                                       },
-                                      child: Text("Add to Playlist")),
-                                  SizedBox(
+                                      child: const Text("Add to Playlist")),
+                                  const SizedBox(
                                     height: 10,
                                   ),
                                   TextButton(
                                       onPressed: () {
                                         Navigator.pop(context);
-                                        addtoFavorites();
+                                        const addtoFavorites();
                                       },
-                                      child: Text("Add to Favorites"))
+                                      child: const Text("Add to Favorites"))
                                 ],
                               ),
                             );
