@@ -93,8 +93,8 @@ class _addPlaylistState extends State<addPlaylist> {
             ),
             trailing: IconButton(
               onPressed: (() {
-                Navigator.push(context,
-                    MaterialPageRoute(builder: ((context) => playingNow())));
+                /* Navigator.push(context,
+                    MaterialPageRoute(builder: ((context) => playingNow()))); */
               }),
               icon: const Icon(
                 Icons.play_arrow,

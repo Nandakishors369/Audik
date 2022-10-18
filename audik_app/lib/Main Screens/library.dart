@@ -237,8 +237,8 @@ class _playingCardState extends State<playingCard> {
   Widget build(BuildContext context) {
     return ListTile(
       onTap: (() {
-        Navigator.push(
-            context, MaterialPageRoute(builder: ((context) => playingNow())));
+        /* Navigator.push(
+            context, MaterialPageRoute(builder: ((context) => playingNow()))); */
       }),
       contentPadding: EdgeInsets.fromLTRB(5, 2, 5, 10),
       leading: Image.asset(

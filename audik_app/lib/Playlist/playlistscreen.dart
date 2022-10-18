@@ -53,10 +53,10 @@ class _ScreenPlaylistState extends State<ScreenPlaylist> {
                             padding: const EdgeInsets.fromLTRB(0, 0, 10, 0),
                             child: FloatingActionButton(
                               onPressed: () {
-                                Navigator.push(
+                                /* Navigator.push(
                                     context,
                                     MaterialPageRoute(
-                                        builder: ((context) => playingNow())));
+                                        builder: ((context) => playingNow()))); */
                               },
                               child: Icon(Icons.play_arrow),
                             ),
@@ -93,8 +93,8 @@ class _ScreenPlaylistState extends State<ScreenPlaylist> {
         itemBuilder: ((context, index) {
           return ListTile(
             onTap: () {
-              Navigator.push(context,
-                  MaterialPageRoute(builder: ((context) => playingNow())));
+              /* Navigator.push(context,
+                  MaterialPageRoute(builder: ((context) => playingNow()))); */
             },
             leading: const Image(
               image: AssetImage(

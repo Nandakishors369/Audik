@@ -27,7 +27,7 @@ class homeScreen extends StatefulWidget {
 }
 
 class _homeScreenState extends State<homeScreen> {
-  late bool isPlaying;
+  late bool isplaying;
   late bool playerVisibility;
   final box = SongBox.getInstance();
   List<Audio> convertAudios = [];
@@ -258,12 +258,12 @@ class _homeScreenState extends State<homeScreen> {
     final width = MediaQuery.of(context).size.width;
     return GestureDetector(
       onTap: () {
-        Navigator.push(
+        /*  Navigator.push(
           context,
           MaterialPageRoute(
             builder: ((context) => const playingNow()),
           ),
-        );
+        ); */
       },
       child: Container(
         height: 10,
@@ -361,99 +361,6 @@ class _homeScreenState extends State<homeScreen> {
     );
   }
 
-  //----------------------------------------ALL-SONGS-LISTING--------------------------------------------------
-
-  allSongs() {
-    Image leadimage;
-
-    return Padding(
-      padding: const EdgeInsets.all(8.0),
-      child: ListView.builder(
-        physics: const NeverScrollableScrollPhysics(),
-        shrinkWrap: true,
-        itemCount: 5,
-        itemBuilder: ((context, index) {
-          return ListTile(
-            onTap: (() {
-              _audioPlayer.open(
-                  Playlist(audios: convertAudios, startIndex: index),
-                  showNotification: true);
-              setState(() {
-                isPlaying = true;
-                playerVisibility = true;
-              });
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: ((context) => const playingNow()),
-                ),
-              );
-            }),
-            leading: const CircleAvatar(
-              backgroundImage:
-                  AssetImage("assets/Music Brand and App Logo (1).png"),
-            ),
-            title: SingleChildScrollView(
-              child: Text(
-                'working on it',
-                style: GoogleFonts.montserrat(
-                  textStyle: const TextStyle(
-                      fontSize: 13.43,
-                      color: Colors.white,
-                      fontWeight: FontWeight.w500),
-                ),
-              ),
-            ),
-            trailing: IconButton(
-              onPressed: (() {
-                showModalBottomSheet(
-                  backgroundColor: Colors.black,
-                  shape: const RoundedRectangleBorder(
-                    borderRadius: BorderRadius.vertical(
-                      top: Radius.circular(20),
-                    ),
-                  ),
-                  context: context,
-                  builder: ((context) {
-                    return SizedBox(
-                      height: 120,
-                      child: Column(
-                        children: [
-                          TextButton(
-                              onPressed: () {
-                                Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                        builder: ((context) =>
-                                            const songtoPlaylist())));
-                              },
-                              child: const Text("Add to Playlist")),
-                          const SizedBox(
-                            height: 10,
-                          ),
-                          TextButton(
-                              onPressed: () {
-                                Navigator.pop(context);
-                                const addtoFavorites();
-                              },
-                              child: const Text("Add to Favorites"))
-                        ],
-                      ),
-                    );
-                  }),
-                );
-              }),
-              icon: const Icon(
-                Icons.more_vert,
-                color: Colors.grey,
-              ),
-            ),
-          );
-        }),
-      ),
-    );
-  }
-
   //----------------------------------------All Songs Listing From DB--------------------------------------------------
   getAllSongs() {
     return ValueListenableBuilder<Box<Songs>>(
@@ -490,10 +397,21 @@ class _homeScreenState extends State<homeScreen> {
                   padding: const EdgeInsets.fromLTRB(0, 5, 0, 2),
                   child: ListTile(
                     onTap: (() {
+                      print("varunnnn");
+                      print(_audioPlayer.getCurrentAudioTitle);
+                      print("vnailaaa");
+                      _audioPlayer.open(
+                          Playlist(audios: convertAudios, startIndex: index),
+                          showNotification: true,
+                          headPhoneStrategy: HeadPhoneStrategy.pauseOnUnplug,
+                          loopMode: LoopMode.playlist);
+                      setState(() {
+                        playerVisibility = true;
+                      });
                       Navigator.push(
                         context,
                         MaterialPageRoute(
-                          builder: ((context) => const playingNow()),
+                          builder: ((context) => playingNow()),
                         ),
                       );
                     }),

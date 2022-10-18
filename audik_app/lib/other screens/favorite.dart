@@ -46,10 +46,10 @@ class _ScreenFavoriteState extends State<ScreenFavorite> {
                       padding: const EdgeInsets.fromLTRB(0, 0, 10, 0),
                       child: FloatingActionButton(
                         onPressed: () {
-                          Navigator.push(
+                          /* Navigator.push(
                               context,
                               MaterialPageRoute(
-                                  builder: ((context) => playingNow())));
+                                  builder: ((context) => playingNow()))); */
                         },
                         child: Icon(Icons.play_arrow),
                       ),
@@ -75,8 +75,8 @@ class _ScreenFavoriteState extends State<ScreenFavorite> {
         itemBuilder: ((context, index) {
           return ListTile(
             onTap: (() {
-              Navigator.push(context,
-                  MaterialPageRoute(builder: ((context) => playingNow())));
+              /*  Navigator.push(context,
+                  MaterialPageRoute(builder: ((context) => playingNow()))); */
             }),
             leading: const Image(
               image: AssetImage(
