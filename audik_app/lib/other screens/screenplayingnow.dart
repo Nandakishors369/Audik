@@ -19,7 +19,14 @@ class _playingNowState extends State<playingNow> {
   Duration position = Duration.zero;
   bool isplaying = true;
   late String head;
+  @override
   void initState() {
+    // TODO: implement initState
+    setState(() {});
+    super.initState();
+  }
+
+  /* void initState() {
     super.initState();
 
     print("hi");
@@ -44,7 +51,7 @@ class _playingNowState extends State<playingNow> {
     });
     print("bye");
   }
-
+ */
   @override
   void dispose() {
     print("helloooooo");
@@ -138,26 +145,77 @@ class _playingNowState extends State<playingNow> {
                   height: 320,
                   width: 320,
                 ),
-                SizedBox(
+                /* SizedBox(
                   height: 32,
-                ),
+                ), */
                 Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 60),
+                  child: Column(
+                    children: [
+                      SizedBox(height: height * .02),
+                      SizedBox(
+                        height: height * .03,
+                        width: width,
+                        child: Marquee(
+                          blankSpace: 20,
+                          velocity: 20,
+                          text: player.getCurrentAudioTitle,
+                          style: GoogleFonts.montserrat(
+                              textStyle: TextStyle(
+                                  fontSize: 22,
+                                  fontWeight: FontWeight.w600,
+                                  color: Colors.white)),
+                        ),
+                      ),
+                      SizedBox(
+                        height: height * .03,
+                        width: width * .2,
+                        child: Marquee(
+                          blankSpace: 20,
+                          velocity: 20,
+                          text: player.getCurrentAudioArtist,
+                          style: GoogleFonts.montserrat(
+                              textStyle: TextStyle(
+                                  fontSize: 15,
+                                  fontWeight: FontWeight.w200,
+                                  color: Colors.white)),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+                /*  Padding(
                   padding: const EdgeInsets.fromLTRB(15, 0, 15, 15),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.center,
-                    mainAxisSize: MainAxisSize.min,
+                    // mainAxisSize: MainAxisSize.min,
                     children: [
-                      Text(
+                      SizedBox(
+                        width: 100,
+                        child: Marquee(
+                          text: player.getCurrentAudioTitle,
+                          style: GoogleFonts.montserrat(
+                              textStyle: TextStyle(
+                                  fontSize: 22,
+                                  fontWeight: FontWeight.w600,
+                                  color: Colors.white)),
+                          blankSpace: 20,
+                          velocity: 20,
+                        ),
+                      )
+                      /* Text(
                         player.getCurrentAudioTitle,
+                        maxLines: 1,
+                        overflow: TextOverflow.ellipsis,
                         style: GoogleFonts.montserrat(
                             textStyle: TextStyle(
                                 fontSize: 22,
                                 fontWeight: FontWeight.w600,
                                 color: Colors.white)),
-                      ),
+                      ), */
                     ],
                   ),
-                ),
+                ), */
                 SizedBox(
                   height: 5,
                 ),
@@ -190,6 +248,7 @@ class _playingNowState extends State<playingNow> {
                       IconButton(
                         onPressed: () async {
                           await player.previous();
+                          setState(() {});
                           if (isplaying == false) {
                             player.pause();
                           }
@@ -232,6 +291,7 @@ class _playingNowState extends State<playingNow> {
                       IconButton(
                         onPressed: () async {
                           await player.next();
+                          setState(() {});
                           if (isplaying == false) {
                             player.pause();
                           }
