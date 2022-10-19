@@ -3,6 +3,7 @@ import 'package:audik_app/Main%20Screens/navigation.dart';
 import 'package:audik_app/Main%20Screens/splash.dart';
 import 'package:audik_app/Model/dbfunctions.dart';
 import 'package:audik_app/Model/favoriteModel.dart';
+import 'package:audik_app/Model/playlistmodel.dart';
 import 'package:audik_app/Model/songModel.dart';
 import 'package:flutter/material.dart';
 import 'package:hive_flutter/adapters.dart';
@@ -10,12 +11,16 @@ import 'package:hive_flutter/adapters.dart';
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Hive.initFlutter();
+
   Hive.registerAdapter(SongsAdapter());
   await Hive.openBox<Songs>(boxname);
-  runApp(const MyApp());
 
   Hive.registerAdapter(favSongsAdapter());
   opendb_fav();
+  runApp(const MyApp());
+
+  Hive.registerAdapter(PlaylistSongsAdapter());
+  opendatabase();
 }
 
 class MyApp extends StatelessWidget {

@@ -1,9 +1,13 @@
+import 'package:audik_app/Model/dbfunctions.dart';
+import 'package:audik_app/Model/playlistmodel.dart';
 import 'package:audik_app/Playlist/playlistscreen.dart';
 import 'package:audik_app/other%20screens/screenplayingnow.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:hive/hive.dart';
+import 'package:hive_flutter/adapters.dart';
 
 class addPlaylist extends StatefulWidget {
   const addPlaylist({super.key});
@@ -13,6 +17,7 @@ class addPlaylist extends StatefulWidget {
 }
 
 class _addPlaylistState extends State<addPlaylist> {
+  List<PlaylistSongs> playlist = [];
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -63,48 +68,82 @@ class _addPlaylistState extends State<addPlaylist> {
 
   //----------------------------------------LIST OF PLAYLISTS--------------------------------------------------
   PlaylistList() {
-    return Padding(
-      padding: const EdgeInsets.all(8.0),
-      child: ListView.builder(
-        physics: const NeverScrollableScrollPhysics(),
-        shrinkWrap: true,
-        itemCount: 15,
-        itemBuilder: ((context, index) {
-          return ListTile(
-            onTap: () => Navigator.push(context,
-                MaterialPageRoute(builder: ((context) => ScreenPlaylist()))),
-            leading: const Image(
-              image: AssetImage(
-                "assets/Music Brand and App Logo (1).png",
-              ),
-              height: 32,
-              width: 32,
-            ),
-            title: SingleChildScrollView(
-              child: Text(
-                "Playlist Name",
-                style: GoogleFonts.montserrat(
-                  textStyle: const TextStyle(
-                      fontSize: 13.43,
-                      color: Colors.white,
-                      fontWeight: FontWeight.w500),
-                ),
-              ),
-            ),
-            trailing: IconButton(
-              onPressed: (() {
-                /* Navigator.push(context,
-                    MaterialPageRoute(builder: ((context) => playingNow()))); */
+    return ValueListenableBuilder<Box<PlaylistSongs>>(
+        valueListenable: playlistbox.listenable(),
+        builder: (context, value, child) {
+          playlist = value.values.toList();
+          return Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: ListView.builder(
+              physics: const NeverScrollableScrollPhysics(),
+              shrinkWrap: true,
+              itemCount: playlist.length,
+              itemBuilder: ((context, index) {
+                if (playlist.isEmpty) {
+                  Center(
+                    child: Text(
+                      "Playlist Not Created",
+                      style: GoogleFonts.montserrat(
+                        textStyle: const TextStyle(
+                            fontSize: 13.43,
+                            color: Colors.white,
+                            fontWeight: FontWeight.w500),
+                      ),
+                    ),
+                  );
+                }
+                if (playlist == null) {
+                  Center(
+                    child: Text(
+                      "Playlist Not Created",
+                      style: GoogleFonts.montserrat(
+                        textStyle: const TextStyle(
+                            fontSize: 13.43,
+                            color: Colors.white,
+                            fontWeight: FontWeight.w500),
+                      ),
+                    ),
+                  );
+                }
+                return ListTile(
+                  onTap: () => Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: ((context) => ScreenPlaylist()))),
+                  leading: const Image(
+                    image: AssetImage(
+                      "assets/Music Brand and App Logo (1).png",
+                    ),
+                    height: 32,
+                    width: 32,
+                  ),
+                  title: SingleChildScrollView(
+                    child: Text(
+                      playlist[index].playlistname.toString(),
+                      style: GoogleFonts.montserrat(
+                        textStyle: const TextStyle(
+                            fontSize: 13.43,
+                            color: Colors.white,
+                            fontWeight: FontWeight.w500),
+                      ),
+                    ),
+                  ),
+                  trailing: IconButton(
+                    onPressed: (() {
+                      playlistbox.deleteAt(index);
+                      /* Navigator.push(context,
+                      MaterialPageRoute(builder: ((context) => playingNow()))); */
+                    }),
+                    icon: const Icon(
+                      Icons.delete,
+                      color: Colors.grey,
+                    ),
+                  ),
+                );
               }),
-              icon: const Icon(
-                Icons.play_arrow,
-                color: Colors.grey,
-              ),
             ),
           );
-        }),
-      ),
-    );
+        });
   }
 
   //----------------------------------------ADD PLAYLIST POP UP--------------------------------------------------

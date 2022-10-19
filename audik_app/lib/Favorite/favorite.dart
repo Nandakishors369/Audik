@@ -1,5 +1,5 @@
 import 'package:assets_audio_player/assets_audio_player.dart';
-import 'package:audik_app/Main%20Screens/Favorite/addtofavorite.dart';
+import 'package:audik_app/Favorite/addtofavorite.dart';
 import 'package:audik_app/Model/dbfunctions.dart';
 import 'package:audik_app/Model/favoriteModel.dart';
 import 'package:audik_app/Playlist/songtoplaylist.dart';

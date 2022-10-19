@@ -3,8 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
 
-import '../../Model/favoriteModel.dart';
-import '../../Model/songModel.dart';
+import '../Model/favoriteModel.dart';
+import '../Model/songModel.dart';
 
 class PlayScreenFav extends StatefulWidget {
   int index;

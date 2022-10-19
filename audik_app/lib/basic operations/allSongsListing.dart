@@ -1,4 +1,5 @@
 import 'package:assets_audio_player/assets_audio_player.dart';
+import 'package:audik_app/Playlist/createPlaylist.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/container.dart';
@@ -8,7 +9,7 @@ import 'package:hive/hive.dart';
 import 'package:hive_flutter/adapters.dart';
 import 'package:on_audio_query/on_audio_query.dart';
 
-import '../Main Screens/Favorite/addtofavorite.dart';
+import '../Favorite/addtofavorite.dart';
 import '../Main Screens/splash.dart';
 import '../Model/songModel.dart';
 import '../Playlist/songtoplaylist.dart';
@@ -129,7 +130,7 @@ class _allSongsScreenState extends State<allSongsScreen> {
                           context: context,
                           builder: ((context) {
                             return SizedBox(
-                              height: 120,
+                              height: 200,
                               child: Column(
                                 children: [
                                   TextButton(
@@ -140,7 +141,8 @@ class _allSongsScreenState extends State<allSongsScreen> {
                                                 builder: ((context) =>
                                                     const songtoPlaylist())));
                                       },
-                                      child: const Text("Add to Playlist")),
+                                      child:
+                                          AddToPlalistbutton(songindex: index)),
                                   const SizedBox(
                                     height: 10,
                                   ),

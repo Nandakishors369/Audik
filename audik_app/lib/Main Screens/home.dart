@@ -1,7 +1,7 @@
 import 'package:assets_audio_player/assets_audio_player.dart';
-import 'package:audik_app/Main%20Screens/Favorite/addtofavorite.dart';
-import 'package:audik_app/Main%20Screens/Recently%20and%20Mostly/mostlyPlayed.dart';
-import 'package:audik_app/Main%20Screens/Recently%20and%20Mostly/recentlyPlayed.dart';
+import 'package:audik_app/Favorite/addtofavorite.dart';
+import 'package:audik_app/Recently%20and%20Mostly/mostlyPlayed.dart';
+import 'package:audik_app/Recently%20and%20Mostly/recentlyPlayed.dart';
 import 'package:audik_app/Main%20Screens/library.dart';
 import 'package:audik_app/Model/songModel.dart';
 import 'package:audik_app/Playlist/playlistscreen.dart';

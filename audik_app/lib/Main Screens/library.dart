@@ -1,6 +1,6 @@
 import 'package:assets_audio_player/assets_audio_player.dart';
 import 'package:audik_app/Playlist/addplaylist.dart';
-import 'package:audik_app/Main%20Screens/Favorite/favorite.dart';
+import 'package:audik_app/Favorite/favorite.dart';
 import 'package:audik_app/Playlist/playlistscreen.dart';
 import 'package:audik_app/other%20screens/screenplayingnow.dart';
 import 'package:flutter/cupertino.dart';
