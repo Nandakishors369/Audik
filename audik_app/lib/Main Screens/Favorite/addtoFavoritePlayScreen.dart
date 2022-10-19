@@ -1,20 +1,20 @@
 import 'package:audik_app/Model/dbfunctions.dart';
-import 'package:audik_app/Model/favoriteModel.dart';
-import 'package:audik_app/Model/songModel.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
 
-class addToFavorite extends StatefulWidget {
-  int index;
+import '../../Model/favoriteModel.dart';
+import '../../Model/songModel.dart';
 
-  addToFavorite({super.key, required this.index});
+class PlayScreenFav extends StatefulWidget {
+  int index;
+  PlayScreenFav({super.key, required this.index});
 
   @override
-  State<addToFavorite> createState() => _addToFavoriteState();
+  State<PlayScreenFav> createState() => _PlayScreenFavState();
 }
 
-class _addToFavoriteState extends State<addToFavorite> {
+class _PlayScreenFavState extends State<PlayScreenFav> {
   List<favSongs> fav = [];
   bool favorited = false;
   final box = SongBox.getInstance();
@@ -33,7 +33,7 @@ class _addToFavoriteState extends State<addToFavorite> {
             .where(
                 (element) => element.songname == dbsongs[widget.index].songname)
             .isEmpty
-        ? TextButton(
+        ? IconButton(
             onPressed: () {
               favsongsdb.add(favSongs(
                   songname: dbsongs[widget.index].songname,
@@ -42,12 +42,15 @@ class _addToFavoriteState extends State<addToFavorite> {
                   songurl: dbsongs[widget.index].songurl,
                   id: dbsongs[widget.index].id));
               setState(() {});
-              Navigator.pop(context);
+
               ScaffoldMessenger.of(context)
                   .showSnackBar(SnackBar(content: Text("Added to Favorites")));
             },
-            child: const Text("Add to Favorites"))
-        : TextButton(
+            icon: Icon(
+              Icons.favorite_border,
+              color: Colors.white,
+            ))
+        : IconButton(
             onPressed: () async {
               if (favsongsdb.length < 1) {
                 favsongsdb.clear();
@@ -57,11 +60,14 @@ class _addToFavoriteState extends State<addToFavorite> {
                     (element) => element.id == dbsongs[widget.index].id);
                 await favsongsdb.deleteAt(currentIndex);
                 setState(() {});
-                Navigator.pop(context);
+
                 ScaffoldMessenger.of(context).showSnackBar(
                     SnackBar(content: Text("Removed From Favorites")));
               }
             },
-            child: const Text("Remove From Favorites"));
+            icon: Icon(
+              Icons.favorite,
+              color: Colors.white,
+            ));
   }
 }

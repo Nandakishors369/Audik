@@ -1,6 +1,6 @@
 import 'package:assets_audio_player/assets_audio_player.dart';
 import 'package:audik_app/Playlist/addplaylist.dart';
-import 'package:audik_app/other%20screens/favorite.dart';
+import 'package:audik_app/Main%20Screens/Favorite/favorite.dart';
 import 'package:audik_app/Playlist/playlistscreen.dart';
 import 'package:audik_app/other%20screens/screenplayingnow.dart';
 import 'package:flutter/cupertino.dart';
@@ -17,11 +17,9 @@ class librarySearch extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      bottomSheet: Container(
-          height: 60,
-          width: 500,
-          color: Color.fromARGB(255, 0, 0, 0),
-          child: playingCard()),
+      bottomSheet: playingCard(
+        index: 0,
+      ),
       backgroundColor: Color.fromARGB(255, 21, 21, 21),
       body: SafeArea(
           child: SingleChildScrollView(
@@ -228,7 +226,8 @@ class librarySearch extends StatelessWidget {
 }
 
 class playingCard extends StatefulWidget {
-  const playingCard({super.key});
+  int index;
+  playingCard({super.key, required this.index});
 
   @override
   State<playingCard> createState() => _playingCardState();

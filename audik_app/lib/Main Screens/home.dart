@@ -1,4 +1,5 @@
 import 'package:assets_audio_player/assets_audio_player.dart';
+import 'package:audik_app/Main%20Screens/Favorite/addtofavorite.dart';
 import 'package:audik_app/Main%20Screens/Recently%20and%20Mostly/mostlyPlayed.dart';
 import 'package:audik_app/Main%20Screens/Recently%20and%20Mostly/recentlyPlayed.dart';
 import 'package:audik_app/Main%20Screens/library.dart';
@@ -7,7 +8,7 @@ import 'package:audik_app/Playlist/playlistscreen.dart';
 import 'package:audik_app/Playlist/songtoplaylist.dart';
 import 'package:audik_app/other%20screens/setting.dart';
 import 'package:audik_app/Main%20Screens/search.dart';
-
+import 'package:flutter/cupertino.dart';
 
 import 'package:flutter/foundation.dart';
 
@@ -34,10 +35,8 @@ class _homeScreenState extends State<homeScreen> {
   final box = SongBox.getInstance();
   List<Audio> convertAudios = [];
   final AssetsAudioPlayer _audioPlayer = AssetsAudioPlayer.withId('0');
-
   @override
   void initState() {
-    // TODO: implement initState
     List<Songs> dbSongs = box.values.toList();
 
     for (var item in dbSongs) {
@@ -47,6 +46,7 @@ class _homeScreenState extends State<homeScreen> {
               artist: item.artist,
               id: item.id.toString())));
     }
+    // TODO: implement initState
     super.initState();
   }
 
@@ -54,111 +54,114 @@ class _homeScreenState extends State<homeScreen> {
   Widget build(BuildContext context) {
     final height = MediaQuery.of(context).size.height;
     final width = MediaQuery.of(context).size.width;
+
     return Scaffold(
-      bottomSheet: playingCard(),
+      bottomSheet: playingCard(index: 0),
       /* Container(
-          height: 60,
-          width: MediaQuery.of(context).size.width,
-          color: Colors.black,
-          child: const playingCard()), */
+            height: 60,
+            width: MediaQuery.of(context).size.width,
+            color: Colors.black,
+            child: const playingCard()), */
       backgroundColor: const Color.fromARGB(255, 21, 21, 21),
       body: SafeArea(
-        child: SingleChildScrollView(
-          child: Column(
-            children: [
-              Container(
-                height: height * .096,
-                decoration: const BoxDecoration(
-                  color: Color.fromARGB(255, 0, 0, 0),
-                  borderRadius: BorderRadius.only(
-                    bottomLeft: Radius.circular(20),
-                    bottomRight: Radius.circular(20),
+        child: CupertinoScrollbar(
+          child: SingleChildScrollView(
+            child: Column(
+              children: [
+                Container(
+                  height: height * .096,
+                  decoration: const BoxDecoration(
+                    color: Color.fromARGB(255, 0, 0, 0),
+                    borderRadius: BorderRadius.only(
+                      bottomLeft: Radius.circular(20),
+                      bottomRight: Radius.circular(20),
+                    ),
+                  ),
+                  child: Padding(
+                    padding: const EdgeInsets.fromLTRB(20, 15, 15, 15),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Text(
+                          welcomeuser(),
+                          style: GoogleFonts.montserrat(
+                            textStyle: const TextStyle(
+                                fontSize: 28,
+                                color: Colors.white,
+                                fontWeight: FontWeight.w700),
+                          ),
+                        ),
+                        IconButton(
+                          onPressed: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: ((context) => const SettingScreen()),
+                              ),
+                            );
+                          },
+                          icon: const Icon(
+                            Icons.more_vert,
+                            color: Colors.grey,
+                          ),
+                        ),
+                      ],
+                    ),
                   ),
                 ),
-                child: Padding(
-                  padding: const EdgeInsets.fromLTRB(20, 15, 15, 15),
+                Padding(
+                  padding: const EdgeInsets.fromLTRB(25, 20, 0, 0),
                   child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Text(
-                        welcomeuser(),
+                        "Your Favorites",
                         style: GoogleFonts.montserrat(
                           textStyle: const TextStyle(
-                              fontSize: 28,
+                              fontSize: 23,
                               color: Colors.white,
                               fontWeight: FontWeight.w700),
-                        ),
-                      ),
-                      IconButton(
-                        onPressed: () {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: ((context) => const SettingScreen()),
-                            ),
-                          );
-                        },
-                        icon: const Icon(
-                          Icons.more_vert,
-                          color: Colors.grey,
                         ),
                       ),
                     ],
                   ),
                 ),
-              ),
-              Padding(
-                padding: const EdgeInsets.fromLTRB(25, 20, 0, 0),
-                child: Row(
-                  children: [
-                    Text(
-                      "Your Favorites",
-                      style: GoogleFonts.montserrat(
-                        textStyle: const TextStyle(
-                            fontSize: 23,
-                            color: Colors.white,
-                            fontWeight: FontWeight.w700),
+                favoritesHomeListing(),
+                Padding(
+                  padding: const EdgeInsets.fromLTRB(25, 5, 0, 4),
+                  child: Row(
+                    children: [
+                      Text(
+                        "Your Dashboard",
+                        style: GoogleFonts.montserrat(
+                          textStyle: const TextStyle(
+                              fontSize: 23,
+                              color: Colors.white,
+                              fontWeight: FontWeight.w700),
+                        ),
                       ),
-                    ),
-                  ],
+                    ],
+                  ),
                 ),
-              ),
-              favoritesHomeListing(),
-              Padding(
-                padding: const EdgeInsets.fromLTRB(25, 5, 0, 4),
-                child: Row(
-                  children: [
-                    Text(
-                      "Your Dashboard",
-                      style: GoogleFonts.montserrat(
-                        textStyle: const TextStyle(
-                            fontSize: 23,
-                            color: Colors.white,
-                            fontWeight: FontWeight.w700),
+                recentsCard(),
+                Padding(
+                  padding: const EdgeInsets.fromLTRB(25, 5, 0, 4),
+                  child: Row(
+                    children: [
+                      Text(
+                        "Your Songs",
+                        style: GoogleFonts.montserrat(
+                          textStyle: const TextStyle(
+                              fontSize: 23,
+                              color: Colors.white,
+                              fontWeight: FontWeight.w700),
+                        ),
                       ),
-                    ),
-                  ],
+                    ],
+                  ),
                 ),
-              ),
-              recentsCard(),
-              Padding(
-                padding: const EdgeInsets.fromLTRB(25, 5, 0, 4),
-                child: Row(
-                  children: [
-                    Text(
-                      "Your Songs",
-                      style: GoogleFonts.montserrat(
-                        textStyle: const TextStyle(
-                            fontSize: 23,
-                            color: Colors.white,
-                            fontWeight: FontWeight.w700),
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-              getAllSongs()
-            ],
+                allSongsScreen()
+              ],
+            ),
           ),
         ),
       ),
@@ -345,7 +348,57 @@ class _homeScreenState extends State<homeScreen> {
     );
   }
 
-  //----------------------------------------All Songs Listing From DB--------------------------------------------------
+  String welcomeuser() {
+    var hour = DateTime.now().hour;
+    if (hour < 12) {
+      return 'Good Morning User !';
+    }
+    if (hour < 16) {
+      return 'Good Afternoon User !';
+    }
+    if (hour < 21) {
+      return 'Good Evening User !';
+    }
+
+    return 'Good Night User !';
+  }
+}
+
+ 
+
+
+
+
+  
+
+
+
+
+//!!!!!!!!!!!!!!!!!! DONT REMOVE !!!!!!!!!!!!!!!!!!//
+
+
+/*
+
+
+Future initill() async {
+    List<Songs> dbSongs = box.values.toList();
+
+    for (var item in dbSongs) {
+      convertAudios.add(Audio.file(item.songurl!,
+          metas: Metas(
+              title: item.songname,
+              artist: item.artist,
+              id: item.id.toString())));
+    }
+  }
+
+
+ late bool isplaying;
+  late bool playerVisibility;
+  final box = SongBox.getInstance();
+  List<Audio> convertAudios = [];
+  final AssetsAudioPlayer _audioPlayer = AssetsAudioPlayer.withId('0');
+   //----------------------------------------All Songs Listing From DB--------------------------------------------------
   getAllSongs() {
     return ValueListenableBuilder<Box<Songs>>(
         valueListenable: box.listenable(),
@@ -356,7 +409,7 @@ class _homeScreenState extends State<homeScreen> {
             return Center(child: CircularProgressIndicator());
           }
           //----------------------------------------If the list is null--------------------------------------------------
-          if (allsongbox == null) {
+          if (allDbSongs == null) {
             return const Center(
               child: CircularProgressIndicator(),
             );
@@ -448,9 +501,12 @@ class _homeScreenState extends State<homeScreen> {
                                   const SizedBox(
                                     height: 10,
                                   ),
-                                  TextButton(
+                                  addToFavorite(
+                                    index: index,
+                                  )
+                                  /* TextButton(
                                       onPressed: () {},
-                                      child: const Text("Add to Favorites"))
+                                      child: const Text("Add to Favorites")) */
                                 ],
                               ),
                             );
@@ -466,101 +522,4 @@ class _homeScreenState extends State<homeScreen> {
                 );
               });
         });
-  }
-
-  String welcomeuser() {
-    var hour = DateTime.now().hour;
-    if (hour < 12) {
-      return 'Good Morning User !';
-    }
-    if (hour < 16) {
-      return 'Good Afternoon User !';
-    }
-    if (hour < 21) {
-      return 'Good Evening User !';
-    }
-
-    return 'Good Night User !';
-  }
-}
-
- 
-
-
-
-
-  /* hello() {
-    FutureBuilder<List<SongModel>>(
-      future: _audioQuery.querySongs(
-        sortType: null,
-        orderType: OrderType.ASC_OR_SMALLER,
-        uriType: UriType.EXTERNAL,
-        ignoreCase: true,
-      ),
-      builder: ((context, item) {
-        if (item.data == null) {
-          return const Center(
-            child: CircularProgressIndicator(),
-          );
-        }
-        if (item.data!.isEmpty) {
-          return const Center(
-            child: Text("No songs Found"),
-          );
-        }
-        return ListView.builder(
-            shrinkWrap: true,
-            itemCount: 5, //item.data!.length,
-            itemBuilder: (context, index) {
-              return ListTile(
-                title: Text(item.data![index].title),
-                subtitle: Text(item.data![index].displayName),
-                trailing: Icon(Icons.more_vert),
-                leading: QueryArtworkWidget(
-                    id: item.data![index].id, type: ArtworkType.AUDIO),
-              );
-            });
-      }),
-    );
-  }
-}
- */ 
-
-/* IconButton(
-              onPressed: (() {
-                showModalBottomSheet(
-                  backgroundColor: Colors.black,
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.vertical(
-                      top: Radius.circular(20),
-                    ),
-                  ),
-                  context: context,
-                  builder: ((context) {
-                    return SizedBox(
-                      height: 120,
-                      child: Column(
-                        children: [
-                          TextButton(
-                              onPressed: () {
-                                Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                        builder: ((context) =>
-                                            songtoPlaylist())));
-                              },
-                              child: Text("Add to Playlist")),
-                          SizedBox(
-                            height: 10,
-                          ),
-                          TextButton(
-                              onPressed: () {
-                                Navigator.pop(context);
-                                addtoFavorites();
-                              },
-                              child: Text("Add to Favorites"))
-                        ],
-                      ),
-                    );
-                  }),
-                ); */
+  } */
