@@ -30,26 +30,6 @@ class homeScreen extends StatefulWidget {
 }
 
 class _homeScreenState extends State<homeScreen> {
-  late bool isplaying;
-  late bool playerVisibility;
-  final box = SongBox.getInstance();
-  List<Audio> convertAudios = [];
-  final AssetsAudioPlayer _audioPlayer = AssetsAudioPlayer.withId('0');
-  @override
-  void initState() {
-    List<Songs> dbSongs = box.values.toList();
-
-    for (var item in dbSongs) {
-      convertAudios.add(Audio.file(item.songurl!,
-          metas: Metas(
-              title: item.songname,
-              artist: item.artist,
-              id: item.id.toString())));
-    }
-    // TODO: implement initState
-    super.initState();
-  }
-
   @override
   Widget build(BuildContext context) {
     final height = MediaQuery.of(context).size.height;
