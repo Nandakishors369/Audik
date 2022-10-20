@@ -1,7 +1,13 @@
+import 'package:assets_audio_player/assets_audio_player.dart';
+import 'package:audik_app/Model/dbfunctions.dart';
+import 'package:audik_app/Model/recentlyplayed_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:hive/hive.dart';
+import 'package:hive_flutter/adapters.dart';
+import 'package:on_audio_query/on_audio_query.dart';
 
 class recentlyPlayed extends StatefulWidget {
   const recentlyPlayed({super.key});
@@ -11,6 +17,7 @@ class recentlyPlayed extends StatefulWidget {
 }
 
 class _recentlyPlayedState extends State<recentlyPlayed> {
+  AssetsAudioPlayer player = AssetsAudioPlayer();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -44,9 +51,79 @@ class _recentlyPlayedState extends State<recentlyPlayed> {
                 ),
               ),
             ),
+            Recentlist()
           ],
         ),
       ),
     );
+  }
+
+  Recentlist() {
+    return ValueListenableBuilder<Box<RecentPlayed>>(
+        valueListenable: recentlyplayedbox.listenable(),
+        builder: (context, Box<RecentPlayed> recentsongs, _) {
+          List<RecentPlayed> rsongs = recentsongs.values.toList();
+
+          if (rsongs.isEmpty) {
+            return Padding(
+              padding: const EdgeInsets.all(20.0),
+              child: Center(
+                child: Text(
+                  "No Songs Added",
+                  style: GoogleFonts.montserrat(
+                      textStyle: TextStyle(color: Colors.white)),
+                ),
+              ),
+            );
+          }
+          return Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: ListView.builder(
+              physics: const NeverScrollableScrollPhysics(),
+              shrinkWrap: true,
+              itemCount: rsongs.length,
+              itemBuilder: ((context, index) {
+                return ListTile(
+                  /* onTap: () {
+                    player.open(Playlist(audios: , startIndex: index),
+                        showNotification: true, loopMode: LoopMode.playlist);
+                    Navigator.of(context).push(MaterialPageRoute(
+                      builder: (context) => playingNow(),
+                    ));
+                    /* Navigator.push(context,
+                    MaterialPageRoute(builder: ((context) => playingNow()))); */
+                  }, */
+                  leading: QueryArtworkWidget(
+                    artworkFit: BoxFit.cover,
+                    id: rsongs[index].id!,
+                    type: ArtworkType.AUDIO,
+                    artworkQuality: FilterQuality.high,
+                    size: 2000,
+                    quality: 100,
+                    artworkBorder: BorderRadius.circular(50),
+                    nullArtworkWidget: ClipRRect(
+                      borderRadius: const BorderRadius.all(Radius.circular(50)),
+                      child: Image.asset(
+                        'assets/Music Brand and App Logo (1).png',
+                        fit: BoxFit.cover,
+                      ),
+                    ),
+                  ),
+                  title: SingleChildScrollView(
+                    child: Text(
+                      rsongs[index].songname!,
+                      style: GoogleFonts.montserrat(
+                        textStyle: const TextStyle(
+                            fontSize: 13.43,
+                            color: Colors.white,
+                            fontWeight: FontWeight.w500),
+                      ),
+                    ),
+                  ),
+                );
+              }),
+            ),
+          );
+        });
   }
 }

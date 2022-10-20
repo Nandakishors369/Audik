@@ -49,7 +49,6 @@ class _ScreenPlaylistState extends State<ScreenPlaylist> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      bottomSheet: playingCard(),
       backgroundColor: const Color.fromARGB(255, 21, 21, 21),
       body: SafeArea(
         child: SingleChildScrollView(
@@ -84,7 +83,7 @@ class _ScreenPlaylistState extends State<ScreenPlaylist> {
                                     color: Colors.white,
                                     fontWeight: FontWeight.w700)),
                           ),
-                          Padding(
+                          /*  Padding(
                             padding: const EdgeInsets.fromLTRB(0, 0, 10, 0),
                             child: FloatingActionButton(
                               onPressed: () {
@@ -104,7 +103,7 @@ class _ScreenPlaylistState extends State<ScreenPlaylist> {
                               child: Icon(Icons.play_arrow),
                             ),
                           )
-
+ */
                           /* IconButton(
                       onPressed: () {},
                       icon: const Icon(
@@ -193,6 +192,11 @@ class _ScreenPlaylistState extends State<ScreenPlaylist> {
                       setState(() {
                         songs.removeAt(index);
                         plsongs.removeAt(index);
+                        playlistbox.putAt(
+                            widget.playlistindex,
+                            PlaylistSongs(
+                                playlistname: widget.playlistname,
+                                playlistssongs: songs));
                       });
                     }),
                     icon: const Icon(

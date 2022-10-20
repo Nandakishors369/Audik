@@ -1,4 +1,7 @@
 import 'package:assets_audio_player/assets_audio_player.dart';
+import 'package:audik_app/Model/dbfunctions.dart';
+import 'package:audik_app/Model/mostlyplayed_model.dart';
+import 'package:audik_app/Model/recentlyplayed_model.dart';
 import 'package:audik_app/Playlist/createPlaylist.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -49,6 +52,7 @@ class _allSongsScreenState extends State<allSongsScreen> {
         valueListenable: box.listenable(),
         builder: (context, Box<Songs> allsongbox, child) {
           List<Songs> allDbSongs = allsongbox.values.toList();
+          List<MostPlayed> allmostplayedsongs = mostplayedsongs.values.toList();
           //----------------------------------------If songs are not there--------------------------------------------------
           if (allDbSongs.isEmpty) {
             return Center(child: CircularProgressIndicator());
@@ -66,20 +70,26 @@ class _allSongsScreenState extends State<allSongsScreen> {
               itemCount: allDbSongs.length,
               itemBuilder: (context, index) {
                 Songs songs = allDbSongs[index];
+                RecentPlayed rsongs;
+                /* MostPlayed MPsongs = allmostplayedsongs[index]; */
                 return Padding(
                   padding: const EdgeInsets.fromLTRB(0, 5, 0, 2),
                   child: ListTile(
                     onTap: (() {
-                      print(_audioPlayer.getCurrentAudioTitle);
-
+                      rsongs = RecentPlayed(
+                          songname: songs.songname,
+                          artist: songs.artist,
+                          id: songs.id,
+                          duration: songs.duration,
+                          songurl: songs.songurl);
+                      updateRecentPlayed(rsongs);
+                      /* updatePlayedSongCount(MPsongs, index); */
                       _audioPlayer.open(
                           Playlist(audios: convertAudios, startIndex: index),
                           showNotification: true,
                           headPhoneStrategy: HeadPhoneStrategy.pauseOnUnplug,
                           loopMode: LoopMode.playlist);
-                      setState(() {
-                        //playerVisibility = true;
-                      });
+                      setState(() {});
                       Navigator.push(
                         context,
                         MaterialPageRoute(

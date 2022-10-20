@@ -26,6 +26,7 @@ class _AddToPlalistbuttonState extends State<AddToPlalistbutton> {
     return TextButton(
         onPressed: () {
           playlistBottomSheet(context);
+          Navigator.pop(context);
         },
         child: Text("Add to Playlist"));
   }
