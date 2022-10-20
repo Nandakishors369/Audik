@@ -36,7 +36,7 @@ class _homeScreenState extends State<homeScreen> {
     final width = MediaQuery.of(context).size.width;
 
     return Scaffold(
-      bottomSheet: playingCard(index: 0),
+      bottomSheet: playingCard(/* index: 0 */),
       /* Container(
             height: 60,
             width: MediaQuery.of(context).size.width,
@@ -179,12 +179,12 @@ class _homeScreenState extends State<homeScreen> {
     final width = MediaQuery.of(context).size.width;
     return GestureDetector(
       onTap: () {
-        Navigator.push(
+        /* Navigator.push(
           context,
           MaterialPageRoute(
             builder: ((context) => const ScreenPlaylist()),
           ),
-        );
+        ); */
       },
       child: Container(
         height: 10,

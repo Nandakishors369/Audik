@@ -9,6 +9,8 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:hive/hive.dart';
 import 'package:hive_flutter/adapters.dart';
 
+import '../Main Screens/library.dart';
+
 class addPlaylist extends StatefulWidget {
   const addPlaylist({super.key});
 
@@ -17,13 +19,18 @@ class addPlaylist extends StatefulWidget {
 }
 
 class _addPlaylistState extends State<addPlaylist> {
+  TextEditingController _textEditingController = TextEditingController();
   List<PlaylistSongs> playlist = [];
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      bottomSheet: playingCard(),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
-          createPlaylist(context);
+          showModalBottomSheet(
+            context: context,
+            builder: (context) => bottomSheet(context),
+          );
         },
         child: Icon(Icons.add),
       ),
@@ -71,7 +78,7 @@ class _addPlaylistState extends State<addPlaylist> {
     return ValueListenableBuilder<Box<PlaylistSongs>>(
         valueListenable: playlistbox.listenable(),
         builder: (context, value, child) {
-          playlist = value.values.toList();
+          List<PlaylistSongs> playlist = value.values.toList();
           return Padding(
             padding: const EdgeInsets.all(8.0),
             child: ListView.builder(
@@ -79,20 +86,20 @@ class _addPlaylistState extends State<addPlaylist> {
               shrinkWrap: true,
               itemCount: playlist.length,
               itemBuilder: ((context, index) {
-                if (playlist.isEmpty) {
+                if (playlistbox.isEmpty) {
                   Center(
                     child: Text(
                       "Playlist Not Created",
                       style: GoogleFonts.montserrat(
                         textStyle: const TextStyle(
-                            fontSize: 13.43,
+                            fontSize: 20,
                             color: Colors.white,
                             fontWeight: FontWeight.w500),
                       ),
                     ),
                   );
                 }
-                if (playlist == null) {
+                if (playlist.isEmpty) {
                   Center(
                     child: Text(
                       "Playlist Not Created",
@@ -109,7 +116,10 @@ class _addPlaylistState extends State<addPlaylist> {
                   onTap: () => Navigator.push(
                       context,
                       MaterialPageRoute(
-                          builder: ((context) => ScreenPlaylist()))),
+                          builder: ((context) => ScreenPlaylist(
+                              allPlaylistSongs: playlist[index].playlistssongs!,
+                              playlistindex: index,
+                              playlistname: playlist[index].playlistname!)))),
                   leading: const Image(
                     image: AssetImage(
                       "assets/Music Brand and App Logo (1).png",
@@ -148,49 +158,84 @@ class _addPlaylistState extends State<addPlaylist> {
 
   //----------------------------------------ADD PLAYLIST POP UP--------------------------------------------------
 
-  Future createPlaylist(context) async {
-    return showDialog(
-        context: context,
-        builder: ((context) => AlertDialog(
-              insetPadding: EdgeInsets.symmetric(vertical: 340),
-              backgroundColor: Colors.black,
-              content: Column(
-                children: [
-                  Padding(
-                    padding: const EdgeInsets.fromLTRB(20, 20, 20, 0),
-                    child: TextFormField(
-                      style: TextStyle(color: Colors.white),
-                      decoration: InputDecoration(
-                        focusedBorder: UnderlineInputBorder(
-                          borderSide: BorderSide(color: Colors.white),
-                        ),
-                        border: UnderlineInputBorder(
-                          borderSide: BorderSide(color: Colors.white),
-                        ),
-                        prefixIcon: Icon(
-                          Icons.abc,
-                          color: Colors.white,
-                        ),
-                        focusColor: Colors.white,
-                        hintText: 'Enter a name for the Playlist',
-                        hintStyle: GoogleFonts.montserrat(
-                            textStyle: TextStyle(
-                                color: Color.fromARGB(113, 158, 158, 158))),
-                        filled: true,
-                        fillColor: Color.fromARGB(146, 50, 50, 50),
-                      ),
-                    ),
-                  ),
-                  SizedBox(
-                    height: 10,
-                  ),
-                  ElevatedButton(
-                      onPressed: () {
-                        Navigator.pop(context);
-                      },
-                      child: Text("Create Playlist"))
-                ],
-              ),
-            )));
+  Widget bottomSheet(BuildContext context) {
+    return Container(
+      height: 423 * 0.7,
+      color: Color.fromARGB(255, 24, 24, 24),
+      child: Column(
+        children: [playlistform(context)],
+      ),
+    );
+  }
+
+  Padding playlistform(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.all(8.0),
+      child: InkWell(
+        child: Column(
+          children: [
+            Text(
+              "Create Playlist ",
+              style: GoogleFonts.montserrat(
+                  textStyle: TextStyle(
+                      color: Colors.white,
+                      fontSize: 18,
+                      fontWeight: FontWeight.w500)),
+            ),
+            SizedBox(
+              height: 20,
+            ),
+            TextFormField(
+              controller: _textEditingController,
+              cursorHeight: 25,
+              decoration: InputDecoration(
+                  hintText: "enter a name",
+                  hintStyle: TextStyle(color: Color.fromARGB(255, 72, 72, 72))),
+              validator: (value) {
+                List<PlaylistSongs> values = playlistbox.values.toList();
+
+                bool isAlreadyAdded = values
+                    .where((element) => element.playlistname == value!.trim())
+                    .isNotEmpty;
+
+                if (value!.trim() == '') {
+                  return 'Name required';
+                }
+
+                if (isAlreadyAdded) {
+                  return 'Name Already Exists';
+                }
+                return null;
+              },
+            ),
+            SizedBox(
+              height: 20,
+            ),
+            formButtons(context)
+          ],
+        ),
+      ),
+    );
+  }
+
+  Row formButtons(BuildContext context) {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      children: [
+        ElevatedButton(
+            onPressed: () {
+              Navigator.pop(context);
+            },
+            child: Text("cancel")),
+        ElevatedButton(
+            onPressed: () {
+              playlistbox.add(PlaylistSongs(
+                  playlistname: _textEditingController.text,
+                  playlistssongs: []));
+              Navigator.pop(context);
+            },
+            child: Text("Create"))
+      ],
+    );
   }
 }

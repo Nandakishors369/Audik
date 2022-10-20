@@ -18,8 +18,8 @@ class librarySearch extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       bottomSheet: playingCard(
-        index: 0,
-      ),
+          /* index: 0 */
+          ),
       backgroundColor: Color.fromARGB(255, 21, 21, 21),
       body: SafeArea(
           child: SingleChildScrollView(
@@ -188,8 +188,8 @@ class librarySearch extends StatelessWidget {
   playlistCard(context) {
     return GestureDetector(
       onTap: () {
-        Navigator.push(context,
-            MaterialPageRoute(builder: ((context) => ScreenPlaylist())));
+        /* Navigator.push(context,
+            MaterialPageRoute(builder: ((context) => ScreenPlaylist()))); */
       },
       child: Container(
         height: 10,
@@ -226,8 +226,11 @@ class librarySearch extends StatelessWidget {
 }
 
 class playingCard extends StatefulWidget {
-  int index;
-  playingCard({super.key, required this.index});
+  /* int index; */
+  playingCard({
+    super.key,
+    /* required this.index */
+  });
 
   @override
   State<playingCard> createState() => _playingCardState();

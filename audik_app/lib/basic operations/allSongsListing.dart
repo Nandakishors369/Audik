@@ -133,16 +133,7 @@ class _allSongsScreenState extends State<allSongsScreen> {
                               height: 200,
                               child: Column(
                                 children: [
-                                  TextButton(
-                                      onPressed: () {
-                                        Navigator.push(
-                                            context,
-                                            MaterialPageRoute(
-                                                builder: ((context) =>
-                                                    const songtoPlaylist())));
-                                      },
-                                      child:
-                                          AddToPlalistbutton(songindex: index)),
+                                  AddToPlalistbutton(songindex: index),
                                   const SizedBox(
                                     height: 10,
                                   ),
