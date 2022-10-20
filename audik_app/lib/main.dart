@@ -28,6 +28,7 @@ Future<void> main() async {
   openmostplayeddb();
 
   Hive.registerAdapter(RecentPlayedAdapter());
+  openrecentlyplayedDb();
 }
 
 class MyApp extends StatelessWidget {

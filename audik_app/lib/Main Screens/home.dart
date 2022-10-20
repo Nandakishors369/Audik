@@ -1,5 +1,6 @@
 import 'package:assets_audio_player/assets_audio_player.dart';
 import 'package:audik_app/Favorite/addtofavorite.dart';
+import 'package:audik_app/Model/dbfunctions.dart';
 import 'package:audik_app/Recently%20and%20Mostly/mostlyPlayed.dart';
 import 'package:audik_app/Recently%20and%20Mostly/recentlyPlayed.dart';
 import 'package:audik_app/Main%20Screens/library.dart';
@@ -73,6 +74,8 @@ class _homeScreenState extends State<homeScreen> {
                         ),
                         IconButton(
                           onPressed: () {
+                            recentlyplayedbox.clear();
+                            mostplayedsongs.clear();
                             Navigator.push(
                               context,
                               MaterialPageRoute(
@@ -156,7 +159,7 @@ class _homeScreenState extends State<homeScreen> {
     return Padding(
       padding: const EdgeInsets.fromLTRB(8, 5, 0, 0),
       child: SizedBox(
-        height: 210,
+        height: height * 0.224,
         child: ListView.separated(
             scrollDirection: Axis.horizontal,
             padding: const EdgeInsets.all(10),
@@ -164,8 +167,8 @@ class _homeScreenState extends State<homeScreen> {
               return favoriteCard();
             }),
             separatorBuilder: ((context, index) {
-              return const SizedBox(
-                width: 10,
+              return SizedBox(
+                width: width * 0.024,
               );
             }),
             itemCount: 8),
@@ -187,7 +190,7 @@ class _homeScreenState extends State<homeScreen> {
         ); */
       },
       child: Container(
-        height: 10,
+        height: height * 0.011,
         // width: 132,
         color: const Color.fromARGB(0, 3, 128, 230),
         child: Column(
@@ -198,7 +201,7 @@ class _homeScreenState extends State<homeScreen> {
                 borderRadius: BorderRadius.circular(15),
                 child: Image.asset(
                   "assets/Music Brand and App Logo (1).png",
-                  width: 132,
+                  width: width * 0.312,
                 ),
               ),
             ),

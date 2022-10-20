@@ -24,7 +24,6 @@ class _addPlaylistState extends State<addPlaylist> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      bottomSheet: playingCard(),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
           showModalBottomSheet(

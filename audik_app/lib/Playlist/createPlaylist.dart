@@ -24,8 +24,9 @@ class _AddToPlalistbuttonState extends State<AddToPlalistbutton> {
   @override
   Widget build(BuildContext context) {
     return TextButton(
-        onPressed: () {
-          playlistBottomSheet(context);
+        onPressed: () async {
+          await playlistBottomSheet(context);
+
           Navigator.pop(context);
         },
         child: Text("Add to Playlist"));
@@ -37,6 +38,7 @@ class _AddToPlalistbuttonState extends State<AddToPlalistbutton> {
       builder: (context) {
         return StatefulBuilder(
             builder: (context, setState) => Container(
+                  height: 200,
                   color: Color.fromARGB(255, 0, 0, 0),
                   child: ValueListenableBuilder(
                     valueListenable: playlistbox.listenable(),
@@ -47,29 +49,33 @@ class _AddToPlalistbuttonState extends State<AddToPlalistbutton> {
                       if (playlistbox.isEmpty) {
                         return Padding(
                           padding: const EdgeInsets.all(15.0),
-                          child: Column(
-                            children: [
-                              Text(
-                                "Create a playlist to add",
-                                style: GoogleFonts.montserrat(
-                                    textStyle: TextStyle(
-                                        color: Colors.white,
-                                        fontSize: 18,
-                                        fontWeight: FontWeight.w500)),
-                              ),
-                              SizedBox(
-                                height: 20,
-                              ),
-                              ElevatedButton(
-                                  onPressed: () {
-                                    showModalBottomSheet(
-                                      context: context,
-                                      builder: (context) =>
-                                          bottomSheet(context),
-                                    );
-                                  },
-                                  child: Text("Create Playlist"))
-                            ],
+                          child: Center(
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              children: [
+                                Text(
+                                  "Create a playlist to add",
+                                  style: GoogleFonts.montserrat(
+                                      textStyle: TextStyle(
+                                          color: Colors.white,
+                                          fontSize: 22,
+                                          fontWeight: FontWeight.w500)),
+                                ),
+                                SizedBox(
+                                  height: 20,
+                                ),
+                                ElevatedButton(
+                                    onPressed: () {
+                                      showModalBottomSheet(
+                                        isScrollControlled: true,
+                                        context: context,
+                                        builder: (context) =>
+                                            bottomSheet(context),
+                                      );
+                                    },
+                                    child: Text("Create Playlist"))
+                              ],
+                            ),
                           ),
                         );
                       }
@@ -151,75 +157,94 @@ class _AddToPlalistbuttonState extends State<AddToPlalistbutton> {
     );
   } */
 
-                      return Column(
-                        children: [
-                          Expanded(
-                              child: ListView.builder(
-                                  itemCount: playlist.length,
-                                  itemBuilder: (context, index) {
-                                    return ListTile(
-                                      leading: Icon(
-                                        Icons.music_note,
-                                        color: Colors.white,
-                                      ),
-                                      title: Text(
-                                        playlist[index].playlistname.toString(),
-                                        style: TextStyle(color: Colors.white),
-                                      ),
-                                      onTap: () {
-                                        PlaylistSongs? plsongs =
-                                            playlistbox.getAt(index);
-                                        List<Songs>? plnewsongs =
-                                            plsongs!.playlistssongs;
-                                        Box<Songs> box = Hive.box('Songs');
-                                        List<Songs> dbAllsongs =
-                                            box.values.toList();
-                                        bool isAlreadyAdded = plnewsongs!.any(
-                                            (element) =>
-                                                element.id ==
-                                                dbAllsongs[widget.songindex]
-                                                    .id);
+                      return Padding(
+                        padding: const EdgeInsets.all(15.0),
+                        child: Column(
+                          children: [
+                            Text(
+                              "Your Playlists",
+                              style: GoogleFonts.montserrat(
+                                  textStyle: TextStyle(
+                                      color: Colors.white,
+                                      fontWeight: FontWeight.w500,
+                                      fontSize: 22)),
+                            ),
+                            Expanded(
+                                child: ListView.builder(
+                                    itemCount: playlist.length,
+                                    itemBuilder: (context, index) {
+                                      return ListTile(
+                                        leading: Icon(
+                                          Icons.music_note,
+                                          color: Colors.white,
+                                        ),
+                                        title: Text(
+                                          playlist[index]
+                                              .playlistname
+                                              .toString(),
+                                          style: TextStyle(color: Colors.white),
+                                        ),
+                                        onTap: () {
+                                          PlaylistSongs? plsongs =
+                                              playlistbox.getAt(index);
+                                          List<Songs>? plnewsongs =
+                                              plsongs!.playlistssongs;
+                                          Box<Songs> box = Hive.box('Songs');
+                                          List<Songs> dbAllsongs =
+                                              box.values.toList();
+                                          bool isAlreadyAdded = plnewsongs!.any(
+                                              (element) =>
+                                                  element.id ==
+                                                  dbAllsongs[widget.songindex]
+                                                      .id);
 
-                                        if (!isAlreadyAdded) {
-                                          plnewsongs.add(Songs(
-                                            songname:
-                                                dbAllsongs[widget.songindex]
-                                                    .songname,
-                                            artist: dbAllsongs[widget.songindex]
-                                                .artist,
-                                            duration:
-                                                dbAllsongs[widget.songindex]
-                                                    .duration,
-                                            songurl:
-                                                dbAllsongs[widget.songindex]
-                                                    .songurl,
-                                            id: dbAllsongs[widget.songindex].id,
-                                          ));
+                                          if (!isAlreadyAdded) {
+                                            plnewsongs.add(Songs(
+                                              songname:
+                                                  dbAllsongs[widget.songindex]
+                                                      .songname,
+                                              artist:
+                                                  dbAllsongs[widget.songindex]
+                                                      .artist,
+                                              duration:
+                                                  dbAllsongs[widget.songindex]
+                                                      .duration,
+                                              songurl:
+                                                  dbAllsongs[widget.songindex]
+                                                      .songurl,
+                                              id: dbAllsongs[widget.songindex]
+                                                  .id,
+                                            ));
 
-                                          playlistbox.putAt(
-                                              index,
-                                              PlaylistSongs(
-                                                  playlistname: playlist[index]
-                                                      .playlistname,
-                                                  playlistssongs: plnewsongs));
+                                            playlistbox.putAt(
+                                                index,
+                                                PlaylistSongs(
+                                                    playlistname:
+                                                        playlist[index]
+                                                            .playlistname,
+                                                    playlistssongs:
+                                                        plnewsongs));
 
-                                          ScaffoldMessenger.of(context)
-                                              .showSnackBar(SnackBar(
-                                                  backgroundColor: Colors.black,
-                                                  content: Text(
-                                                      '${dbAllsongs[widget.songindex].songname}Added to ${playlist[index].playlistname}')));
-                                        } else {
-                                          ScaffoldMessenger.of(context)
-                                              .showSnackBar(SnackBar(
-                                                  backgroundColor: Colors.black,
-                                                  content: Text(
-                                                      '${dbAllsongs[widget.songindex].songname} is already added')));
-                                        }
-                                        Navigator.pop(context);
-                                      },
-                                    );
-                                  }))
-                        ],
+                                            ScaffoldMessenger.of(context)
+                                                .showSnackBar(SnackBar(
+                                                    backgroundColor:
+                                                        Colors.black,
+                                                    content: Text(
+                                                        '${dbAllsongs[widget.songindex].songname}Added to ${playlist[index].playlistname}')));
+                                          } else {
+                                            ScaffoldMessenger.of(context)
+                                                .showSnackBar(SnackBar(
+                                                    backgroundColor:
+                                                        Colors.black,
+                                                    content: Text(
+                                                        '${dbAllsongs[widget.songindex].songname} is already added')));
+                                          }
+                                          Navigator.pop(context);
+                                        },
+                                      );
+                                    }))
+                          ],
+                        ),
                       );
                     },
                   ),
@@ -231,9 +256,10 @@ class _AddToPlalistbuttonState extends State<AddToPlalistbutton> {
   //----------------------------------------Function to Create Playlist--------------------------------------------------
   Widget bottomSheet(BuildContext context) {
     return Container(
-      height: 423 * 0.7,
+      height: 250,
       color: Color.fromARGB(255, 24, 24, 24),
       child: Column(
+        mainAxisSize: MainAxisSize.min,
         children: [playlistform(context)],
       ),
     );
@@ -241,7 +267,7 @@ class _AddToPlalistbuttonState extends State<AddToPlalistbutton> {
 
   Padding playlistform(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.all(8.0),
+      padding: const EdgeInsets.all(15.0),
       child: InkWell(
         child: Column(
           children: [
@@ -260,8 +286,16 @@ class _AddToPlalistbuttonState extends State<AddToPlalistbutton> {
               controller: _textEditingController,
               cursorHeight: 25,
               decoration: InputDecoration(
-                  hintText: "enter a name",
-                  hintStyle: TextStyle(color: Color.fromARGB(255, 72, 72, 72))),
+                filled: true,
+                fillColor: Color.fromARGB(199, 255, 255, 255),
+                border: OutlineInputBorder(
+                    borderSide:
+                        BorderSide(color: Color.fromARGB(255, 0, 0, 0))),
+                hintText: "Enter a name",
+                hintStyle: GoogleFonts.montserrat(
+                    textStyle:
+                        TextStyle(color: Color.fromARGB(255, 69, 69, 69))),
+              ),
               validator: (value) {
                 List<PlaylistSongs> values = playlistbox.values.toList();
 
@@ -297,7 +331,7 @@ class _AddToPlalistbuttonState extends State<AddToPlalistbutton> {
             onPressed: () {
               Navigator.pop(context);
             },
-            child: Text("cancel")),
+            child: Text("Cancel")),
         ElevatedButton(
             onPressed: () {
               playlistbox.add(PlaylistSongs(

@@ -38,6 +38,8 @@ class _ScreenFavoriteState extends State<ScreenFavorite> {
 
   @override
   Widget build(BuildContext context) {
+    final height = MediaQuery.of(context).size.height;
+    final width = MediaQuery.of(context).size.width;
     return Scaffold(
       backgroundColor: Color.fromARGB(255, 21, 21, 21),
       body: SafeArea(
@@ -45,7 +47,7 @@ class _ScreenFavoriteState extends State<ScreenFavorite> {
         child: Column(
           children: [
             Container(
-              height: 90,
+              height: height * 0.096,
               decoration: const BoxDecoration(
                 color: Color.fromARGB(255, 0, 0, 0),
                 borderRadius: BorderRadius.only(

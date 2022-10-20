@@ -16,6 +16,8 @@ class librarySearch extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final height = MediaQuery.of(context).size.height;
+    final width = MediaQuery.of(context).size.width;
     return Scaffold(
       bottomSheet: playingCard(
           /* index: 0 */
@@ -26,7 +28,7 @@ class librarySearch extends StatelessWidget {
         child: Column(
           children: [
             Container(
-              height: 90,
+              height: height * 0.096,
               decoration: const BoxDecoration(
                 color: Color.fromARGB(255, 0, 0, 0),
                 borderRadius: BorderRadius.only(
@@ -52,7 +54,7 @@ class librarySearch extends StatelessWidget {
               ),
             ),
             SizedBox(
-              height: 15,
+              height: height * 0.016,
             ),
             GestureDetector(
               onTap: () {
@@ -64,7 +66,7 @@ class librarySearch extends StatelessWidget {
               child: Padding(
                 padding: const EdgeInsets.fromLTRB(10, 0, 10, 0),
                 child: Container(
-                  height: 60,
+                  height: height * 0.064,
                   width: MediaQuery.of(context).size.width,
                   decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(8),
@@ -108,7 +110,7 @@ class librarySearch extends StatelessWidget {
               ),
             ),
             SizedBox(
-              height: 15,
+              height: height * 0.016,
             ),
             GestureDetector(
               onTap: () => Navigator.push(context,
@@ -131,12 +133,12 @@ class librarySearch extends StatelessWidget {
                 ),
               ),
             ),
-            play(),
+            play(context),
             SizedBox(
-              height: 10,
+              height: height * 0.011,
             ),
             headings("Folders"),
-            play()
+            play(context)
           ],
         ),
       )),
@@ -162,12 +164,14 @@ class librarySearch extends StatelessWidget {
   }
 
   //----------------------------------------Playlist--------------------------------------------------
-  play() {
+  play(context) {
+    final height = MediaQuery.of(context).size.height;
+    final width = MediaQuery.of(context).size.width;
     String hello;
     return Padding(
       padding: const EdgeInsets.fromLTRB(8, 0, 0, 0),
       child: SizedBox(
-        height: 210,
+        height: height * 0.223,
         child: ListView.separated(
             scrollDirection: Axis.horizontal,
             padding: const EdgeInsets.fromLTRB(10, 10, 10, 10),
@@ -186,13 +190,15 @@ class librarySearch extends StatelessWidget {
 
   //----------------------------------------PlayList Card--------------------------------------------------
   playlistCard(context) {
+    final height = MediaQuery.of(context).size.height;
+    final width = MediaQuery.of(context).size.width;
     return GestureDetector(
       onTap: () {
         /* Navigator.push(context,
             MaterialPageRoute(builder: ((context) => ScreenPlaylist()))); */
       },
       child: Container(
-        height: 10,
+        height: height * 0.011,
         // width: 132,
         color: const Color.fromARGB(0, 3, 128, 230),
         child: Column(

@@ -48,6 +48,8 @@ class _allSongsScreenState extends State<allSongsScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final height = MediaQuery.of(context).size.height;
+    final width = MediaQuery.of(context).size.width;
     return ValueListenableBuilder<Box<Songs>>(
         valueListenable: box.listenable(),
         builder: (context, Box<Songs> allsongbox, child) {
@@ -67,11 +69,11 @@ class _allSongsScreenState extends State<allSongsScreen> {
           return ListView.builder(
               physics: const NeverScrollableScrollPhysics(),
               shrinkWrap: true,
-              itemCount: allDbSongs.length,
+              itemCount: 10, //allDbSongs.length,
               itemBuilder: (context, index) {
                 Songs songs = allDbSongs[index];
                 RecentPlayed rsongs;
-                /* MostPlayed MPsongs = allmostplayedsongs[index]; */
+                MostPlayed MPsongs = allmostplayedsongs[index];
                 return Padding(
                   padding: const EdgeInsets.fromLTRB(0, 5, 0, 2),
                   child: ListTile(
@@ -83,6 +85,7 @@ class _allSongsScreenState extends State<allSongsScreen> {
                           duration: songs.duration,
                           songurl: songs.songurl);
                       updateRecentPlayed(rsongs);
+                      //updatePlayedSongCount(MPsongs, index);
                       /* updatePlayedSongCount(MPsongs, index); */
                       _audioPlayer.open(
                           Playlist(audios: convertAudios, startIndex: index),
@@ -140,12 +143,12 @@ class _allSongsScreenState extends State<allSongsScreen> {
                           context: context,
                           builder: ((context) {
                             return SizedBox(
-                              height: 200,
+                              height: height * 0.13,
                               child: Column(
                                 children: [
                                   AddToPlalistbutton(songindex: index),
-                                  const SizedBox(
-                                    height: 10,
+                                  SizedBox(
+                                    height: height * 0.011,
                                   ),
                                   addToFavorite(
                                     index: index,
