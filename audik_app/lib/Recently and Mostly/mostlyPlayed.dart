@@ -24,7 +24,7 @@ class mostlyPlayed extends StatefulWidget {
 class _mostlyPlayedState extends State<mostlyPlayed> {
   AssetsAudioPlayer player = AssetsAudioPlayer();
   List<Audio> songs = [];
-  List<MostPlayed> finalpmsongs = [];
+
   @override
   void initState() {
     // TODO: implement initState
@@ -46,6 +46,8 @@ class _mostlyPlayedState extends State<mostlyPlayed> {
     }
     super.initState();
   }
+
+  List<MostPlayed> finalpmsongs = [];
 
   @override
   Widget build(BuildContext context) {
@@ -80,6 +82,7 @@ class _mostlyPlayedState extends State<mostlyPlayed> {
                 ),
               ),
             ),
+            showmostlyplayed()
           ],
         ),
       ),
@@ -95,8 +98,7 @@ class _mostlyPlayedState extends State<mostlyPlayed> {
             return ListView.builder(
                 physics: const NeverScrollableScrollPhysics(),
                 shrinkWrap: true,
-                itemCount:
-                    finalpmsongs.length /* < 4 ? finalpmsongs.length : 4 */,
+                itemCount: finalpmsongs.length < 4 ? finalpmsongs.length : 4,
                 itemBuilder: (context, index) {
                   return Padding(
                     padding: const EdgeInsets.fromLTRB(0, 5, 0, 2),

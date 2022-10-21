@@ -69,7 +69,7 @@ class _allSongsScreenState extends State<allSongsScreen> {
           return ListView.builder(
               physics: const NeverScrollableScrollPhysics(),
               shrinkWrap: true,
-              itemCount: 10, //allDbSongs.length,
+              itemCount: allDbSongs.length,
               itemBuilder: (context, index) {
                 Songs songs = allDbSongs[index];
                 RecentPlayed rsongs;
@@ -85,7 +85,7 @@ class _allSongsScreenState extends State<allSongsScreen> {
                           duration: songs.duration,
                           songurl: songs.songurl);
                       updateRecentPlayed(rsongs);
-                      //updatePlayedSongCount(MPsongs, index);
+                      updatePlayedSongCount(MPsongs, index);
                       /* updatePlayedSongCount(MPsongs, index); */
                       _audioPlayer.open(
                           Playlist(audios: convertAudios, startIndex: index),

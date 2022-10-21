@@ -255,12 +255,16 @@ class _AddToPlalistbuttonState extends State<AddToPlalistbutton> {
 
   //----------------------------------------Function to Create Playlist--------------------------------------------------
   Widget bottomSheet(BuildContext context) {
-    return Container(
-      height: 250,
-      color: Color.fromARGB(255, 24, 24, 24),
-      child: Column(
-        mainAxisSize: MainAxisSize.min,
-        children: [playlistform(context)],
+    return Padding(
+      padding:
+          EdgeInsets.only(bottom: MediaQuery.of(context).viewInsets.bottom),
+      child: Container(
+        height: 250,
+        color: Color.fromARGB(255, 24, 24, 24),
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [playlistform(context)],
+        ),
       ),
     );
   }

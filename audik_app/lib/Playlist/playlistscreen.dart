@@ -189,15 +189,37 @@ class _ScreenPlaylistState extends State<ScreenPlaylist> {
                   ),
                   trailing: IconButton(
                     onPressed: (() {
-                      setState(() {
-                        songs.removeAt(index);
-                        plsongs.removeAt(index);
-                        playlistbox.putAt(
-                            widget.playlistindex,
-                            PlaylistSongs(
-                                playlistname: widget.playlistname,
-                                playlistssongs: songs));
-                      });
+                      showDialog(
+                        context: context,
+                        builder: (context) {
+                          return AlertDialog(
+                            title: Text("Delete Playlist"),
+                            content: Text("Are You Sure"),
+                            actions: [
+                              TextButton(
+                                  onPressed: () {
+                                    Navigator.pop(context);
+                                  },
+                                  child: Text("Cancel")),
+                              TextButton(
+                                  onPressed: () {
+                                    setState(() {
+                                      songs.removeAt(index);
+                                      plsongs.removeAt(index);
+                                      playlistbox.putAt(
+                                          widget.playlistindex,
+                                          PlaylistSongs(
+                                              playlistname: widget.playlistname,
+                                              playlistssongs: songs));
+                                    });
+                                    setState(() {});
+                                    Navigator.pop(context);
+                                  },
+                                  child: Text("Delete"))
+                            ],
+                          );
+                        },
+                      );
                     }),
                     icon: const Icon(
                       Icons.delete,

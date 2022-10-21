@@ -170,11 +170,32 @@ class _ScreenFavoriteState extends State<ScreenFavorite> {
                               ),
                               trailing: IconButton(
                                   onPressed: () {
-                                    favsongsdb.deleteAt(index);
+                                    showDialog(
+                                      context: context,
+                                      builder: (context) {
+                                        return AlertDialog(
+                                          title: Text("Remove from favorites"),
+                                          content: Text("Are You Sure ?"),
+                                          actions: [
+                                            TextButton(
+                                                onPressed: () {
+                                                  Navigator.pop(context);
+                                                },
+                                                child: Text("Cancel")),
+                                            TextButton(
+                                                onPressed: () {
+                                                  favsongsdb.deleteAt(index);
+                                                  Navigator.pop(context);
+                                                },
+                                                child: Text("Remove"))
+                                          ],
+                                        );
+                                      },
+                                    );
                                   },
                                   icon: Icon(
-                                    Icons.delete,
-                                    color: Colors.blue,
+                                    Icons.heart_broken,
+                                    color: Colors.white,
                                   ))),
                         );
                       });

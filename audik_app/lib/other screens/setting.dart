@@ -1,3 +1,5 @@
+import 'package:audik_app/Model/dbfunctions.dart';
+import 'package:audik_app/Recently%20and%20Mostly/mostlyPlayed.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/container.dart';
@@ -17,51 +19,206 @@ class _SettingScreenState extends State<SettingScreen> {
   Widget build(BuildContext context) {
     final OnAudioQuery _audioQuery = OnAudioQuery();
     return Scaffold(
-      backgroundColor: Color.fromARGB(255, 138, 138, 138),
+      backgroundColor: Color.fromARGB(255, 21, 21, 21),
       body: SafeArea(
         child: SingleChildScrollView(
           physics: ScrollPhysics(),
           child: Column(
             mainAxisSize: MainAxisSize.min,
             children: [
-              favoritesHomeListing(),
-              favoritesHomeListing(),
-              // test(),
-              FutureBuilder<List<SongModel>>(
-                future: _audioQuery.querySongs(
-                  sortType: null,
-                  orderType: OrderType.ASC_OR_SMALLER,
-                  // uriType: UriType.EXTERNAL,
-                  ignoreCase: true,
+              Container(
+                height: 90,
+                decoration: const BoxDecoration(
+                  color: Color.fromARGB(255, 0, 0, 0),
+                  borderRadius: BorderRadius.only(
+                    bottomLeft: Radius.circular(20),
+                    bottomRight: Radius.circular(20),
+                  ),
                 ),
-                builder: ((context, item) {
-                  if (item.data == null) {
-                    return const Center(
-                      child: CircularProgressIndicator(),
-                    );
-                  }
-                  if (item.data!.isEmpty) {
-                    return const Center(
-                      child: Text("No songs Found"),
-                    );
-                  }
-                  return Container(
-                    child: ListView.builder(
-                        physics: NeverScrollableScrollPhysics(),
-                        shrinkWrap: true,
-                        itemCount: item.data!.length,
-                        itemBuilder: (context, index) {
-                          return ListTile(
-                            title: Text(item.data![index].displayNameWOExt),
-                            subtitle: Text("${item.data![index].artist}"),
-                            trailing: Icon(Icons.more_vert),
-                            leading: QueryArtworkWidget(
-                                id: item.data![index].id,
-                                type: ArtworkType.AUDIO),
-                          );
-                        }),
-                  );
-                }),
+                child: Padding(
+                  padding: const EdgeInsets.fromLTRB(20, 15, 15, 15),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text(
+                        "Settings",
+                        style: GoogleFonts.montserrat(
+                            textStyle: const TextStyle(
+                                fontSize: 32,
+                                color: Colors.white,
+                                fontWeight: FontWeight.w700)),
+                      ),
+                      /* IconButton(
+                onPressed: () {},
+                icon: const Icon(
+                  Icons.more_vert,
+                  color: Colors.grey,
+                )),
+                 */
+                    ],
+                  ),
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.all(10.0),
+                child: Text(
+                  "App Settings",
+                  style: GoogleFonts.montserrat(
+                      textStyle: const TextStyle(
+                          fontSize: 32,
+                          color: Colors.white,
+                          fontWeight: FontWeight.w700)),
+                ),
+              ),
+              SizedBox(
+                height: 15,
+              ),
+              Padding(
+                padding: const EdgeInsets.all(10.0),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text(
+                      "Terms And Conditions",
+                      style: GoogleFonts.montserrat(
+                          textStyle: const TextStyle(
+                        fontSize: 20,
+                        color: Colors.white, /* fontWeight: FontWeight.w700 */
+                      )),
+                    ),
+                    Icon(
+                      Icons.arrow_forward_ios,
+                      color: Colors.white,
+                      size: 20,
+                    )
+                  ],
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.all(10.0),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text(
+                      "About Us",
+                      style: GoogleFonts.montserrat(
+                          textStyle: const TextStyle(
+                        fontSize: 20,
+                        color: Colors.white, /* fontWeight: FontWeight.w700 */
+                      )),
+                    ),
+                    Icon(
+                      Icons.arrow_forward_ios,
+                      color: Colors.white,
+                      size: 20,
+                    )
+                  ],
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.all(10.0),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    GestureDetector(
+                      onTap: () {
+                        mostplayedsongs.clear();
+                      },
+                      child: Text(
+                        "clear mp",
+                        style: GoogleFonts.montserrat(
+                            textStyle: const TextStyle(
+                          fontSize: 20,
+                          color: Colors.white, /* fontWeight: FontWeight.w700 */
+                        )),
+                      ),
+                    ),
+                    Icon(
+                      Icons.arrow_forward_ios,
+                      color: Colors.white,
+                      size: 20,
+                    )
+                  ],
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.all(10.0),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    GestureDetector(
+                      onTap: () {
+                        recentlyplayedbox.clear();
+                      },
+                      child: Text(
+                        "clear rp",
+                        style: GoogleFonts.montserrat(
+                            textStyle: const TextStyle(
+                          fontSize: 20,
+                          color: Colors.white, /* fontWeight: FontWeight.w700 */
+                        )),
+                      ),
+                    ),
+                    Icon(
+                      Icons.arrow_forward_ios,
+                      color: Colors.white,
+                      size: 20,
+                    )
+                  ],
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.all(10.0),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text(
+                      "Notifications",
+                      style: GoogleFonts.montserrat(
+                          textStyle: const TextStyle(
+                        fontSize: 20,
+                        color: Colors.white, /* fontWeight: FontWeight.w700 */
+                      )),
+                    ),
+                    Icon(
+                      Icons.arrow_forward_ios,
+                      color: Colors.white,
+                      size: 20,
+                    )
+                  ],
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.all(10.0),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text(
+                      "Equalizer",
+                      style: GoogleFonts.montserrat(
+                          textStyle: const TextStyle(
+                        fontSize: 20,
+                        color: Colors.white, /* fontWeight: FontWeight.w500 */
+                      )),
+                    ),
+                    Icon(
+                      Icons.arrow_forward_ios,
+                      color: Colors.white,
+                      size: 20,
+                    )
+                  ],
+                ),
+              ),
+              SizedBox(
+                height: 410,
+              ),
+              Text(
+                "Version 1.0.1",
+                style: GoogleFonts.montserrat(
+                    textStyle: const TextStyle(
+                  fontSize: 15,
+                  color: Color.fromARGB(62, 255, 255, 255),
+                )),
               ),
             ],
           ),
@@ -140,191 +297,11 @@ class _SettingScreenState extends State<SettingScreen> {
 
 
 
-/* Column(
-          children: [
-            Container(
-              height: 90,
-              decoration: const BoxDecoration(
-                color: Color.fromARGB(255, 0, 0, 0),
-                borderRadius: BorderRadius.only(
-                  bottomLeft: Radius.circular(20),
-                  bottomRight: Radius.circular(20),
-                ),
-              ),
-              child: Padding(
-                padding: const EdgeInsets.fromLTRB(20, 15, 15, 15),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Text(
-                      "Settings",
-                      style: GoogleFonts.montserrat(
-                          textStyle: const TextStyle(
-                              fontSize: 32,
-                              color: Colors.white,
-                              fontWeight: FontWeight.w700)),
-                    ),
-                    /* IconButton(
-                onPressed: () {},
-                icon: const Icon(
-                  Icons.more_vert,
-                  color: Colors.grey,
-                )),
-                 */
-                  ],
-                ),
-              ),
-            ),
-            Padding(
-              padding: const EdgeInsets.all(10.0),
-              child: Text(
-                "App Settings",
-                style: GoogleFonts.montserrat(
-                    textStyle: const TextStyle(
-                        fontSize: 32,
-                        color: Colors.white,
-                        fontWeight: FontWeight.w700)),
-              ),
-            ),
-            SizedBox(
-              height: 15,
-            ),
-            Padding(
-              padding: const EdgeInsets.all(10.0),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Text(
-                    "Terms And Conditions",
-                    style: GoogleFonts.montserrat(
-                        textStyle: const TextStyle(
-                      fontSize: 20,
-                      color: Colors.white, /* fontWeight: FontWeight.w700 */
-                    )),
-                  ),
-                  Icon(
-                    Icons.arrow_forward_ios,
-                    color: Colors.white,
-                    size: 20,
-                  )
-                ],
-              ),
-            ),
-            Padding(
-              padding: const EdgeInsets.all(10.0),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Text(
-                    "About Us",
-                    style: GoogleFonts.montserrat(
-                        textStyle: const TextStyle(
-                      fontSize: 20,
-                      color: Colors.white, /* fontWeight: FontWeight.w700 */
-                    )),
-                  ),
-                  Icon(
-                    Icons.arrow_forward_ios,
-                    color: Colors.white,
-                    size: 20,
-                  )
-                ],
-              ),
-            ),
-            Padding(
-              padding: const EdgeInsets.all(10.0),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Text(
-                    "Rate The App",
-                    style: GoogleFonts.montserrat(
-                        textStyle: const TextStyle(
-                      fontSize: 20,
-                      color: Colors.white, /* fontWeight: FontWeight.w700 */
-                    )),
-                  ),
-                  Icon(
-                    Icons.arrow_forward_ios,
-                    color: Colors.white,
-                    size: 20,
-                  )
-                ],
-              ),
-            ),
-            Padding(
-              padding: const EdgeInsets.all(10.0),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Text(
-                    "Share This App",
-                    style: GoogleFonts.montserrat(
-                        textStyle: const TextStyle(
-                      fontSize: 20,
-                      color: Colors.white, /* fontWeight: FontWeight.w700 */
-                    )),
-                  ),
-                  Icon(
-                    Icons.arrow_forward_ios,
-                    color: Colors.white,
-                    size: 20,
-                  )
-                ],
-              ),
-            ),
-            Padding(
-              padding: const EdgeInsets.all(10.0),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Text(
-                    "Notifications",
-                    style: GoogleFonts.montserrat(
-                        textStyle: const TextStyle(
-                      fontSize: 20,
-                      color: Colors.white, /* fontWeight: FontWeight.w700 */
-                    )),
-                  ),
-                  Icon(
-                    Icons.arrow_forward_ios,
-                    color: Colors.white,
-                    size: 20,
-                  )
-                ],
-              ),
-            ),
-            Padding(
-              padding: const EdgeInsets.all(10.0),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Text(
-                    "Equalizer",
-                    style: GoogleFonts.montserrat(
-                        textStyle: const TextStyle(
-                      fontSize: 20,
-                      color: Colors.white, /* fontWeight: FontWeight.w500 */
-                    )),
-                  ),
-                  Icon(
-                    Icons.arrow_forward_ios,
-                    color: Colors.white,
-                    size: 20,
-                  )
-                ],
-              ),
-            ),
-            SizedBox(
-              height: 410,
-            ),
-            Text(
-              "Version 1.0.1",
-              style: GoogleFonts.montserrat(
-                  textStyle: const TextStyle(
-                fontSize: 15,
-                color: Color.fromARGB(62, 255, 255, 255),
-              )),
-            ),
-          ],
-        ), */
+ 
+
+
+
+
+
+       /*  recentlyplayedbox.clear();
+                            mostplayedsongs.clear(); */

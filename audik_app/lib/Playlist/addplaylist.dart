@@ -139,9 +139,28 @@ class _addPlaylistState extends State<addPlaylist> {
                   ),
                   trailing: IconButton(
                     onPressed: (() {
-                      playlistbox.deleteAt(index);
-                      /* Navigator.push(context,
-                      MaterialPageRoute(builder: ((context) => playingNow()))); */
+                      showDialog(
+                        context: context,
+                        builder: (context) {
+                          return AlertDialog(
+                            title: Text("Delete Playlist"),
+                            content: Text("Are You Sure"),
+                            actions: [
+                              TextButton(
+                                  onPressed: () {
+                                    Navigator.pop(context);
+                                  },
+                                  child: Text("Cancel")),
+                              TextButton(
+                                  onPressed: () {
+                                    playlistbox.deleteAt(index);
+                                    Navigator.pop(context);
+                                  },
+                                  child: Text("Delete"))
+                            ],
+                          );
+                        },
+                      );
                     }),
                     icon: const Icon(
                       Icons.delete,
@@ -158,11 +177,17 @@ class _addPlaylistState extends State<addPlaylist> {
   //----------------------------------------ADD PLAYLIST POP UP--------------------------------------------------
 
   Widget bottomSheet(BuildContext context) {
-    return Container(
-      height: 423 * 0.7,
-      color: Color.fromARGB(255, 24, 24, 24),
-      child: Column(
-        children: [playlistform(context)],
+    return SingleChildScrollView(
+      child: Padding(
+        padding:
+            EdgeInsets.only(bottom: MediaQuery.of(context).viewInsets.bottom),
+        child: Container(
+          height: 423 * 0.7,
+          color: Color.fromARGB(255, 24, 24, 24),
+          child: Column(
+            children: [playlistform(context)],
+          ),
+        ),
       ),
     );
   }
@@ -188,8 +213,16 @@ class _addPlaylistState extends State<addPlaylist> {
               controller: _textEditingController,
               cursorHeight: 25,
               decoration: InputDecoration(
-                  hintText: "enter a name",
-                  hintStyle: TextStyle(color: Color.fromARGB(255, 72, 72, 72))),
+                filled: true,
+                fillColor: Color.fromARGB(199, 255, 255, 255),
+                border: OutlineInputBorder(
+                    borderSide:
+                        BorderSide(color: Color.fromARGB(255, 0, 0, 0))),
+                hintText: "Enter a name",
+                hintStyle: GoogleFonts.montserrat(
+                    textStyle:
+                        TextStyle(color: Color.fromARGB(255, 69, 69, 69))),
+              ),
               validator: (value) {
                 List<PlaylistSongs> values = playlistbox.values.toList();
 

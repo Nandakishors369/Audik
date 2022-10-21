@@ -74,8 +74,6 @@ class _homeScreenState extends State<homeScreen> {
                         ),
                         IconButton(
                           onPressed: () {
-                            recentlyplayedbox.clear();
-                            mostplayedsongs.clear();
                             Navigator.push(
                               context,
                               MaterialPageRoute(
@@ -164,7 +162,46 @@ class _homeScreenState extends State<homeScreen> {
             scrollDirection: Axis.horizontal,
             padding: const EdgeInsets.all(10),
             itemBuilder: ((context, index) {
-              return favoriteCard();
+              return GestureDetector(
+                onTap: () {
+                  /* Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: ((context) => const ScreenPlaylist()),
+          ),
+        ); */
+                },
+                child: Container(
+                  height: height * 0.011,
+                  // width: 132,
+                  color: const Color.fromARGB(0, 3, 128, 230),
+                  child: Column(
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.fromLTRB(0, 10, 0, 0),
+                        child: ClipRRect(
+                          borderRadius: BorderRadius.circular(15),
+                          child: Image.asset(
+                            "assets/Music Brand and App Logo (1).png",
+                            width: width * 0.312,
+                          ),
+                        ),
+                      ),
+                      SizedBox(
+                        height: height * 0.016,
+                      ),
+                      Text(
+                        "Name here",
+                        style: GoogleFonts.montserrat(
+                            textStyle: const TextStyle(
+                                fontSize: 13.43,
+                                color: Colors.white,
+                                fontWeight: FontWeight.w500)),
+                      )
+                    ],
+                  ),
+                ),
+              );
             }),
             separatorBuilder: ((context, index) {
               return SizedBox(
