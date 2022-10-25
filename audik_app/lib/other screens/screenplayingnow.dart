@@ -20,7 +20,7 @@ class _playingNowState extends State<playingNow> {
   final player = AssetsAudioPlayer.withId('0');
   Duration duration = Duration.zero;
   Duration position = Duration.zero;
-  /* bool isfav = false; */
+  bool isRepeat = false;
 
   @override
   void initState() {
@@ -215,6 +215,7 @@ class _playingNowState extends State<playingNow> {
                                 },
                                 icon: const Icon(Icons.skip_previous),
                                 color: Colors.white,
+                                iconSize: 45,
                               );
                             }),
                         IconButton(
@@ -223,6 +224,7 @@ class _playingNowState extends State<playingNow> {
                           },
                           icon: const Icon(Icons.replay_10),
                           color: Colors.white,
+                          iconSize: 30,
                         ),
                         Container(
                           decoration: const BoxDecoration(
@@ -240,7 +242,7 @@ class _playingNowState extends State<playingNow> {
                                     icon: Icon(isPlaying
                                         ? Icons.pause
                                         : Icons.play_arrow),
-                                    iconSize: 40,
+                                    iconSize: 50,
                                     color: Colors.white,
                                   );
                                 }),
@@ -252,6 +254,7 @@ class _playingNowState extends State<playingNow> {
                           },
                           icon: const Icon(Icons.forward_10),
                           color: Colors.white,
+                          iconSize: 30,
                         ),
                         PlayerBuilder.isPlaying(
                             player: player,
@@ -266,6 +269,7 @@ class _playingNowState extends State<playingNow> {
                                 },
                                 icon: const Icon(Icons.skip_next),
                                 color: Colors.white,
+                                iconSize: 45,
                               );
                             }),
                       ],
@@ -277,11 +281,22 @@ class _playingNowState extends State<playingNow> {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         IconButton(
-                            onPressed: () {},
-                            icon: const Icon(
-                              Icons.loop_sharp,
-                              color: Colors.white,
-                            )),
+                            onPressed: () {
+                              if (isRepeat) {
+                                player.setLoopMode(LoopMode.none);
+                                isRepeat = false;
+                              } else {
+                                player.setLoopMode(LoopMode.single);
+                                isRepeat = true;
+                              }
+                              setState(() {});
+                            },
+                            icon: isRepeat
+                                ? const Icon(Icons.repeat, color: Colors.blue)
+                                : const Icon(
+                                    Icons.repeat,
+                                    color: Colors.white,
+                                  )),
                         const SizedBox(
                           width: 45,
                         ),
@@ -289,10 +304,19 @@ class _playingNowState extends State<playingNow> {
                           width: 45,
                         ),
                         IconButton(
-                          onPressed: () {},
-                          icon: const Icon(Icons.shuffle),
-                          color: Colors.white,
-                        ),
+                            onPressed: () {
+                              setState(() {});
+                              player.toggleShuffle();
+                            },
+                            icon: player.isShuffling.value
+                                ? Icon(
+                                    Icons.shuffle,
+                                    color: Colors.blue,
+                                  )
+                                : Icon(
+                                    Icons.shuffle,
+                                    color: Colors.white,
+                                  )),
                       ],
                     ),
                   ),

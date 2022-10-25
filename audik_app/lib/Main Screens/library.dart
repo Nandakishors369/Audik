@@ -171,7 +171,7 @@ class librarySearch extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.fromLTRB(8, 0, 0, 0),
       child: SizedBox(
-        height: height * 0.223,
+        height: 200,
         child: ListView.separated(
             scrollDirection: Axis.horizontal,
             padding: const EdgeInsets.fromLTRB(10, 10, 10, 10),
@@ -304,17 +304,18 @@ class _playingCardState extends State<playingCard> {
                     color: Colors.white,
                   ),
                   IconButton(
-                      onPressed: () async {
-                        await player.next();
-                        setState(() {});
-                        if (isPlaying == false) {
-                          player.pause();
-                        }
-                      },
-                      icon: Icon(
-                        Icons.skip_next,
-                        color: Colors.white,
-                      ))
+                    onPressed: () async {
+                      await player.next();
+                      setState(() {});
+                      if (isPlaying == false) {
+                        player.pause();
+                      }
+                    },
+                    icon: Icon(
+                      Icons.skip_next,
+                      color: Colors.white,
+                    ),
+                  )
                 ],
               );
             },

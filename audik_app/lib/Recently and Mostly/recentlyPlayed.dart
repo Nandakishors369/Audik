@@ -69,7 +69,7 @@ class _recentlyPlayedState extends State<recentlyPlayed> {
               padding: const EdgeInsets.all(20.0),
               child: Center(
                 child: Text(
-                  "No Songs Added",
+                  "You haven't played anything ! Try playing something.",
                   style: GoogleFonts.montserrat(
                       textStyle: TextStyle(color: Colors.white)),
                 ),
