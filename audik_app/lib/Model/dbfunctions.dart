@@ -31,12 +31,27 @@ openrecentlyplayedDb() async {
   recentlyplayedbox = await Hive.openBox('recentlyplayed');
 }
 
-updateRecentPlayed(RecentPlayed value) {
+/* updateRecentPlayed(RecentPlayed value) {
   List<RecentPlayed> list = recentlyplayedbox.values.toList();
   bool isAlready =
       list.where((element) => element.songname == value.songname).isEmpty;
 
   if (isAlready == true) {
+    recentlyplayedbox.add(value);
+  }
+} */
+updateRecentPlayed(RecentPlayed value, index) {
+  List<RecentPlayed> list = recentlyplayedbox.values.toList();
+  bool isAlready =
+      list.where((element) => element.songname == value.songname).isEmpty;
+
+  if (isAlready == true) {
+    recentlyplayedbox.add(value);
+  } else {
+    list.removeWhere((element) => element.songname == value.songname);
+    recentlyplayedbox.deleteAt(index);
+    recentlyplayedbox.delete(value);
+
     recentlyplayedbox.add(value);
   }
 }

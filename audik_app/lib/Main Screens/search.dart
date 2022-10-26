@@ -1,6 +1,7 @@
 import 'dart:ui';
 
 import 'package:audik_app/Main%20Screens/home.dart';
+import 'package:audik_app/basic%20operations/searchfunction.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
@@ -49,18 +50,16 @@ class ScreenSearch extends StatelessWidget {
                 ),
               ),
             ),
-            Padding(
-              padding: EdgeInsets.all(15),
-              child: searchbar(),
-            ),
+            Padding(padding: EdgeInsets.all(15), child: searchbar(context)),
           ],
         ),
       ),
     );
   }
 
-  searchbar() {
+  searchbar(BuildContext context) {
     return TextFormField(
+      onTap: () {},
       decoration: InputDecoration(
         focusedBorder: UnderlineInputBorder(
           borderSide: BorderSide(color: Colors.white),

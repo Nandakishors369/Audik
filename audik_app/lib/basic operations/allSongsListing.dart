@@ -85,7 +85,7 @@ class _allSongsScreenState extends State<allSongsScreen> {
                           id: songs.id,
                           duration: songs.duration,
                           songurl: songs.songurl);
-                      updateRecentPlayed(rsongs);
+                      updateRecentPlayed(rsongs, index);
                       updatePlayedSongCount(MPsongs, index);
                       /* updatePlayedSongCount(MPsongs, index); */
                       _audioPlayer.open(

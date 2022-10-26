@@ -1,6 +1,7 @@
 import 'package:assets_audio_player/assets_audio_player.dart';
 import 'package:audik_app/Playlist/addplaylist.dart';
 import 'package:audik_app/Favorite/favorite.dart';
+import 'package:audik_app/Playlist/libraryplaylistview.dart';
 import 'package:audik_app/Playlist/playlistscreen.dart';
 import 'package:audik_app/other%20screens/screenplayingnow.dart';
 import 'package:flutter/cupertino.dart';
@@ -116,7 +117,7 @@ class librarySearch extends StatelessWidget {
               onTap: () => Navigator.push(context,
                   MaterialPageRoute(builder: ((context) => addPlaylist()))),
               child: Padding(
-                padding: const EdgeInsets.fromLTRB(0, 0, 20, 0),
+                padding: const EdgeInsets.fromLTRB(0, 10, 20, 0),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
@@ -133,10 +134,10 @@ class librarySearch extends StatelessWidget {
                 ),
               ),
             ),
-            play(context),
+            playlistView(),
             SizedBox(
-              height: height * 0.011,
-            ),
+                //height: height * 0.011,
+                ),
             headings("Folders"),
             play(context),
             SizedBox(height: 20)
