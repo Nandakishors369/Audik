@@ -42,7 +42,7 @@ class _PlayScreenFavState extends State<PlayScreenFav> {
                   songurl: dbsongs[widget.index].songurl,
                   id: dbsongs[widget.index].id));
               setState(() {});
-
+              //Navigator.pop(context);
               ScaffoldMessenger.of(context)
                   .showSnackBar(SnackBar(content: Text("Added to Favorites")));
             },
@@ -60,7 +60,7 @@ class _PlayScreenFavState extends State<PlayScreenFav> {
                     (element) => element.id == dbsongs[widget.index].id);
                 await favsongsdb.deleteAt(currentIndex);
                 setState(() {});
-
+                // Navigator.pop(context);
                 ScaffoldMessenger.of(context).showSnackBar(
                     SnackBar(content: Text("Removed From Favorites")));
               }

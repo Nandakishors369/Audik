@@ -138,7 +138,8 @@ class librarySearch extends StatelessWidget {
               height: height * 0.011,
             ),
             headings("Folders"),
-            play(context)
+            play(context),
+            SizedBox(height: 20)
           ],
         ),
       )),
@@ -223,7 +224,7 @@ class librarySearch extends StatelessWidget {
                       fontSize: 13.43,
                       color: Colors.white,
                       fontWeight: FontWeight.w500)),
-            )
+            ),
           ],
         ),
       ),
@@ -235,7 +236,7 @@ class playingCard extends StatefulWidget {
   /* int index; */
   playingCard({
     super.key,
-    /* required this.index */
+    /*  required this.index */
   });
 
   @override
@@ -253,8 +254,12 @@ class _playingCardState extends State<playingCard> {
         color: Colors.black,
         child: ListTile(
           onTap: (() {
-            Navigator.push(context,
-                MaterialPageRoute(builder: ((context) => playingNow())));
+            Navigator.push(
+                context,
+                MaterialPageRoute(
+                    builder: ((context) => playingNow(
+                          index: playing.index,
+                        ))));
           }),
           contentPadding: EdgeInsets.fromLTRB(5, 2, 5, 10),
           leading: QueryArtworkWidget(

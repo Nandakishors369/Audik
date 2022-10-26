@@ -36,10 +36,10 @@ dependencies:
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^1.0.2
-  video_player: ^2.4.7
+  
   google_fonts: 
   marquee: ^2.2.1
-  intl: ^0.17.0 # <-- SEE HERE
+  
   audio_video_progress_bar: ^0.11.0
   hive: ^2.2.1
   hive_flutter: ^1.1.0
@@ -75,7 +75,7 @@ flutter:
   # To add assets to your application, add an assets section, like this:
   assets:
      - assets/Music Brand and App Logo (1).png
-     - assets/ezgif.com-gif-maker.gif
+     
   #   - images/a_dot_ham.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see

@@ -1,3 +1,5 @@
+import 'dart:ui';
+
 import 'package:assets_audio_player/assets_audio_player.dart';
 import 'package:audik_app/Favorite/addtofavorite.dart';
 import 'package:audik_app/Model/dbfunctions.dart';
@@ -34,13 +36,21 @@ class homeScreen extends StatefulWidget {
 
 class _homeScreenState extends State<homeScreen> {
   bool mp = false;
+
+  @override
+  void initState() {
+    setState(() {});
+    // TODO: implement initState
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     final height = MediaQuery.of(context).size.height;
     final width = MediaQuery.of(context).size.width;
 
     return Scaffold(
-      bottomSheet: playingCard(/* index: 0 */),
+      bottomSheet: playingCard(),
       /* Container(
             height: 60,
             width: MediaQuery.of(context).size.width,
@@ -130,7 +140,18 @@ class _homeScreenState extends State<homeScreen> {
                     ],
                   ),
                 ),
-                allSongsScreen()
+                allSongsScreen(),
+                SizedBox(
+                    height: 80,
+                    width: width,
+                    child: Align(
+                      alignment: Alignment.topCenter,
+                      child: Text(
+                        "End of songs...",
+                        style: GoogleFonts.notoSansOldItalic(
+                            textStyle: TextStyle(color: Colors.grey)),
+                      ),
+                    ))
               ],
             ),
           ),
@@ -176,7 +197,7 @@ class _homeScreenState extends State<homeScreen> {
                       ),
                     ),
                     SizedBox(
-                      height: height * 0.016,
+                      height: 10,
                     ),
                     Text(
                       "hello",
@@ -288,12 +309,27 @@ class _homeScreenState extends State<homeScreen> {
                     height: height * .045,
                   ), */
                   Padding(
+                    padding: EdgeInsets.fromLTRB(height * 0.0106, 0, 0, 0),
+                    child: Align(
+                      alignment: Alignment.bottomLeft,
+                      child: Text(
+                        '''Mostly''',
+                        style: GoogleFonts.montserrat(
+                          textStyle: TextStyle(
+                              fontSize: width * 0.065,
+                              color: Color.fromARGB(255, 255, 255, 255),
+                              fontWeight: FontWeight.bold),
+                        ),
+                      ),
+                    ),
+                  ),
+                  Padding(
                     padding: EdgeInsets.fromLTRB(
                         height * 0.0106, 0, 0, height * 0.016),
                     child: Align(
                       alignment: Alignment.bottomLeft,
                       child: Text(
-                        '''Mostly Played ''',
+                        '''Played ''',
                         style: GoogleFonts.montserrat(
                           textStyle: TextStyle(
                               fontSize: width * 0.065,
@@ -343,12 +379,27 @@ class _homeScreenState extends State<homeScreen> {
                     height: height * .045,
                   ), */
                   Padding(
+                    padding: EdgeInsets.fromLTRB(height * 0.0106, 0, 0, 0),
+                    child: Align(
+                      alignment: Alignment.bottomLeft,
+                      child: Text(
+                        '''Recently''',
+                        style: GoogleFonts.montserrat(
+                          textStyle: TextStyle(
+                              fontSize: width * 0.065,
+                              color: Color.fromARGB(255, 255, 255, 255),
+                              fontWeight: FontWeight.bold),
+                        ),
+                      ),
+                    ),
+                  ),
+                  Padding(
                     padding: EdgeInsets.fromLTRB(
                         height * 0.0106, 0, 0, height * 0.016),
                     child: Align(
                       alignment: Alignment.bottomLeft,
                       child: Text(
-                        '''Recently Played ''',
+                        '''Played ''',
                         style: GoogleFonts.montserrat(
                           textStyle: TextStyle(
                               fontSize: width * 0.065,

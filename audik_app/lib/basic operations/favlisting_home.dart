@@ -125,10 +125,10 @@ class _favHomeState extends State<favHome> {
                                   ),
                                 ),
                                 SizedBox(
-                                  height: 20,
+                                  height: 15,
                                 ),
                                 SizedBox(
-                                  height: height * .02,
+                                  height: 18,
                                   width: width * .28,
                                   child: Marquee(
                                     blankSpace: 20,

@@ -42,6 +42,7 @@ class _allSongsScreenState extends State<allSongsScreen> {
               artist: item.artist,
               id: item.id.toString())));
     }
+    setState(() {});
     // TODO: implement initState
     super.initState();
   }
@@ -96,7 +97,9 @@ class _allSongsScreenState extends State<allSongsScreen> {
                       Navigator.push(
                         context,
                         MaterialPageRoute(
-                          builder: ((context) => playingNow()),
+                          builder: ((context) => playingNow(
+                                index: index,
+                              )),
                         ),
                       );
                     }),
@@ -143,7 +146,7 @@ class _allSongsScreenState extends State<allSongsScreen> {
                           context: context,
                           builder: ((context) {
                             return SizedBox(
-                              height: height * 0.13,
+                              height: 130 /* height * 0.13 */,
                               child: Column(
                                 children: [
                                   AddToPlalistbutton(songindex: index),
