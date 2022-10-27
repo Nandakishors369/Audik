@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:assets_audio_player/assets_audio_player.dart';
 import 'package:audik_app/Favorite/addtofavorite.dart';
 import 'package:audik_app/Main%20Screens/home.dart';
@@ -6,21 +8,22 @@ import 'package:audik_app/Playlist/createPlaylist.dart';
 import 'package:audik_app/other%20screens/screenplayingnow.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:marquee/marquee.dart';
 
 import 'package:on_audio_query/on_audio_query.dart';
 
-class SongsByArtistScreen extends StatefulWidget {
-  final String artistName;
-  final int artistId;
-  const SongsByArtistScreen(
-      {super.key, required this.artistName, required this.artistId});
+class SongsByAlbumScreen extends StatefulWidget {
+  final String albumName;
+  final int albumId;
+  const SongsByAlbumScreen(
+      {super.key, required this.albumName, required this.albumId});
 
   @override
-  State<SongsByArtistScreen> createState() => _SongsByArtistScreenState();
+  State<SongsByAlbumScreen> createState() => _SongsByAlbumScreenState();
 }
 
-class _SongsByArtistScreenState extends State<SongsByArtistScreen> {
-  final OnAudioQuery fetchArtistSongs = OnAudioQuery();
+class _SongsByAlbumScreenState extends State<SongsByAlbumScreen> {
+  final OnAudioQuery fetchAlbumSongs = OnAudioQuery();
   final AssetsAudioPlayer _audioPlayer = AssetsAudioPlayer.withId('0');
   int itemId = 0;
 
@@ -47,21 +50,26 @@ class _SongsByArtistScreenState extends State<SongsByArtistScreen> {
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      Text(
-                        "${widget.artistName}",
-                        style: GoogleFonts.montserrat(
-                            textStyle: const TextStyle(
-                                fontSize: 32,
-                                color: Colors.white,
-                                fontWeight: FontWeight.w700)),
+                      Expanded(
+                        child: Marquee(
+                          blankSpace: 40,
+                          velocity: 40,
+                          // pauseAfterRound: Duration(seconds: 2),
+                          text: "${widget.albumName}   ",
+                          style: GoogleFonts.montserrat(
+                              textStyle: const TextStyle(
+                                  fontSize: 25,
+                                  color: Colors.white,
+                                  fontWeight: FontWeight.w500)),
+                        ),
                       ),
                     ],
                   ),
                 ),
               ),
               FutureBuilder<List<SongModel>>(
-                future: fetchArtistSongs.queryAudiosFrom(
-                    AudiosFromType.ALBUM_ID, widget.artistId,
+                future: fetchAlbumSongs.queryAudiosFrom(
+                    AudiosFromType.ALBUM_ID, widget.albumId,
                     sortType: SongSortType.TITLE,
                     orderType: OrderType.ASC_OR_SMALLER),
                 builder: (context, item) {
@@ -70,13 +78,14 @@ class _SongsByArtistScreenState extends State<SongsByArtistScreen> {
                     shrinkWrap: true,
                     padding: const EdgeInsets.only(top: 10),
                     itemBuilder: (context, index) {
-                      List<Audio> songsByArtists = [];
+                      List<Audio> songsByAlbums = [];
                       for (var songs in item.data!) {
                         itemId = songs.id;
-                        songsByArtists.add(Audio.file(songs.uri.toString(),
+                        songsByAlbums.add(Audio.file(songs.uri.toString(),
                             metas: Metas(
-                                title: songs.title,
                                 artist: songs.artist,
+                                title: songs.title,
+                                album: songs.album,
                                 id: songs.id.toString())));
                       }
                       return Padding(
@@ -85,7 +94,7 @@ class _SongsByArtistScreenState extends State<SongsByArtistScreen> {
                           onTap: (() {
                             /* rsongs = RecentPlayed(
                             songname: songs.songname,
-                            artist: songs.artist,
+                            album: songs.album,
                             id: songs.id,
                             duration: songs.duration,
                             songurl: songs.songurl);
@@ -94,7 +103,7 @@ class _SongsByArtistScreenState extends State<SongsByArtistScreen> {
                         /* updatePlayedSongCount(MPsongs, index); */ */
                             _audioPlayer.open(
                                 Playlist(
-                                    audios: songsByArtists, startIndex: index),
+                                    audios: songsByAlbums, startIndex: index),
                                 showNotification: true,
                                 headPhoneStrategy:
                                     HeadPhoneStrategy.pauseOnUnplug,
@@ -103,9 +112,7 @@ class _SongsByArtistScreenState extends State<SongsByArtistScreen> {
                             Navigator.push(
                               context,
                               MaterialPageRoute(
-                                builder: ((context) => playingNow(
-                                      index: index,
-                                    )),
+                                builder: ((context) => playingNow()),
                               ),
                             );
                           }),
@@ -129,7 +136,7 @@ class _SongsByArtistScreenState extends State<SongsByArtistScreen> {
                           ),
                           title: SingleChildScrollView(
                             child: Text(
-                              songsByArtists[index].metas.title.toString(),
+                              songsByAlbums[index].metas.title.toString(),
                               maxLines: 1,
                               overflow: TextOverflow.ellipsis,
                               style: GoogleFonts.montserrat(
@@ -140,47 +147,11 @@ class _SongsByArtistScreenState extends State<SongsByArtistScreen> {
                               ),
                             ),
                           ),
-                          trailing: IconButton(
-                            onPressed: (() {
-                              showModalBottomSheet(
-                                backgroundColor: Colors.black,
-                                shape: const RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.vertical(
-                                    top: Radius.circular(20),
-                                  ),
-                                ),
-                                context: context,
-                                builder: ((context) {
-                                  return SizedBox(
-                                    height: 130 /* height * 0.13 */,
-                                    child: Column(
-                                      children: [
-                                        AddToPlalistbutton(songindex: index),
-                                        SizedBox(
-                                          height: height * 0.011,
-                                        ),
-                                        addToFavorite(
-                                          index: index,
-                                        )
-                                        /* TextButton(
-                                        onPressed: () {},
-                                        child: const Text("Add to Favorites")) */
-                                      ],
-                                    ),
-                                  );
-                                }),
-                              );
-                            }),
-                            icon: const Icon(
-                              Icons.more_vert,
-                              color: Colors.grey,
-                            ),
-                          ),
                         ),
                       ); /* ListTile(
                     onTap: () {
                       _audioPlayer.open(
-                        Playlist(audios: songsByArtists, startIndex: index),
+                        Playlist(audios: songsByAlbums, startIndex: index),
                         showNotification: true,
                       );
         
@@ -213,11 +184,11 @@ class _SongsByArtistScreenState extends State<SongsByArtistScreen> {
                           )),
                     ),
                     title: Text(
-                      songsByArtists[index].metas.title.toString(),
+                      songsByAlbums[index].metas.title.toString(),
                       style: TextStyle(color: Color.fromARGB(255, 0, 0, 0)),
                     ),
                     subtitle: Text(
-                      songsByArtists[index].metas.artist.toString(),
+                      songsByAlbums[index].metas.album.toString(),
                       style: TextStyle(color: Color.fromARGB(255, 0, 0, 0)),
                       overflow: TextOverflow.ellipsis,
                     ),

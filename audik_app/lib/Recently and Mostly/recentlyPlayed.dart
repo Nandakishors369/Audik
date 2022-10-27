@@ -96,9 +96,7 @@ class _recentlyPlayedState extends State<recentlyPlayed> {
                     Navigator.push(
                       context,
                       MaterialPageRoute(
-                        builder: ((context) => playingNow(
-                              index: index,
-                            )),
+                        builder: ((context) => playingNow()),
                       ),
                     );
                   },

@@ -141,7 +141,7 @@ class _SettingScreenState extends State<SettingScreen> {
                       )),
                     ),
                   )),
-              Padding(
+              /*  Padding(
                   padding: const EdgeInsets.all(0.0),
                   child: ListTile(
                     onTap: () {
@@ -159,7 +159,7 @@ class _SettingScreenState extends State<SettingScreen> {
                         color: Colors.white, /* fontWeight: FontWeight.w700 */
                       )),
                     ),
-                  )),
+                  )), */
               Padding(
                   padding: const EdgeInsets.all(0.0),
                   child: ListTile(

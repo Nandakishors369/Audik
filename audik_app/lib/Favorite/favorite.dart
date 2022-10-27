@@ -133,9 +133,7 @@ class _ScreenFavoriteState extends State<ScreenFavorite> {
                                 Navigator.push(
                                   context,
                                   MaterialPageRoute(
-                                    builder: ((context) => playingNow(
-                                          index: index,
-                                        )),
+                                    builder: ((context) => playingNow()),
                                   ),
                                 );
                               }),

@@ -1,6 +1,8 @@
 import 'dart:ui';
 
+import 'package:assets_audio_player/assets_audio_player.dart';
 import 'package:audik_app/Main%20Screens/home.dart';
+import 'package:audik_app/Main%20Screens/splash.dart';
 import 'package:audik_app/Model/songModel.dart';
 import 'package:audik_app/basic%20operations/searchfunction.dart';
 import 'package:flutter/material.dart';
@@ -9,6 +11,8 @@ import 'package:flutter/src/widgets/framework.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:hive/hive.dart';
 import 'package:on_audio_query/on_audio_query.dart';
+
+import '../other screens/screenplayingnow.dart';
 
 class ScreenSearch extends StatefulWidget {
   const ScreenSearch({super.key});
@@ -19,8 +23,33 @@ class ScreenSearch extends StatefulWidget {
 
 class _ScreenSearchState extends State<ScreenSearch> {
   final TextEditingController searchController = TextEditingController();
+  final box = SongBox.getInstance();
+  late List<Songs> dbSongs;
+  AssetsAudioPlayer _audioPlayer = AssetsAudioPlayer.withId('0');
+  List<Audio> allSongs = [];
 
-  //List<SongModel> display_list = List.from(main_songs_list);
+  @override
+  void initState() {
+    // TODO: implement initState
+    dbSongs = box.values.toList();
+
+    for (var item in dbSongs) {
+      allSongs.add(
+        Audio.file(
+          item.songurl.toString(),
+          metas: Metas(
+            artist: item.artist,
+            title: item.songname,
+            id: item.id.toString(),
+          ),
+        ),
+      );
+    }
+
+    super.initState();
+  }
+
+  late List<Songs> another = List.from(dbSongs);
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -65,7 +94,7 @@ class _ScreenSearchState extends State<ScreenSearch> {
             SizedBox(
               height: 20,
             ),
-            //Expanded(child: searchHistory())
+            Expanded(child: searchHistory())
           ],
         ),
       ),
@@ -75,8 +104,10 @@ class _ScreenSearchState extends State<ScreenSearch> {
   searchbar(BuildContext context) {
     return TextFormField(
       onTap: () {
-        showSearch(context: context, delegate: SearchLocation());
+        //showSearch(context: context, delegate: SearchLocation());
       },
+      controller: searchController,
+      onChanged: (value) => updateList(value),
       decoration: InputDecoration(
         focusedBorder: UnderlineInputBorder(
           borderSide: BorderSide(color: Colors.white),
@@ -101,42 +132,80 @@ class _ScreenSearchState extends State<ScreenSearch> {
   searchHistory() {
     return Padding(
       padding: const EdgeInsets.all(8.0),
-      child: ListView.builder(
-        physics: const NeverScrollableScrollPhysics(),
-        shrinkWrap: true,
-        itemCount: 10,
-        itemBuilder: ((context, index) {
-          return ListTile(
-            leading: const Image(
-              image: AssetImage(
-                "assets/Music Brand and App Logo (1).png",
-              ),
-              height: 32,
-              width: 32,
-            ),
-            title: SingleChildScrollView(
+      child: another.length == 0
+          ? Center(
               child: Text(
-                "Song Name",
-                style: GoogleFonts.montserrat(
-                  textStyle: const TextStyle(
-                      fontSize: 13.43,
-                      color: Colors.white,
-                      fontWeight: FontWeight.w500),
-                ),
+              "No Songs Found",
+              style: GoogleFonts.montserrat(
+                textStyle: const TextStyle(
+                    fontSize: 15,
+                    color: Colors.white,
+                    fontWeight: FontWeight.w500),
               ),
+            ))
+          : ListView.builder(
+              //physics: const NeverScrollableScrollPhysics(),
+              shrinkWrap: true,
+              itemCount: another.length,
+              itemBuilder: ((context, index) {
+                return Padding(
+                  padding: const EdgeInsets.only(top: 8),
+                  child: ListTile(
+                    onTap: () {
+                      _audioPlayer.open(
+                          Playlist(audios: allSongs, startIndex: index),
+                          showNotification: true,
+                          headPhoneStrategy: HeadPhoneStrategy.pauseOnUnplug,
+                          loopMode: LoopMode.playlist);
+                      setState(() {});
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: ((context) => playingNow()),
+                        ),
+                      );
+                    },
+                    leading: QueryArtworkWidget(
+                      artworkFit: BoxFit.cover,
+                      id: another[index].id!,
+                      type: ArtworkType.AUDIO,
+                      artworkQuality: FilterQuality.high,
+                      size: 2000,
+                      quality: 100,
+                      artworkBorder: BorderRadius.circular(50),
+                      nullArtworkWidget: ClipRRect(
+                        borderRadius:
+                            const BorderRadius.all(Radius.circular(50)),
+                        child: Image.asset(
+                          'assets/Music Brand and App Logo (1).png',
+                          fit: BoxFit.cover,
+                        ),
+                      ),
+                    ),
+                    title: SingleChildScrollView(
+                      child: Text(
+                        another[index].songname!,
+                        style: GoogleFonts.montserrat(
+                          textStyle: const TextStyle(
+                              fontSize: 13.43,
+                              color: Colors.white,
+                              fontWeight: FontWeight.w500),
+                        ),
+                      ),
+                    ),
+                  ),
+                );
+              }),
             ),
-            trailing: IconButton(
-              onPressed: (() {}),
-              icon: const Icon(
-                Icons.more_vert,
-                color: Colors.grey,
-              ),
-            ),
-          );
-        }),
-      ),
     );
   }
 
-  void updateList(String) {}
+  void updateList(String value) {
+    setState(() {
+      another = dbSongs
+          .where((element) =>
+              element.songname!.toLowerCase().contains(value.toLowerCase()))
+          .toList();
+    });
+  }
 }

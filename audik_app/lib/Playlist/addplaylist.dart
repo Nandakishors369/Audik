@@ -20,6 +20,7 @@ class addPlaylist extends StatefulWidget {
 
 class _addPlaylistState extends State<addPlaylist> {
   TextEditingController _textEditingController = TextEditingController();
+  TextEditingController controller = TextEditingController();
   List<PlaylistSongs> playlist = [];
   @override
   Widget build(BuildContext context) {
@@ -137,35 +138,52 @@ class _addPlaylistState extends State<addPlaylist> {
                       ),
                     ),
                   ),
-                  trailing: IconButton(
-                    onPressed: (() {
-                      showDialog(
-                        context: context,
-                        builder: (context) {
-                          return AlertDialog(
-                            title: Text("Delete Playlist"),
-                            content: Text("Are You Sure"),
-                            actions: [
-                              TextButton(
-                                  onPressed: () {
-                                    Navigator.pop(context);
-                                  },
-                                  child: Text("Cancel")),
-                              TextButton(
-                                  onPressed: () {
-                                    playlistbox.deleteAt(index);
-                                    Navigator.pop(context);
-                                  },
-                                  child: Text("Delete"))
-                            ],
+                  trailing: Row(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      IconButton(
+                          onPressed: () {
+                            showModalBottomSheet(
+                              context: context,
+                              builder: (context) =>
+                                  bottomSheetedit(context, index),
+                            );
+                          },
+                          icon: Icon(
+                            Icons.edit,
+                            color: Colors.grey,
+                          )),
+                      IconButton(
+                        onPressed: (() {
+                          showDialog(
+                            context: context,
+                            builder: (context) {
+                              return AlertDialog(
+                                title: Text("Delete Playlist"),
+                                content: Text("Are You Sure"),
+                                actions: [
+                                  TextButton(
+                                      onPressed: () {
+                                        Navigator.pop(context);
+                                      },
+                                      child: Text("Cancel")),
+                                  TextButton(
+                                      onPressed: () {
+                                        playlistbox.deleteAt(index);
+                                        Navigator.pop(context);
+                                      },
+                                      child: Text("Delete"))
+                                ],
+                              );
+                            },
                           );
-                        },
-                      );
-                    }),
-                    icon: const Icon(
-                      Icons.delete,
-                      color: Colors.grey,
-                    ),
+                        }),
+                        icon: const Icon(
+                          Icons.delete,
+                          color: Colors.grey,
+                        ),
+                      ),
+                    ],
                   ),
                 );
               }),
@@ -186,6 +204,22 @@ class _addPlaylistState extends State<addPlaylist> {
           color: Color.fromARGB(255, 24, 24, 24),
           child: Column(
             children: [playlistform(context)],
+          ),
+        ),
+      ),
+    );
+  }
+
+  Widget bottomSheetedit(BuildContext context, int index) {
+    return SingleChildScrollView(
+      child: Padding(
+        padding:
+            EdgeInsets.only(bottom: MediaQuery.of(context).viewInsets.bottom),
+        child: Container(
+          height: 423 * 0.7,
+          color: Color.fromARGB(255, 24, 24, 24),
+          child: Column(
+            children: [editBottom(context, index)],
           ),
         ),
       ),
@@ -264,6 +298,127 @@ class _addPlaylistState extends State<addPlaylist> {
               playlistbox.add(PlaylistSongs(
                   playlistname: _textEditingController.text,
                   playlistssongs: []));
+              Navigator.pop(context);
+            },
+            child: Text("Create"))
+      ],
+    );
+  }
+
+  Widget editBottom(BuildContext context, int index) {
+    double width = MediaQuery.of(context).size.width;
+    return Padding(
+      padding: const EdgeInsets.all(8.0),
+      child: InkWell(
+        child: Column(
+          children: [
+            Text(
+              "Edit Playlist ",
+              style: GoogleFonts.montserrat(
+                  textStyle: TextStyle(
+                      color: Colors.white,
+                      fontSize: 18,
+                      fontWeight: FontWeight.w500)),
+            ),
+            SizedBox(
+              height: 20,
+            ),
+            TextFormField(
+              controller: controller,
+              cursorHeight: 25,
+              decoration: InputDecoration(
+                filled: true,
+                fillColor: Color.fromARGB(199, 255, 255, 255),
+                border: OutlineInputBorder(
+                    borderSide:
+                        BorderSide(color: Color.fromARGB(255, 0, 0, 0))),
+                hintText: "Enter a name",
+                hintStyle: GoogleFonts.montserrat(
+                    textStyle:
+                        TextStyle(color: Color.fromARGB(255, 69, 69, 69))),
+              ),
+              validator: (value) {
+                List<PlaylistSongs> values = playlistbox.values.toList();
+
+                bool isAlreadyAdded = values
+                    .where((element) => element.playlistname == value!.trim())
+                    .isNotEmpty;
+
+                if (value!.trim() == '') {
+                  return 'Name Required';
+                }
+                if (isAlreadyAdded) {
+                  return 'This Name Already Exist';
+                }
+                return null;
+              },
+            ),
+            SizedBox(
+              height: 20,
+            ),
+            formButtonsedit(context, index)
+          ],
+        ),
+      ),
+    ); /* Padding(
+      padding: EdgeInsets.only(
+          bottom: MediaQuery.of(context).viewInsets.bottom + 10),
+      child: Container(
+        height: width * .7,
+        decoration: const BoxDecoration(
+          borderRadius: BorderRadius.vertical(
+            top: Radius.circular(20),
+          ),
+          color: Color.fromARGB(255, 23, 23, 24),
+        ),
+        child: TextFormField(
+          autofocus: true,
+          controller: controller,
+          cursorHeight: 25,
+          decoration: InputDecoration(
+            hintText: 'Playlist name',
+            //hintStyle: text18,
+            border: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(20),
+                borderSide: BorderSide.none),
+            fillColor: Colors.white,
+            filled: true,
+          ),
+          validator: (value) {
+            List<PlaylistSongs> values = playlistbox.values.toList();
+
+            bool isAlreadyAdded = values
+                .where((element) => element.playlistname == value!.trim())
+                .isNotEmpty;
+
+            if (value!.trim() == '') {
+              return 'Name Required';
+            }
+            if (isAlreadyAdded) {
+              return 'This Name Already Exist';
+            }
+            return null;
+          },
+        ),
+      ),
+    ); */
+  }
+
+  Row formButtonsedit(BuildContext context, int index) {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      children: [
+        ElevatedButton(
+            onPressed: () {
+              Navigator.pop(context);
+            },
+            child: Text("cancel")),
+        ElevatedButton(
+            onPressed: () {
+              playlistbox.putAt(
+                  index,
+                  PlaylistSongs(
+                      playlistname: controller.text, playlistssongs: []));
               Navigator.pop(context);
             },
             child: Text("Create"))

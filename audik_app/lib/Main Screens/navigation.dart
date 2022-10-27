@@ -1,4 +1,5 @@
 import 'package:audik_app/Main%20Screens/search.dart';
+import 'package:audik_app/other%20screens/setting.dart';
 import 'package:flutter/material.dart';
 
 import 'home.dart';
@@ -17,7 +18,7 @@ class _navigationBarState extends State<navigationBar> {
   final screen = [
     const homeScreen(),
     const ScreenSearch(),
-    const librarySearch()
+    const librarySearch(),
   ];
   @override
   Widget build(BuildContext context) {

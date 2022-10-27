@@ -1,5 +1,6 @@
 import 'package:audik_app/Model/dbfunctions.dart';
 import 'package:audik_app/Playlist/addplaylist.dart';
+import 'package:audik_app/Playlist/playlistscreen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
@@ -98,12 +99,17 @@ class _playlistViewState extends State<playlistView> {
                         itemBuilder: ((context, index) {
                           return GestureDetector(
                             onTap: () {
-                              /* Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: ((context) => const ScreenPlaylist()),
-                    ),
-                  ); */
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: ((context) => ScreenPlaylist(
+                                      allPlaylistSongs:
+                                          playlist[index].playlistssongs!,
+                                      playlistindex: index,
+                                      playlistname:
+                                          playlist[index].playlistname!)),
+                                ),
+                              );
                             },
                             child: Column(
                               children: [

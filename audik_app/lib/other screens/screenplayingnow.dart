@@ -5,6 +5,7 @@ import 'package:audik_app/Favorite/addtoFavoritePlayScreen.dart';
 import 'package:audik_app/Favorite/addtofavorite.dart';
 import 'package:audik_app/Model/dbfunctions.dart';
 import 'package:audik_app/Model/mostlyplayed_model.dart';
+import 'package:audik_app/Model/songModel.dart';
 import 'package:audik_app/Playlist/AddToPlaylistPlay.dart';
 import 'package:audik_app/Playlist/createPlaylist.dart';
 import 'package:audio_video_progress_bar/audio_video_progress_bar.dart';
@@ -16,8 +17,11 @@ import 'package:on_audio_query/on_audio_query.dart';
 import '../Model/recentlyplayed_model.dart';
 
 class playingNow extends StatefulWidget {
-  int index;
-  playingNow({super.key, required this.index});
+  //int index;
+  playingNow({
+    super.key,
+    /* required this.index */
+  });
 
   @override
   State<playingNow> createState() => _playingNowState();
@@ -28,12 +32,14 @@ class _playingNowState extends State<playingNow> {
   Duration duration = Duration.zero;
   Duration position = Duration.zero;
   bool isRepeat = false;
-
+  late List<Songs> dbsongs;
+  final box = SongBox.getInstance();
+  List<MostPlayed> allmostplayedsongs = mostplayedsongs.values.toList();
   @override
   void initState() {
     setState(() {});
     // TODO: implement initState
-
+    dbsongs = box.values.toList();
     super.initState();
     print("kitiii");
     print(player.getCurrentAudioTitle);
@@ -105,7 +111,10 @@ class _playingNowState extends State<playingNow> {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       player.builderCurrent(builder: (context, playing) {
-                        return PlayScreenFav(index: playing.index);
+                        return PlayScreenFav(
+                            index: dbsongs.indexWhere((element) =>
+                                element.songname ==
+                                playing.audio.audio.metas.title));
                       }),
 
                       /* IconButton(
@@ -121,7 +130,7 @@ class _playingNowState extends State<playingNow> {
                       const SizedBox(
                         width: 45,
                       ),
-                      PlayScreenPlst(songindex: widget.index)
+                      PlayScreenPlst(songindex: playing.index)
                       /* IconButton(
                         onPressed: () {},
                         icon: const Icon(Icons.add),
@@ -173,7 +182,7 @@ class _playingNowState extends State<playingNow> {
                         child: Marquee(
                           blankSpace: 20,
                           velocity: 20,
-                          text: player.getCurrentAudioArtist,
+                          text: artistname(),
                           style: GoogleFonts.montserrat(
                               textStyle: const TextStyle(
                                   fontSize: 15,
@@ -277,8 +286,20 @@ class _playingNowState extends State<playingNow> {
                             return IconButton(
                               onPressed: () async {
                                 // widget.index = widget.index + 1;
+                                setState(() {});
                                 await player.next();
                                 setState(() {});
+                                RecentPlayed rsongs;
+                                MostPlayed MPsongs =
+                                    allmostplayedsongs[playing.index];
+                                rsongs = RecentPlayed(
+                                    songname: dbsongs[playing.index].songname,
+                                    artist: dbsongs[playing.index].artist,
+                                    id: dbsongs[playing.index].id,
+                                    duration: dbsongs[playing.index].duration,
+                                    songurl: dbsongs[playing.index].songurl);
+                                updateRecentPlayed(rsongs, playing.index);
+                                updatePlayedSongCount(MPsongs, playing.index);
                                 if (isPlaying == false) {
                                   player.pause();
                                 }
@@ -342,6 +363,16 @@ class _playingNowState extends State<playingNow> {
         ),
       );
     });
+  }
+
+  String artistname() {
+    if (player.getCurrentAudioArtist == null) {
+      return '';
+    }
+    if (player.getCurrentAudioArtist.isEmpty) {
+      return '';
+    }
+    return player.getCurrentAudioArtist;
   }
 }
 /* void initState() {

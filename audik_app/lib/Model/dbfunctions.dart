@@ -48,10 +48,9 @@ updateRecentPlayed(RecentPlayed value, index) {
   if (isAlready == true) {
     recentlyplayedbox.add(value);
   } else {
-    list.removeWhere((element) => element.songname == value.songname);
+    int index =
+        list.indexWhere((element) => element.songname == value.songname);
     recentlyplayedbox.deleteAt(index);
-    recentlyplayedbox.delete(value);
-
     recentlyplayedbox.add(value);
   }
 }

@@ -98,7 +98,8 @@ class _mostlyPlayedState extends State<mostlyPlayed> {
             return ListView.builder(
                 physics: const NeverScrollableScrollPhysics(),
                 shrinkWrap: true,
-                itemCount: finalpmsongs.length < 4 ? finalpmsongs.length : 4,
+                itemCount:
+                    finalpmsongs.length /* < 4 ? finalpmsongs.length : 4 */,
                 itemBuilder: (context, index) {
                   return Padding(
                     padding: const EdgeInsets.fromLTRB(0, 5, 0, 2),
@@ -116,9 +117,7 @@ class _mostlyPlayedState extends State<mostlyPlayed> {
                         Navigator.push(
                           context,
                           MaterialPageRoute(
-                            builder: ((context) => playingNow(
-                                  index: index,
-                                )),
+                            builder: ((context) => playingNow()),
                           ),
                         );
                       }),

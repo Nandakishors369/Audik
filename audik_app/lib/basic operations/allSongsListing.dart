@@ -97,9 +97,7 @@ class _allSongsScreenState extends State<allSongsScreen> {
                       Navigator.push(
                         context,
                         MaterialPageRoute(
-                          builder: ((context) => playingNow(
-                                index: index,
-                              )),
+                          builder: ((context) => playingNow()),
                         ),
                       );
                     }),
@@ -176,3 +174,7 @@ class _allSongsScreenState extends State<allSongsScreen> {
         });
   }
 }
+
+/* if(convertAudios.indexWhere(
+                      (e) => e.songname == playing.audio.audio.metas.title));
+  } */

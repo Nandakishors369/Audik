@@ -140,7 +140,7 @@ class librarySearch extends StatelessWidget {
                 //height: height * 0.011,
                 ),
             //headings("Folders"),
-            Artist(width: 5),
+            Album(width: 5),
             SizedBox(height: 20)
           ],
         ),
@@ -256,12 +256,8 @@ class _playingCardState extends State<playingCard> {
         color: Colors.black,
         child: ListTile(
           onTap: (() {
-            Navigator.push(
-                context,
-                MaterialPageRoute(
-                    builder: ((context) => playingNow(
-                          index: playing.index,
-                        ))));
+            Navigator.push(context,
+                MaterialPageRoute(builder: ((context) => playingNow())));
           }),
           contentPadding: EdgeInsets.fromLTRB(5, 2, 5, 10),
           leading: QueryArtworkWidget(

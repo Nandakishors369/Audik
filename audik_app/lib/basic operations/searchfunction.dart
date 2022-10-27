@@ -1,4 +1,4 @@
-import 'package:assets_audio_player/assets_audio_player.dart';
+/* import 'package:assets_audio_player/assets_audio_player.dart';
 import 'package:flutter/material.dart';
 import 'package:on_audio_query/on_audio_query.dart';
 
@@ -114,9 +114,7 @@ class SearchLocation extends SearchDelegate {
                               Navigator.push(
                                 context,
                                 MaterialPageRoute(
-                                  builder: ((context) => playingNow(
-                                        index: index,
-                                      )),
+                                  builder: ((context) => playingNow()),
                                 ),
                               );
                             }),
@@ -155,3 +153,4 @@ class SearchLocation extends SearchDelegate {
     );
   }
 }
+ */

@@ -1,12 +1,13 @@
 import 'package:assets_audio_player/assets_audio_player.dart';
+import 'package:audik_app/basic%20operations/albumView.dart';
 import 'package:audik_app/basic%20operations/songbyalbum.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:marquee/marquee.dart';
 import 'package:on_audio_query/on_audio_query.dart';
 
-class Artist extends StatefulWidget {
-  const Artist({
+class Album extends StatefulWidget {
+  const Album({
     Key? key,
     required this.width,
   }) : super(key: key);
@@ -14,29 +15,29 @@ class Artist extends StatefulWidget {
   final double width;
 
   @override
-  State<Artist> createState() => _ArtistState();
+  State<Album> createState() => _AlbumState();
 }
 
-List<AlbumModel> artistList = [];
+List<AlbumModel> albumList = [];
 
-class _ArtistState extends State<Artist> {
+class _AlbumState extends State<Album> {
   final AssetsAudioPlayer _audioPlayer = AssetsAudioPlayer();
-  OnAudioQuery fetchartist = OnAudioQuery();
+  OnAudioQuery fetchalbum = OnAudioQuery();
   late int newIndex;
   int count = 0;
   int count1 = 1;
 
   @override
   void initState() {
-    getArtist();
+    getAlbum();
     super.initState();
   }
 
-  void getArtist() async {
-    artistList = await fetchartist.queryAlbums();
+  void getAlbum() async {
+    albumList = await fetchalbum.queryAlbums();
 
-    for (var items in artistList) {
-      artistList.add(items);
+    for (var items in albumList) {
+      albumList.add(items);
     }
   }
 
@@ -45,7 +46,7 @@ class _ArtistState extends State<Artist> {
     final height = MediaQuery.of(context).size.height;
     final width = MediaQuery.of(context).size.width;
     return FutureBuilder<List<AlbumModel>>(
-        future: fetchartist.queryAlbums(),
+        future: fetchalbum.queryAlbums(),
         builder: (context, item) {
           if (item.data == null) {
             return const Center(
@@ -63,16 +64,27 @@ class _ArtistState extends State<Artist> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Padding(
-                padding: EdgeInsets.fromLTRB(20, 0, 0, 0),
+                padding: EdgeInsets.fromLTRB(0, 0, 0, 0),
                 child: Row(
                   children: [
-                    Text(
-                      "Your Albums",
-                      style: GoogleFonts.montserrat(
-                        textStyle: TextStyle(
-                            fontSize: width * 0.0543,
-                            color: Colors.white,
-                            fontWeight: FontWeight.w700),
+                    GestureDetector(
+                      onTap: () {},
+                      child: Padding(
+                        padding: const EdgeInsets.fromLTRB(0, 10, 20, 0),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            headings("Your Albums"),
+                            SizedBox(
+                              width: 205,
+                            ),
+                            Icon(
+                              Icons.arrow_forward_ios,
+                              color: Colors.white,
+                              size: 20,
+                            )
+                          ],
+                        ),
                       ),
                     ),
                   ],
@@ -93,10 +105,9 @@ class _ArtistState extends State<Artist> {
                         onTap: () {
                           Navigator.of(context)
                               .push(MaterialPageRoute(builder: (context) {
-                            return SongsByArtistScreen(
-                                artistId: artistList[index].id,
-                                artistName:
-                                    artistList[index].artist.toString());
+                            return SongsByAlbumScreen(
+                                albumId: albumList[index].id,
+                                albumName: albumList[index].album.toString());
                           }));
                           /* Navigator.push(
                     context,
@@ -114,7 +125,7 @@ class _ArtistState extends State<Artist> {
                                 artworkHeight: width * 0.306,
                                 artworkWidth: width * 0.306,
                                 artworkFit: BoxFit.cover,
-                                id: artistList[index].id,
+                                id: albumList[index].id,
                                 type: ArtworkType.AUDIO,
                                 artworkQuality: FilterQuality.high,
                                 size: 2000,
@@ -141,7 +152,7 @@ class _ArtistState extends State<Artist> {
                               child: Marquee(
                                 blankSpace: 20,
                                 velocity: 20,
-                                text: artistList[index].artist.toString(),
+                                text: albumList[index].album.toString(),
                                 style: GoogleFonts.montserrat(
                                     textStyle: TextStyle(
                                         fontSize: 15,
@@ -158,13 +169,31 @@ class _ArtistState extends State<Artist> {
                         width: width * 0.024,
                       );
                     }),
-                    itemCount: artistList.length,
+                    itemCount: albumList.length,
                   ),
                 ),
               ),
             ],
           );
         });
+  }
+
+  headings(String name) {
+    return Padding(
+      padding: const EdgeInsets.fromLTRB(25, 0, 0, 4),
+      child: Row(
+        children: [
+          Text(
+            name,
+            style: GoogleFonts.montserrat(
+                textStyle: const TextStyle(
+                    fontSize: 23,
+                    color: Colors.white,
+                    fontWeight: FontWeight.w700)),
+          ),
+        ],
+      ),
+    );
   }
 }
 
