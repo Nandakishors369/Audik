@@ -9,6 +9,8 @@ import 'package:hive/hive.dart';
 import 'package:hive_flutter/adapters.dart';
 import 'package:on_audio_query/on_audio_query.dart';
 
+import '../other screens/screenplayingnow.dart';
+
 class recentlyPlayed extends StatefulWidget {
   const recentlyPlayed({super.key});
 
@@ -18,6 +20,7 @@ class recentlyPlayed extends StatefulWidget {
 
 class _recentlyPlayedState extends State<recentlyPlayed> {
   AssetsAudioPlayer player = AssetsAudioPlayer();
+  List<Audio> resongs = [];
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -84,15 +87,21 @@ class _recentlyPlayedState extends State<recentlyPlayed> {
               itemCount: rsongs.length,
               itemBuilder: ((context, index) {
                 return ListTile(
-                  /* onTap: () {
-                    player.open(Playlist(audios: , startIndex: index),
-                        showNotification: true, loopMode: LoopMode.playlist);
-                    Navigator.of(context).push(MaterialPageRoute(
-                      builder: (context) => playingNow(),
-                    ));
-                    /* Navigator.push(context,
-                    MaterialPageRoute(builder: ((context) => playingNow()))); */
-                  }, */
+                  onTap: () {
+                    player.open(Playlist(audios: resongs, startIndex: index),
+                        showNotification: true,
+                        headPhoneStrategy: HeadPhoneStrategy.pauseOnUnplug,
+                        loopMode: LoopMode.playlist);
+                    setState(() {});
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: ((context) => playingNow(
+                              index: index,
+                            )),
+                      ),
+                    );
+                  },
                   leading: QueryArtworkWidget(
                     artworkFit: BoxFit.cover,
                     id: rsongs[index].id!,

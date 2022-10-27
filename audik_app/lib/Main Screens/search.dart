@@ -1,21 +1,32 @@
 import 'dart:ui';
 
 import 'package:audik_app/Main%20Screens/home.dart';
+import 'package:audik_app/Model/songModel.dart';
 import 'package:audik_app/basic%20operations/searchfunction.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:hive/hive.dart';
+import 'package:on_audio_query/on_audio_query.dart';
 
-class ScreenSearch extends StatelessWidget {
+class ScreenSearch extends StatefulWidget {
   const ScreenSearch({super.key});
 
+  @override
+  State<ScreenSearch> createState() => _ScreenSearchState();
+}
+
+class _ScreenSearchState extends State<ScreenSearch> {
+  final TextEditingController searchController = TextEditingController();
+
+  //List<SongModel> display_list = List.from(main_songs_list);
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: const Color.fromARGB(255, 21, 21, 21),
       body: SafeArea(
-        child: Column(
+        child: /* child: */ Column(
           children: [
             Container(
               height: 90,
@@ -40,17 +51,21 @@ class ScreenSearch extends StatelessWidget {
                               fontWeight: FontWeight.w700)),
                     ),
                     /* IconButton(
-                onPressed: () {},
-                icon: const Icon(
-                  Icons.more_vert,
-                  color: Colors.grey,
-                )),
-                 */
+                  onPressed: () {},
+                  icon: const Icon(
+                    Icons.more_vert,
+                    color: Colors.grey,
+                  )),
+                   */
                   ],
                 ),
               ),
             ),
             Padding(padding: EdgeInsets.all(15), child: searchbar(context)),
+            SizedBox(
+              height: 20,
+            ),
+            //Expanded(child: searchHistory())
           ],
         ),
       ),
@@ -59,7 +74,9 @@ class ScreenSearch extends StatelessWidget {
 
   searchbar(BuildContext context) {
     return TextFormField(
-      onTap: () {},
+      onTap: () {
+        showSearch(context: context, delegate: SearchLocation());
+      },
       decoration: InputDecoration(
         focusedBorder: UnderlineInputBorder(
           borderSide: BorderSide(color: Colors.white),
@@ -87,7 +104,7 @@ class ScreenSearch extends StatelessWidget {
       child: ListView.builder(
         physics: const NeverScrollableScrollPhysics(),
         shrinkWrap: true,
-        itemCount: 3,
+        itemCount: 10,
         itemBuilder: ((context, index) {
           return ListTile(
             leading: const Image(
@@ -120,4 +137,6 @@ class ScreenSearch extends StatelessWidget {
       ),
     );
   }
+
+  void updateList(String) {}
 }

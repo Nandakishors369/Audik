@@ -3,6 +3,7 @@ import 'package:audik_app/Playlist/addplaylist.dart';
 import 'package:audik_app/Favorite/favorite.dart';
 import 'package:audik_app/Playlist/libraryplaylistview.dart';
 import 'package:audik_app/Playlist/playlistscreen.dart';
+import 'package:audik_app/basic%20operations/songfromalbums.dart';
 import 'package:audik_app/other%20screens/screenplayingnow.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -138,8 +139,8 @@ class librarySearch extends StatelessWidget {
             SizedBox(
                 //height: height * 0.011,
                 ),
-            headings("Folders"),
-            play(context),
+            //headings("Folders"),
+            Artist(width: 5),
             SizedBox(height: 20)
           ],
         ),

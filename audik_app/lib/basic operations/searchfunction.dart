@@ -9,7 +9,7 @@ import '../other screens/screenplayingnow.dart';
 class SearchLocation extends SearchDelegate {
   AssetsAudioPlayer player = AssetsAudioPlayer.withId("0");
   @override
-  List<Widget>? buildActions(BuildContext context) {
+  /* List<Widget>? */ buildActions(BuildContext context) {
     return [
       IconButton(
           onPressed: (() {
