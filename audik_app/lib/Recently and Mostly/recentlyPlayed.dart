@@ -9,6 +9,7 @@ import 'package:hive/hive.dart';
 import 'package:hive_flutter/adapters.dart';
 import 'package:on_audio_query/on_audio_query.dart';
 
+import '../Model/mostlyplayed_model.dart';
 import '../other screens/screenplayingnow.dart';
 
 class recentlyPlayed extends StatefulWidget {
@@ -21,6 +22,23 @@ class recentlyPlayed extends StatefulWidget {
 class _recentlyPlayedState extends State<recentlyPlayed> {
   AssetsAudioPlayer player = AssetsAudioPlayer();
   List<Audio> resongs = [];
+
+  @override
+  void initState() {
+    // TODO: implement
+    List<RecentPlayed> rdbsongs =
+        recentlyplayedbox.values.toList().reversed.toList();
+    for (var item in rdbsongs) {
+      resongs.add(Audio.file(item.songurl!,
+          metas: Metas(
+            artist: item.songname,
+            title: item.artist,
+            id: item.id.toString(),
+          )));
+    }
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -65,7 +83,8 @@ class _recentlyPlayedState extends State<recentlyPlayed> {
     return ValueListenableBuilder<Box<RecentPlayed>>(
         valueListenable: recentlyplayedbox.listenable(),
         builder: (context, Box<RecentPlayed> recentsongs, _) {
-          List<RecentPlayed> rsongs = recentsongs.values.toList();
+          List<RecentPlayed> rsongs =
+              recentsongs.values.toList().reversed.toList();
 
           if (rsongs.isEmpty) {
             return Padding(
@@ -86,12 +105,25 @@ class _recentlyPlayedState extends State<recentlyPlayed> {
               shrinkWrap: true,
               itemCount: rsongs.length,
               itemBuilder: ((context, index) {
+                List<MostPlayed> allmostplayedsongs =
+                    mostplayedsongs.values.toList();
+                MostPlayed msongs = allmostplayedsongs[index];
                 return ListTile(
                   onTap: () {
-                    player.open(Playlist(audios: resongs, startIndex: index),
-                        showNotification: true,
-                        headPhoneStrategy: HeadPhoneStrategy.pauseOnUnplug,
-                        loopMode: LoopMode.playlist);
+                    final rsong = RecentPlayed(
+                        songname: rsongs[index].songname,
+                        artist: rsongs[index].artist,
+                        duration: rsongs[index].duration,
+                        songurl: rsongs[index].songurl,
+                        id: rsongs[index].id);
+
+                    updatePlayedSongCount(msongs, index);
+                    updateRecentPlayed(rsong, index);
+                    player.open(
+                      Playlist(audios: resongs, startIndex: index),
+                      showNotification: true,
+                      loopMode: LoopMode.none,
+                    );
                     setState(() {});
                     Navigator.push(
                       context,

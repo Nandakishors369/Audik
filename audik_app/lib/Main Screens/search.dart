@@ -33,19 +33,6 @@ class _ScreenSearchState extends State<ScreenSearch> {
     // TODO: implement initState
     dbSongs = box.values.toList();
 
-    for (var item in dbSongs) {
-      allSongs.add(
-        Audio.file(
-          item.songurl.toString(),
-          metas: Metas(
-            artist: item.artist,
-            title: item.songname,
-            id: item.id.toString(),
-          ),
-        ),
-      );
-    }
-
     super.initState();
   }
 
@@ -206,6 +193,23 @@ class _ScreenSearchState extends State<ScreenSearch> {
           .where((element) =>
               element.songname!.toLowerCase().contains(value.toLowerCase()))
           .toList();
+      for (var item in another) {
+        allSongs.add(
+          Audio.file(
+            item.songurl.toString(),
+            metas: Metas(
+              artist: item.artist,
+              title: item.songname,
+              id: item.id.toString(),
+            ),
+          ),
+        );
+      }
+
+      /* dbSongs
+          .where((element) =>
+              element.songname!.toLowerCase().contains(value.toLowerCase()))
+          .toList(); */
     });
   }
 }
