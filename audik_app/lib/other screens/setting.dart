@@ -1,3 +1,4 @@
+import 'package:assets_audio_player/assets_audio_player.dart';
 import 'package:audik_app/Model/dbfunctions.dart';
 import 'package:audik_app/Recently%20and%20Mostly/mostlyPlayed.dart';
 import 'package:audik_app/other%20screens/settingPopup.dart';
@@ -19,6 +20,7 @@ class SettingScreen extends StatefulWidget {
 }
 
 class _SettingScreenState extends State<SettingScreen> {
+  AssetsAudioPlayer audioPlayer = AssetsAudioPlayer.withId('0');
   @override
   Widget build(BuildContext context) {
     final OnAudioQuery _audioQuery = OnAudioQuery();
@@ -141,32 +143,34 @@ class _SettingScreenState extends State<SettingScreen> {
                       )),
                     ),
                   )),
-              /*  Padding(
+              Padding(
                   padding: const EdgeInsets.all(0.0),
                   child: ListTile(
                     onTap: () {
-                      recentlyplayedbox.clear();
+                      //recentlyplayedbox.clear();
                     },
                     trailing: Icon(
                       Icons.arrow_forward_ios,
                       color: Colors.white,
                     ),
                     title: Text(
-                      "clear rp",
+                      "Nick Name",
                       style: GoogleFonts.montserrat(
                           textStyle: const TextStyle(
                         fontSize: 20,
                         color: Colors.white, /* fontWeight: FontWeight.w700 */
                       )),
                     ),
-                  )), */
+                  )),
               Padding(
                   padding: const EdgeInsets.all(0.0),
                   child: ListTile(
                     trailing: SwitcherButton(
                       value: true,
                       size: 27,
-                      onChange: (value) {},
+                      onChange: (value) {
+                        audioPlayer.showNotification = false;
+                      },
                     ),
                     title: Text(
                       "Notifications",

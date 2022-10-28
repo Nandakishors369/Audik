@@ -132,13 +132,19 @@ class _ScreenPlaylistState extends State<ScreenPlaylist> {
           List<PlaylistSongs> plsongs = playlistbox.values.toList();
           List<Songs>? songs = plsongs[widget.playlistindex].playlistssongs;
           if (songs!.isEmpty) {
-            return Padding(
-              padding: const EdgeInsets.all(20.0),
-              child: Center(
-                child: Text(
-                  "No Songs Added",
-                  style: GoogleFonts.montserrat(
-                      textStyle: TextStyle(color: Colors.white)),
+            return Align(
+              heightFactor: 7.5,
+              child: Padding(
+                padding: const EdgeInsets.all(20.0),
+                child: Center(
+                  child: Text(
+                    "No Songs Added",
+                    style: GoogleFonts.montserrat(
+                        textStyle: TextStyle(
+                            color: Colors.white,
+                            fontSize: 20,
+                            fontWeight: FontWeight.w500)),
+                  ),
                 ),
               ),
             );

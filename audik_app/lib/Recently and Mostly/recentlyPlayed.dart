@@ -20,7 +20,7 @@ class recentlyPlayed extends StatefulWidget {
 }
 
 class _recentlyPlayedState extends State<recentlyPlayed> {
-  AssetsAudioPlayer player = AssetsAudioPlayer();
+  AssetsAudioPlayer player = AssetsAudioPlayer.withId("0");
   List<Audio> resongs = [];
 
   @override
@@ -44,36 +44,38 @@ class _recentlyPlayedState extends State<recentlyPlayed> {
     return Scaffold(
       backgroundColor: const Color.fromARGB(255, 21, 21, 21),
       body: SafeArea(
-        child: Column(
-          children: [
-            Container(
-              height: 90,
-              decoration: const BoxDecoration(
-                color: Color.fromARGB(255, 0, 0, 0),
-                borderRadius: BorderRadius.only(
-                  bottomLeft: Radius.circular(20),
-                  bottomRight: Radius.circular(20),
+        child: SingleChildScrollView(
+          child: Column(
+            children: [
+              Container(
+                height: 90,
+                decoration: const BoxDecoration(
+                  color: Color.fromARGB(255, 0, 0, 0),
+                  borderRadius: BorderRadius.only(
+                    bottomLeft: Radius.circular(20),
+                    bottomRight: Radius.circular(20),
+                  ),
+                ),
+                child: Padding(
+                  padding: const EdgeInsets.fromLTRB(20, 15, 15, 15),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text(
+                        "Recently Played",
+                        style: GoogleFonts.montserrat(
+                            textStyle: const TextStyle(
+                                fontSize: 32,
+                                color: Colors.white,
+                                fontWeight: FontWeight.w700)),
+                      ),
+                    ],
+                  ),
                 ),
               ),
-              child: Padding(
-                padding: const EdgeInsets.fromLTRB(20, 15, 15, 15),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Text(
-                      "Recently Played",
-                      style: GoogleFonts.montserrat(
-                          textStyle: const TextStyle(
-                              fontSize: 32,
-                              color: Colors.white,
-                              fontWeight: FontWeight.w700)),
-                    ),
-                  ],
-                ),
-              ),
-            ),
-            Recentlist()
-          ],
+              Recentlist()
+            ],
+          ),
         ),
       ),
     );

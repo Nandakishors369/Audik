@@ -182,7 +182,7 @@ class _playingNowState extends State<playingNow> {
                         child: Marquee(
                           blankSpace: 20,
                           velocity: 20,
-                          text: artistname(),
+                          text: player.getCurrentAudioArtist,
                           style: GoogleFonts.montserrat(
                               textStyle: const TextStyle(
                                   fontSize: 15,
@@ -293,13 +293,17 @@ class _playingNowState extends State<playingNow> {
                                 MostPlayed MPsongs =
                                     allmostplayedsongs[playing.index];
                                 rsongs = RecentPlayed(
-                                    songname: dbsongs[playing.index].songname,
-                                    artist: dbsongs[playing.index].artist,
-                                    id: dbsongs[playing.index].id,
-                                    duration: dbsongs[playing.index].duration,
-                                    songurl: dbsongs[playing.index].songurl);
-                                updateRecentPlayed(rsongs, playing.index);
-                                updatePlayedSongCount(MPsongs, playing.index);
+                                    songname:
+                                        dbsongs[playing.index + 1].songname,
+                                    artist: dbsongs[playing.index + 1].artist,
+                                    id: dbsongs[playing.index + 1].id,
+                                    duration:
+                                        dbsongs[playing.index + 1].duration,
+                                    songurl:
+                                        dbsongs[playing.index + 1].songurl);
+                                updateRecentPlayed(rsongs, playing.index + 1);
+                                updatePlayedSongCount(
+                                    MPsongs, playing.index + 1);
                                 if (isPlaying == false) {
                                   player.pause();
                                 }
@@ -365,7 +369,7 @@ class _playingNowState extends State<playingNow> {
     });
   }
 
-  String artistname() {
+  /*  String artistname() {
     if (player.getCurrentAudioArtist == null) {
       return '';
     }
@@ -373,7 +377,7 @@ class _playingNowState extends State<playingNow> {
       return '';
     }
     return player.getCurrentAudioArtist;
-  }
+  } */
 }
 /* void initState() {
     super.initState();

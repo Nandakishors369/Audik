@@ -22,7 +22,7 @@ class mostlyPlayed extends StatefulWidget {
 }
 
 class _mostlyPlayedState extends State<mostlyPlayed> {
-  AssetsAudioPlayer player = AssetsAudioPlayer();
+  AssetsAudioPlayer player = AssetsAudioPlayer.withId("0");
   List<Audio> songs = [];
 
   @override

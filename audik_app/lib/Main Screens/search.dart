@@ -90,6 +90,8 @@ class _ScreenSearchState extends State<ScreenSearch> {
 
   searchbar(BuildContext context) {
     return TextFormField(
+      style: GoogleFonts.montserrat(
+          textStyle: TextStyle(color: Color.fromARGB(255, 255, 255, 255))),
       onTap: () {
         //showSearch(context: context, delegate: SearchLocation());
       },
@@ -193,6 +195,7 @@ class _ScreenSearchState extends State<ScreenSearch> {
           .where((element) =>
               element.songname!.toLowerCase().contains(value.toLowerCase()))
           .toList();
+      allSongs.clear();
       for (var item in another) {
         allSongs.add(
           Audio.file(
