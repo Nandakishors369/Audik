@@ -73,16 +73,17 @@ class _AlbumState extends State<Album> {
                         padding: const EdgeInsets.fromLTRB(0, 10, 20, 0),
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          mainAxisSize: MainAxisSize.max,
                           children: [
                             headings("Your Albums"),
-                            SizedBox(
-                              width: 205,
-                            ),
-                            Icon(
+                            /*  SizedBox(
+                      width: 265,
+                    ), */
+                            /* Icon(
                               Icons.arrow_forward_ios,
                               color: Colors.white,
                               size: 20,
-                            )
+                            ) */
                           ],
                         ),
                       ),
@@ -119,9 +120,31 @@ class _AlbumState extends State<Album> {
                         child: Column(
                           children: [
                             Padding(
-                              padding:
-                                  EdgeInsets.fromLTRB(0, height * 0.0106, 0, 0),
-                              child: QueryArtworkWidget(
+                                padding: EdgeInsets.fromLTRB(
+                                    0, height * 0.0106, 0, 0),
+                                child: Container(
+                                  child: Image.asset(
+                                    "assets/Playlist (720 × 720px) (1).png",
+                                  ),
+                                  width: width * 0.306,
+                                  height: width * 0.306,
+                                  decoration: const BoxDecoration(
+                                      gradient: LinearGradient(
+                                          begin: Alignment.topLeft,
+                                          end: Alignment.bottomRight,
+                                          colors: [
+                                            Color.fromARGB(255, 0, 0, 255),
+                                            Color.fromARGB(255, 31, 31, 255),
+                                            Color.fromARGB(255, 73, 73, 255),
+                                            Color.fromARGB(255, 120, 121, 255),
+                                            Color.fromARGB(255, 163, 163, 255),
+                                            Color.fromARGB(255, 191, 191, 255)
+                                            //
+                                          ]),
+                                      color: Colors.green,
+                                      borderRadius: BorderRadius.all(
+                                          Radius.circular(10))),
+                                ) /* QueryArtworkWidget(
                                 artworkHeight: width * 0.306,
                                 artworkWidth: width * 0.306,
                                 artworkFit: BoxFit.cover,
@@ -141,8 +164,8 @@ class _AlbumState extends State<Album> {
                                     fit: BoxFit.cover,
                                   ),
                                 ),
-                              ),
-                            ),
+                              ), */
+                                ),
                             SizedBox(
                               height: 15,
                             ),

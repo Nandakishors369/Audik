@@ -7,6 +7,7 @@ import 'package:audik_app/Model/mostlyplayed_model.dart';
 import 'package:audik_app/Model/playlistmodel.dart';
 import 'package:audik_app/Model/recentlyplayed_model.dart';
 import 'package:audik_app/Model/songModel.dart';
+import 'package:audik_app/Model/userName.dart';
 import 'package:flutter/material.dart';
 import 'package:hive_flutter/adapters.dart';
 
@@ -23,6 +24,9 @@ Future<void> main() async {
 
   Hive.registerAdapter(PlaylistSongsAdapter());
   opendatabase();
+
+  Hive.registerAdapter(nickNameAdapter());
+  openname();
 
   Hive.registerAdapter(MostPlayedAdapter());
   openmostplayeddb();

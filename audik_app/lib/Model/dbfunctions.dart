@@ -2,6 +2,7 @@ import 'package:audik_app/Model/favoriteModel.dart';
 import 'package:audik_app/Model/mostlyplayed_model.dart';
 import 'package:audik_app/Model/playlistmodel.dart';
 import 'package:audik_app/Model/recentlyplayed_model.dart';
+import 'package:audik_app/Model/userName.dart';
 import 'package:hive/hive.dart';
 
 late Box<favSongs> favsongsdb;
@@ -14,6 +15,12 @@ opendatabase() async {
   playlistbox = await Hive.openBox<PlaylistSongs>('playlist');
 }
 
+late Box<nickName> nameBox;
+openname() async {
+  nameBox = await Hive.openBox<nickName>('name');
+  nameBox.add(nickName(name: "user"));
+}
+
 late Box<MostPlayed> mostplayedsongs;
 openmostplayeddb() async {
   mostplayedsongs = await Hive.openBox("mostlyplayed");
@@ -23,7 +30,7 @@ updatePlayedSongCount(MostPlayed value, int index) {
   int count = value.count;
   value.count = count + 1;
   mostplayedsongs.put(index, value);
-  print("this song now played ${value.count}");
+  // print("this song now played ${value.count}");
 }
 
 late Box<RecentPlayed> recentlyplayedbox;

@@ -3,6 +3,7 @@ import 'dart:ui';
 import 'package:assets_audio_player/assets_audio_player.dart';
 import 'package:audik_app/Favorite/addtofavorite.dart';
 import 'package:audik_app/Model/dbfunctions.dart';
+import 'package:audik_app/Model/userName.dart';
 import 'package:audik_app/Recently%20and%20Mostly/mostlyPlayed.dart';
 import 'package:audik_app/Recently%20and%20Mostly/recentlyPlayed.dart';
 import 'package:audik_app/Main%20Screens/library.dart';
@@ -36,10 +37,14 @@ class homeScreen extends StatefulWidget {
 
 class _homeScreenState extends State<homeScreen> {
   bool mp = false;
+  late List<nickName> userName /* = nameBox.values.toList() */;
 
   @override
   void initState() {
-    setState(() {});
+    // print("$userName");
+    setState(() {
+      // userName = nameBox.values.toList();
+    });
     // TODO: implement initState
     super.initState();
   }
@@ -49,115 +54,121 @@ class _homeScreenState extends State<homeScreen> {
     final height = MediaQuery.of(context).size.height;
     final width = MediaQuery.of(context).size.width;
 
-    return Scaffold(
-      bottomSheet: playingCard(),
-      /* Container(
-            height: 60,
-            width: MediaQuery.of(context).size.width,
-            color: Colors.black,
-            child: const playingCard()), */
-      backgroundColor: const Color.fromARGB(255, 21, 21, 21),
-      body: SafeArea(
-        child: CupertinoScrollbar(
-          child: SingleChildScrollView(
-            child: Column(
-              children: [
-                Container(
-                  height: height * .096,
-                  decoration: const BoxDecoration(
-                    color: Color.fromARGB(255, 0, 0, 0),
-                    borderRadius: BorderRadius.only(
-                      bottomLeft: Radius.circular(20),
-                      bottomRight: Radius.circular(20),
-                    ),
-                  ),
-                  child: Padding(
-                    padding: EdgeInsets.fromLTRB(20, 15, 15, 15),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Text(
-                          welcomeuser(),
-                          style: GoogleFonts.montserrat(
-                            textStyle: TextStyle(
-                                fontSize: width * 0.066,
-                                color: Colors.white,
-                                fontWeight: FontWeight.w700),
+    return ValueListenableBuilder(
+        valueListenable: nameBox.listenable(),
+        builder: (context, value, child) {
+          userName = nameBox.values.toList();
+          return Scaffold(
+            bottomSheet: playingCard(),
+            /* Container(
+                height: 60,
+                width: MediaQuery.of(context).size.width,
+                color: Colors.black,
+                child: const playingCard()), */
+            backgroundColor: const Color.fromARGB(255, 21, 21, 21),
+            body: SafeArea(
+              child: CupertinoScrollbar(
+                child: SingleChildScrollView(
+                  child: Column(
+                    children: [
+                      Container(
+                        height: height * .096,
+                        decoration: const BoxDecoration(
+                          color: Color.fromARGB(255, 0, 0, 0),
+                          borderRadius: BorderRadius.only(
+                            bottomLeft: Radius.circular(20),
+                            bottomRight: Radius.circular(20),
                           ),
                         ),
-                        IconButton(
-                          onPressed: () {
-                            mp = true;
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                builder: ((context) => const SettingScreen()),
+                        child: Padding(
+                          padding: EdgeInsets.fromLTRB(20, 15, 15, 15),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Text(
+                                welcomeuser(),
+                                style: GoogleFonts.montserrat(
+                                  textStyle: TextStyle(
+                                      fontSize: width * 0.066,
+                                      color: Colors.white,
+                                      fontWeight: FontWeight.w700),
+                                ),
                               ),
-                            );
-                          },
-                          icon: const Icon(
-                            Icons.more_vert,
-                            color: Colors.grey,
+                              IconButton(
+                                onPressed: () {
+                                  mp = true;
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                      builder: ((context) =>
+                                          const SettingScreen()),
+                                    ),
+                                  );
+                                },
+                                icon: const Icon(
+                                  Icons.more_vert,
+                                  color: Colors.grey,
+                                ),
+                              ),
+                            ],
                           ),
                         ),
-                      ],
-                    ),
-                  ),
-                ),
-                favHome(),
-                /* favoritesHomeListing(), */
-                Padding(
-                  padding: EdgeInsets.fromLTRB(
-                      width * 0.05903, 0, 0, height * 0.0094),
-                  child: Row(
-                    children: [
-                      Text(
-                        "Your Dashboard",
-                        style: GoogleFonts.montserrat(
-                          textStyle: const TextStyle(
-                              fontSize: 23,
-                              color: Colors.white,
-                              fontWeight: FontWeight.w700),
+                      ),
+                      favHome(),
+                      /* favoritesHomeListing(), */
+                      Padding(
+                        padding: EdgeInsets.fromLTRB(
+                            width * 0.05903, 0, 0, height * 0.0094),
+                        child: Row(
+                          children: [
+                            Text(
+                              "Your Dashboard",
+                              style: GoogleFonts.montserrat(
+                                textStyle: const TextStyle(
+                                    fontSize: 23,
+                                    color: Colors.white,
+                                    fontWeight: FontWeight.w700),
+                              ),
+                            ),
+                          ],
                         ),
                       ),
+                      recentsCard(),
+                      Padding(
+                        padding: EdgeInsets.fromLTRB(width * 0.059, 5, 0, 4),
+                        child: Row(
+                          children: [
+                            Text(
+                              "Your Songs",
+                              style: GoogleFonts.montserrat(
+                                textStyle: const TextStyle(
+                                    fontSize: 23,
+                                    color: Colors.white,
+                                    fontWeight: FontWeight.w700),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                      allSongsScreen(),
+                      SizedBox(
+                          height: 80,
+                          width: width,
+                          child: Align(
+                            alignment: Alignment.topCenter,
+                            child: Text(
+                              "End of songs...",
+                              style: GoogleFonts.notoSansOldItalic(
+                                  textStyle: TextStyle(color: Colors.grey)),
+                            ),
+                          ))
                     ],
                   ),
                 ),
-                recentsCard(),
-                Padding(
-                  padding: EdgeInsets.fromLTRB(width * 0.059, 5, 0, 4),
-                  child: Row(
-                    children: [
-                      Text(
-                        "Your Songs",
-                        style: GoogleFonts.montserrat(
-                          textStyle: const TextStyle(
-                              fontSize: 23,
-                              color: Colors.white,
-                              fontWeight: FontWeight.w700),
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-                allSongsScreen(),
-                SizedBox(
-                    height: 80,
-                    width: width,
-                    child: Align(
-                      alignment: Alignment.topCenter,
-                      child: Text(
-                        "End of songs...",
-                        style: GoogleFonts.notoSansOldItalic(
-                            textStyle: TextStyle(color: Colors.grey)),
-                      ),
-                    ))
-              ],
+              ),
             ),
-          ),
-        ),
-      ),
-    );
+          );
+        });
   }
 
   //----------------------------------------FAVORITES-HOME-LIST-------------------------------------------
@@ -420,21 +431,22 @@ class _homeScreenState extends State<homeScreen> {
 
   String welcomeuser() {
     var hour = DateTime.now().hour;
+    String name = userName[0].name!;
 
     if (hour < 12) {
-      return 'Good Morning User !';
+      return 'Good Morning $name !';
     }
     if (hour < 16) {
-      return 'Good Afternoon User !';
+      return 'Good Afternoon $name !';
     }
     if (hour < 21) {
-      return 'Good Evening User !';
+      return 'Good Evening $name !';
     }
     if (hour < 4) {
-      return 'Good Night User !';
+      return 'Good Night $name !';
     }
 
-    return 'Good Night User !';
+    return 'Good Night $name !';
   }
 
   tryCard() {

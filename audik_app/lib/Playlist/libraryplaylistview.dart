@@ -115,10 +115,55 @@ class _playlistViewState extends State<playlistView> {
                               children: [
                                 Padding(
                                     padding: EdgeInsets.fromLTRB(0, 0, 0, 0),
-                                    child: Image.asset(
-                                      "assets/Music Brand and App Logo (1).png",
-                                      width: 130,
-                                    )),
+                                    child: Container(
+                                      child: Image.asset(
+                                        "assets/Playlist.png",
+                                      ),
+                                      width: width * 0.306,
+                                      height: width * 0.306,
+                                      decoration: const BoxDecoration(
+                                          gradient: LinearGradient(
+                                              begin: Alignment.topLeft,
+                                              end: Alignment.bottomRight,
+                                              colors: [
+                                                Color.fromARGB(255, 0, 0, 255),
+                                                Color.fromARGB(
+                                                    255, 31, 31, 255),
+                                                Color.fromARGB(
+                                                    255, 73, 73, 255),
+                                                Color.fromARGB(
+                                                    255, 120, 121, 255),
+                                                Color.fromARGB(
+                                                    255, 163, 163, 255),
+                                                Color.fromARGB(
+                                                    255, 191, 191, 255)
+                                                //
+                                              ]),
+                                          color: Colors.green,
+                                          borderRadius: BorderRadius.all(
+                                              Radius.circular(10))),
+                                    ) /*  QueryArtworkWidget(
+                                    artworkHeight: width * 0.306,
+                                    artworkWidth: width * 0.306,
+                                    artworkFit: BoxFit.cover,
+                                    id: 0,
+                                    type: ArtworkType.AUDIO,
+                                    artworkQuality: FilterQuality.high,
+                                    size: 2000,
+                                    quality: 100,
+                                    artworkBorder: BorderRadius.circular(8),
+                                    nullArtworkWidget: ClipRRect(
+                                      borderRadius: const BorderRadius.all(
+                                          Radius.circular(8)),
+                                      child: Image.asset(
+                                        'assets/Music Brand and App Logo (1).png',
+                                        height: width * 0.306,
+                                        width: width * 0.306,
+                                        fit: BoxFit.cover,
+                                      ),
+                                    ),
+                                  ), */
+                                    ),
                                 SizedBox(
                                   height: 15,
                                 ),

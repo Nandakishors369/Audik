@@ -120,7 +120,7 @@ class _recentlyPlayedState extends State<recentlyPlayed> {
                         id: rsongs[index].id);
 
                     updatePlayedSongCount(msongs, index);
-                    updateRecentPlayed(rsong, index);
+                    //updateRecentPlayed(rsong, index);
                     player.open(
                       Playlist(audios: resongs, startIndex: index),
                       showNotification: true,

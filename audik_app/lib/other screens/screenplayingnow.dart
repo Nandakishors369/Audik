@@ -80,7 +80,7 @@ class _playingNowState extends State<playingNow> {
             child: Column(
               children: [
                 Container(
-                  height: 90,
+                  height: height * .096,
                   decoration: const BoxDecoration(
                     color: Color.fromARGB(255, 0, 0, 0),
                     borderRadius: BorderRadius.only(
@@ -106,7 +106,7 @@ class _playingNowState extends State<playingNow> {
                   ),
                 ),
                 Padding(
-                  padding: const EdgeInsets.fromLTRB(15, 15, 15, 15),
+                  padding: const EdgeInsets.fromLTRB(15, 5, 15, 5),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
@@ -125,10 +125,10 @@ class _playingNowState extends State<playingNow> {
                         color: Colors.white,
                       ), */
                       SizedBox(
-                        width: 45,
+                        width: width * 0.10625,
                       ),
-                      const SizedBox(
-                        width: 45,
+                      SizedBox(
+                        width: width * 0.10625,
                       ),
                       PlayScreenPlst(songindex: playing.index)
                       /* IconButton(
@@ -140,13 +140,13 @@ class _playingNowState extends State<playingNow> {
                   ),
                 ),
                 SizedBox(
-                  height: 320,
-                  width: 320,
+                  height: width * 0.7556,
+                  width: width * 0.7556,
                   child: QueryArtworkWidget(
                     artworkFit: BoxFit.contain,
                     artworkBorder: BorderRadius.circular(8),
-                    artworkHeight: 320,
-                    artworkWidth: 320,
+                    artworkHeight: width * 0.7556,
+                    artworkWidth: width * 0.7556,
                     id: int.parse(playing.audio.audio.metas.id!),
                     type: ArtworkType.AUDIO,
                     nullArtworkWidget: ClipRRect(
@@ -193,8 +193,8 @@ class _playingNowState extends State<playingNow> {
                     ],
                   ),
                 ),
-                const SizedBox(
-                  height: 5,
+                SizedBox(
+                  height: height * 0.00531,
                 ),
                 Padding(
                   padding: const EdgeInsets.fromLTRB(20, 5, 20, 0),
@@ -215,8 +215,8 @@ class _playingNowState extends State<playingNow> {
                         );
                       }),
                 ),
-                const SizedBox(
-                  height: 4,
+                SizedBox(
+                  height: height * 0.00520,
                 ),
                 Padding(
                   padding: const EdgeInsets.fromLTRB(15, 5, 15, 5),
@@ -317,7 +317,7 @@ class _playingNowState extends State<playingNow> {
                   ),
                 ),
                 Padding(
-                  padding: const EdgeInsets.fromLTRB(15, 15, 15, 15),
+                  padding: const EdgeInsets.fromLTRB(15, 5, 15, 5),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
