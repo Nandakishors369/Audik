@@ -62,4 +62,3 @@ This policy is effective as of 2022-10-26
 
 If you have any questions or suggestions about my Privacy Policy, do not hesitate to contact me at connect.nandakishor@gmail.com.
 
-This privacy policy page was created at [privacypolicytemplate.net]

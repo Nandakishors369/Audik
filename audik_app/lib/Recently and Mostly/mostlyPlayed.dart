@@ -108,7 +108,7 @@ class _mostlyPlayedState extends State<mostlyPlayed> {
                         print(player.getCurrentAudioTitle);
 
                         player.open(Playlist(audios: songs, startIndex: index),
-                            showNotification: true,
+                            //showNotification: true,
                             headPhoneStrategy: HeadPhoneStrategy.pauseOnUnplug,
                             loopMode: LoopMode.playlist);
                         setState(() {

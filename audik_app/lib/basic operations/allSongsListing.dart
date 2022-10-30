@@ -90,7 +90,7 @@ class _allSongsScreenState extends State<allSongsScreen> {
                       /* updatePlayedSongCount(MPsongs, index); */
                       _audioPlayer.open(
                           Playlist(audios: convertAudios, startIndex: index),
-                          showNotification: true,
+                          //showNotification: true,
                           headPhoneStrategy: HeadPhoneStrategy.pauseOnUnplug,
                           loopMode: LoopMode.playlist);
                       setState(() {});

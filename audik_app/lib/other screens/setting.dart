@@ -30,6 +30,8 @@ class _SettingScreenState extends State<SettingScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final height = MediaQuery.of(context).size.height;
+    final width = MediaQuery.of(context).size.width;
     final OnAudioQuery _audioQuery = OnAudioQuery();
     return ValueListenableBuilder(
         valueListenable: nameBox.listenable(),
@@ -75,10 +77,10 @@ class _SettingScreenState extends State<SettingScreen> {
                         ),
                       ),
                     ),
-                    Padding(
+                    /* Padding(
                       padding: const EdgeInsets.all(0.0),
                       child: Text(
-                        "App Settings",
+                        "",
                         style: GoogleFonts.montserrat(
                             textStyle: const TextStyle(
                                 fontSize: 32,
@@ -86,9 +88,8 @@ class _SettingScreenState extends State<SettingScreen> {
                                 fontWeight: FontWeight.w700)),
                       ),
                     ),
-                    SizedBox(
-                      height: 15,
-                    ),
+                    SizedBox(height: 0 //15,
+                        ), */
                     Padding(
                         padding: const EdgeInsets.all(0.0),
                         child: ListTile(
@@ -223,7 +224,7 @@ class _SettingScreenState extends State<SettingScreen> {
                           ),
                         )),
                     SizedBox(
-                      height: 410,
+                      height: height * 0.4356,
                     ),
                     Text(
                       "Version 1.0.1",

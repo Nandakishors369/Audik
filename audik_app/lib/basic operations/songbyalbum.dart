@@ -104,7 +104,7 @@ class _SongsByAlbumScreenState extends State<SongsByAlbumScreen> {
                             _audioPlayer.open(
                                 Playlist(
                                     audios: songsByAlbums, startIndex: index),
-                                showNotification: true,
+                                //showNotification: true,
                                 headPhoneStrategy:
                                     HeadPhoneStrategy.pauseOnUnplug,
                                 loopMode: LoopMode.playlist);

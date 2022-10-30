@@ -123,7 +123,7 @@ class _recentlyPlayedState extends State<recentlyPlayed> {
                     //updateRecentPlayed(rsong, index);
                     player.open(
                       Playlist(audios: resongs, startIndex: index),
-                      showNotification: true,
+                      //showNotification: true,
                       loopMode: LoopMode.none,
                     );
                     setState(() {});

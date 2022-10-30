@@ -21,7 +21,7 @@ class Album extends StatefulWidget {
 List<AlbumModel> albumList = [];
 
 class _AlbumState extends State<Album> {
-  final AssetsAudioPlayer _audioPlayer = AssetsAudioPlayer();
+  //final AssetsAudioPlayer _audioPlayer = AssetsAudioPlayer();
   OnAudioQuery fetchalbum = OnAudioQuery();
   late int newIndex;
   int count = 0;

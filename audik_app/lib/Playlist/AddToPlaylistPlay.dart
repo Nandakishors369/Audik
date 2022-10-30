@@ -18,6 +18,7 @@ class PlayScreenPlst extends StatefulWidget {
 
 class _PlayScreenPlstState extends State<PlayScreenPlst> {
   TextEditingController _textEditingController = TextEditingController();
+  final formGlobalKey = GlobalKey<FormState>();
 
   @override
   Widget build(BuildContext context) {
@@ -287,36 +288,42 @@ class _PlayScreenPlstState extends State<PlayScreenPlst> {
             SizedBox(
               height: 20,
             ),
-            TextFormField(
-              controller: _textEditingController,
-              cursorHeight: 25,
-              decoration: InputDecoration(
-                filled: true,
-                fillColor: Color.fromARGB(199, 255, 255, 255),
-                border: OutlineInputBorder(
-                    borderSide:
-                        BorderSide(color: Color.fromARGB(255, 0, 0, 0))),
-                hintText: "Enter a name",
-                hintStyle: GoogleFonts.montserrat(
-                    textStyle:
-                        TextStyle(color: Color.fromARGB(255, 69, 69, 69))),
+            Form(
+              key: formGlobalKey,
+              child: TextFormField(
+                controller: _textEditingController,
+                cursorHeight: 25,
+                decoration: InputDecoration(
+                  filled: true,
+                  fillColor: Color.fromARGB(199, 255, 255, 255),
+                  border: OutlineInputBorder(
+                      borderSide:
+                          BorderSide(color: Color.fromARGB(255, 0, 0, 0))),
+                  hintText: "Enter a name",
+                  hintStyle: GoogleFonts.montserrat(
+                      textStyle:
+                          TextStyle(color: Color.fromARGB(255, 69, 69, 69))),
+                ),
+                validator: (value) {
+                  List<PlaylistSongs> values = playlistbox.values.toList();
+
+                  bool isAlreadyAdded = values
+                      .where((element) => element.playlistname == value!.trim())
+                      .isNotEmpty;
+
+                  if (value!.trim() == '') {
+                    return 'Name required';
+                  }
+                  if (value.trim().length > 10) {
+                    return 'Enter Characters below 10 ';
+                  }
+
+                  if (isAlreadyAdded) {
+                    return 'Name Already Exists';
+                  }
+                  return null;
+                },
               ),
-              validator: (value) {
-                List<PlaylistSongs> values = playlistbox.values.toList();
-
-                bool isAlreadyAdded = values
-                    .where((element) => element.playlistname == value!.trim())
-                    .isNotEmpty;
-
-                if (value!.trim() == '') {
-                  return 'Name required';
-                }
-
-                if (isAlreadyAdded) {
-                  return 'Name Already Exists';
-                }
-                return null;
-              },
             ),
             SizedBox(
               height: 20,
@@ -339,10 +346,13 @@ class _PlayScreenPlstState extends State<PlayScreenPlst> {
             child: Text("Cancel")),
         ElevatedButton(
             onPressed: () {
-              playlistbox.add(PlaylistSongs(
-                  playlistname: _textEditingController.text,
-                  playlistssongs: []));
-              Navigator.pop(context);
+              final isValid = formGlobalKey.currentState!.validate();
+              if (isValid) {
+                playlistbox.add(PlaylistSongs(
+                    playlistname: _textEditingController.text,
+                    playlistssongs: []));
+                Navigator.pop(context);
+              }
             },
             child: Text("Create"))
       ],

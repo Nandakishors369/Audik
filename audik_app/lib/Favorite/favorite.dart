@@ -123,7 +123,7 @@ class _ScreenFavoriteState extends State<ScreenFavorite> {
                                 audioPlayer.open(
                                     Playlist(
                                         audios: allsongs, startIndex: index),
-                                    showNotification: true,
+                                    //showNotification: true,
                                     headPhoneStrategy:
                                         HeadPhoneStrategy.pauseOnUnplug,
                                     loopMode: LoopMode.playlist);

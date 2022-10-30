@@ -97,51 +97,71 @@ class _favHomeState extends State<favHome> {
                     ),
                   ); */
                             },
-                            child: Column(
-                              children: [
-                                Padding(
-                                  padding: EdgeInsets.fromLTRB(
-                                      0, height * 0.0106, 0, 0),
-                                  child: QueryArtworkWidget(
-                                    artworkHeight: width * 0.306,
-                                    artworkWidth: width * 0.306,
-                                    artworkFit: BoxFit.cover,
-                                    id: allDbSongs[index].id!,
-                                    type: ArtworkType.AUDIO,
-                                    artworkQuality: FilterQuality.high,
-                                    size: 2000,
-                                    quality: 100,
-                                    artworkBorder: BorderRadius.circular(8),
-                                    nullArtworkWidget: ClipRRect(
-                                      borderRadius: const BorderRadius.all(
-                                          Radius.circular(8)),
-                                      child: Image.asset(
-                                        'assets/Music Brand and App Logo (1).png',
-                                        height: width * 0.306,
-                                        width: width * 0.306,
-                                        fit: BoxFit.cover,
+                            child: GestureDetector(
+                              onTap: (() {
+                                audioPlayer.open(
+                                    Playlist(
+                                        audios: allsongs, startIndex: index),
+                                    //showNotification: true,
+                                    headPhoneStrategy:
+                                        HeadPhoneStrategy.pauseOnUnplug,
+                                    loopMode: LoopMode.playlist);
+                                setState(() {
+                                  //playerVisibility = true;
+                                });
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: ((context) => playingNow()),
+                                  ),
+                                );
+                              }),
+                              child: Column(
+                                children: [
+                                  Padding(
+                                    padding: EdgeInsets.fromLTRB(
+                                        0, height * 0.0106, 0, 0),
+                                    child: QueryArtworkWidget(
+                                      artworkHeight: width * 0.306,
+                                      artworkWidth: width * 0.306,
+                                      artworkFit: BoxFit.cover,
+                                      id: allDbSongs[index].id!,
+                                      type: ArtworkType.AUDIO,
+                                      artworkQuality: FilterQuality.high,
+                                      size: 2000,
+                                      quality: 100,
+                                      artworkBorder: BorderRadius.circular(8),
+                                      nullArtworkWidget: ClipRRect(
+                                        borderRadius: const BorderRadius.all(
+                                            Radius.circular(8)),
+                                        child: Image.asset(
+                                          'assets/Music Brand and App Logo (1).png',
+                                          height: width * 0.306,
+                                          width: width * 0.306,
+                                          fit: BoxFit.cover,
+                                        ),
                                       ),
                                     ),
                                   ),
-                                ),
-                                SizedBox(
-                                  height: 15,
-                                ),
-                                SizedBox(
-                                  height: 18,
-                                  width: width * .28,
-                                  child: Marquee(
-                                    blankSpace: 20,
-                                    velocity: 20,
-                                    text: allDbSongs[index].songname!,
-                                    style: GoogleFonts.montserrat(
-                                        textStyle: TextStyle(
-                                            fontSize: 15,
-                                            color: Colors.white,
-                                            fontWeight: FontWeight.w500)),
+                                  SizedBox(
+                                    height: 15,
                                   ),
-                                )
-                              ],
+                                  SizedBox(
+                                    height: 18,
+                                    width: width * .28,
+                                    child: Marquee(
+                                      blankSpace: 20,
+                                      velocity: 20,
+                                      text: allDbSongs[index].songname!,
+                                      style: GoogleFonts.montserrat(
+                                          textStyle: TextStyle(
+                                              fontSize: 15,
+                                              color: Colors.white,
+                                              fontWeight: FontWeight.w500)),
+                                    ),
+                                  )
+                                ],
+                              ),
                             ),
                           );
                         }),

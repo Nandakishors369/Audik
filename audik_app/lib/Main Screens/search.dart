@@ -143,7 +143,7 @@ class _ScreenSearchState extends State<ScreenSearch> {
                     onTap: () {
                       _audioPlayer.open(
                           Playlist(audios: allSongs, startIndex: index),
-                          showNotification: true,
+                          //showNotification: true,
                           headPhoneStrategy: HeadPhoneStrategy.pauseOnUnplug,
                           loopMode: LoopMode.playlist);
                       setState(() {});
