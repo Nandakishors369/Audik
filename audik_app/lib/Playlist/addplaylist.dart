@@ -78,6 +78,24 @@ class _addPlaylistState extends State<addPlaylist> {
 
   //----------------------------------------LIST OF PLAYLISTS--------------------------------------------------
   PlaylistList() {
+    if (playlist.length == 0) {
+      Padding(
+        padding: const EdgeInsets.all(15.0),
+        child: Align(
+          heightFactor: 7.5,
+          child: Center(
+              child: Text(
+            'No Playlist Created',
+            style: GoogleFonts.montserrat(
+              textStyle: const TextStyle(
+                  fontSize: 20,
+                  color: Color.fromARGB(255, 255, 255, 255),
+                  fontWeight: FontWeight.w500),
+            ),
+          )),
+        ),
+      );
+    }
     return ValueListenableBuilder<Box<PlaylistSongs>>(
         valueListenable: playlistbox.listenable(),
         builder: (context, value, child) {

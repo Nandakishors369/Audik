@@ -1,6 +1,8 @@
 import 'package:assets_audio_player/assets_audio_player.dart';
+import 'package:audik_app/Favorite/addtofavorite.dart';
 import 'package:audik_app/Model/dbfunctions.dart';
 import 'package:audik_app/Model/recentlyplayed_model.dart';
+import 'package:audik_app/Playlist/createPlaylist.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
@@ -41,6 +43,8 @@ class _recentlyPlayedState extends State<recentlyPlayed> {
 
   @override
   Widget build(BuildContext context) {
+    final height = MediaQuery.of(context).size.height;
+    final width = MediaQuery.of(context).size.width;
     return Scaffold(
       backgroundColor: const Color.fromARGB(255, 21, 21, 21),
       body: SafeArea(
@@ -85,17 +89,22 @@ class _recentlyPlayedState extends State<recentlyPlayed> {
     return ValueListenableBuilder<Box<RecentPlayed>>(
         valueListenable: recentlyplayedbox.listenable(),
         builder: (context, Box<RecentPlayed> recentsongs, _) {
+          final height = MediaQuery.of(context).size.height;
+          final width = MediaQuery.of(context).size.width;
           List<RecentPlayed> rsongs =
               recentsongs.values.toList().reversed.toList();
 
           if (rsongs.isEmpty) {
             return Padding(
               padding: const EdgeInsets.all(20.0),
-              child: Center(
-                child: Text(
-                  "You haven't played anything ! Try playing something.",
-                  style: GoogleFonts.montserrat(
-                      textStyle: TextStyle(color: Colors.white)),
+              child: Align(
+                heightFactor: 7.5,
+                child: Center(
+                  child: Text(
+                    "You haven't played anything ! Try playing something.",
+                    style: GoogleFonts.montserrat(
+                        textStyle: TextStyle(color: Colors.white)),
+                  ),
                 ),
               ),
             );
@@ -112,7 +121,7 @@ class _recentlyPlayedState extends State<recentlyPlayed> {
                 MostPlayed msongs = allmostplayedsongs[index];
                 return ListTile(
                   onTap: () {
-                    final rsong = RecentPlayed(
+                    /* final rsong = RecentPlayed(
                         songname: rsongs[index].songname,
                         artist: rsongs[index].artist,
                         duration: rsongs[index].duration,
@@ -120,11 +129,11 @@ class _recentlyPlayedState extends State<recentlyPlayed> {
                         id: rsongs[index].id);
 
                     updatePlayedSongCount(msongs, index);
-                    //updateRecentPlayed(rsong, index);
-                    player.open(
+                    //updateRecentPlayed(rsong, index); */
+                    /* player.open(
                       Playlist(audios: resongs, startIndex: index),
-                      //showNotification: true,
-                      loopMode: LoopMode.none,
+                      showNotification: true,
+                      loopMode: LoopMode.playlist,
                     );
                     setState(() {});
                     Navigator.push(
@@ -132,7 +141,7 @@ class _recentlyPlayedState extends State<recentlyPlayed> {
                       MaterialPageRoute(
                         builder: ((context) => playingNow()),
                       ),
-                    );
+                    ); */
                   },
                   leading: QueryArtworkWidget(
                     artworkFit: BoxFit.cover,
@@ -159,6 +168,42 @@ class _recentlyPlayedState extends State<recentlyPlayed> {
                             color: Colors.white,
                             fontWeight: FontWeight.w500),
                       ),
+                    ),
+                  ),
+                  trailing: IconButton(
+                    onPressed: (() {
+                      showModalBottomSheet(
+                        backgroundColor: Colors.black,
+                        shape: const RoundedRectangleBorder(
+                          borderRadius: BorderRadius.vertical(
+                            top: Radius.circular(20),
+                          ),
+                        ),
+                        context: context,
+                        builder: ((context) {
+                          return SizedBox(
+                            height: 130 /* height * 0.13 */,
+                            child: Column(
+                              children: [
+                                AddToPlalistbutton(songindex: index),
+                                SizedBox(
+                                  height: height * 0.011,
+                                ),
+                                addToFavorite(
+                                  index: index,
+                                )
+                                /* TextButton(
+                                      onPressed: () {},
+                                      child: const Text("Add to Favorites")) */
+                              ],
+                            ),
+                          );
+                        }),
+                      );
+                    }),
+                    icon: const Icon(
+                      Icons.more_vert,
+                      color: Colors.grey,
                     ),
                   ),
                 );

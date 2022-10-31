@@ -1,32 +1,21 @@
-import 'dart:ui';
-
-import 'package:assets_audio_player/assets_audio_player.dart';
-import 'package:audik_app/Favorite/addtofavorite.dart';
 import 'package:audik_app/Model/dbfunctions.dart';
 import 'package:audik_app/Model/userName.dart';
 import 'package:audik_app/Recently%20and%20Mostly/mostlyPlayed.dart';
 import 'package:audik_app/Recently%20and%20Mostly/recentlyPlayed.dart';
 import 'package:audik_app/Main%20Screens/library.dart';
-import 'package:audik_app/Model/songModel.dart';
-import 'package:audik_app/Playlist/playlistscreen.dart';
-import 'package:audik_app/Playlist/songtoplaylist.dart';
+
 import 'package:audik_app/basic%20operations/favlisting_home.dart';
 import 'package:audik_app/other%20screens/setting.dart';
-import 'package:audik_app/Main%20Screens/search.dart';
-import 'package:flutter/cupertino.dart';
 
-import 'package:flutter/foundation.dart';
+import 'package:flutter/cupertino.dart';
 
 import 'package:flutter/material.dart';
 
 import 'package:google_fonts/google_fonts.dart';
-import 'package:hive/hive.dart';
-import 'package:hive_flutter/adapters.dart';
-import 'package:on_audio_query/on_audio_query.dart';
 
-import '../Model/favoriteModel.dart';
+import 'package:hive_flutter/adapters.dart';
+
 import '../basic operations/allSongsListing.dart';
-import '../other screens/screenplayingnow.dart';
 
 class homeScreen extends StatefulWidget {
   const homeScreen({super.key});

@@ -92,16 +92,19 @@ class _ScreenFavoriteState extends State<ScreenFavorite> {
                   if (favsongsdb.isEmpty) {
                     return Padding(
                       padding: const EdgeInsets.all(15.0),
-                      child: Center(
-                          child: Text(
-                        'No Favorites',
-                        style: GoogleFonts.montserrat(
-                          textStyle: const TextStyle(
-                              fontSize: 20,
-                              color: Colors.blue,
-                              fontWeight: FontWeight.w500),
-                        ),
-                      )),
+                      child: Align(
+                        heightFactor: 7.5,
+                        child: Center(
+                            child: Text(
+                          'No Favorites',
+                          style: GoogleFonts.montserrat(
+                            textStyle: const TextStyle(
+                                fontSize: 20,
+                                color: Color.fromARGB(255, 255, 255, 255),
+                                fontWeight: FontWeight.w500),
+                          ),
+                        )),
+                      ),
                     );
                   }
                   //----------------------------------------If the list is null--------------------------------------------------
@@ -123,7 +126,7 @@ class _ScreenFavoriteState extends State<ScreenFavorite> {
                                 audioPlayer.open(
                                     Playlist(
                                         audios: allsongs, startIndex: index),
-                                    //showNotification: true,
+                                    showNotification: true,
                                     headPhoneStrategy:
                                         HeadPhoneStrategy.pauseOnUnplug,
                                     loopMode: LoopMode.playlist);

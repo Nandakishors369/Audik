@@ -108,7 +108,7 @@ class _mostlyPlayedState extends State<mostlyPlayed> {
                         print(player.getCurrentAudioTitle);
 
                         player.open(Playlist(audios: songs, startIndex: index),
-                            //showNotification: true,
+                            showNotification: true,
                             headPhoneStrategy: HeadPhoneStrategy.pauseOnUnplug,
                             loopMode: LoopMode.playlist);
                         setState(() {
@@ -192,11 +192,20 @@ class _mostlyPlayedState extends State<mostlyPlayed> {
                   );
                 });
           } else {
-            return Center(
-              child: Text(
-                "No Songs Found",
-                style: GoogleFonts.montserrat(
-                    textStyle: TextStyle(color: Colors.white)),
+            return Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Align(
+                heightFactor: 7.5,
+                child: Center(
+                  child: Text(
+                    '''Your most played songs will be listed here ''',
+                    style: GoogleFonts.montserrat(
+                        textStyle: TextStyle(
+                            color: Colors.white,
+                            fontSize: 18,
+                            fontWeight: FontWeight.w300)),
+                  ),
+                ),
               ),
             );
           }

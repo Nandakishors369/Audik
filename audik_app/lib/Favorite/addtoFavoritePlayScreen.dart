@@ -1,3 +1,4 @@
+import 'package:assets_audio_player/assets_audio_player.dart';
 import 'package:audik_app/Model/dbfunctions.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/container.dart';
@@ -18,17 +19,22 @@ class _PlayScreenFavState extends State<PlayScreenFav> {
   List<favSongs> fav = [];
   bool favorited = false;
   final box = SongBox.getInstance();
-  late List<Songs> dbsongs;
+
+  late List<Songs> dbsongs = box.values.toList();
   @override
   void initState() {
     // TODO: implement initState
     dbsongs = box.values.toList();
+
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
     fav = favsongsdb.values.toList();
+    print("daaa niiiiii");
+
+    print(dbsongs[widget.index].songname);
     return fav
             .where(
                 (element) => element.songname == dbsongs[widget.index].songname)

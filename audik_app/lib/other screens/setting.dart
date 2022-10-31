@@ -14,6 +14,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:hive/hive.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:on_audio_query/on_audio_query.dart';
+import 'package:share_plus/share_plus.dart';
 import 'package:switcher_button/switcher_button.dart';
 
 class SettingScreen extends StatefulWidget {
@@ -26,10 +27,12 @@ class SettingScreen extends StatefulWidget {
 class _SettingScreenState extends State<SettingScreen> {
   AssetsAudioPlayer audioPlayer = AssetsAudioPlayer.withId('0');
   TextEditingController _textEditingController = TextEditingController();
+
   final formGlobalKey = GlobalKey<FormState>();
 
   @override
   Widget build(BuildContext context) {
+    bool hello = audioPlayer.showNotification = true;
     final height = MediaQuery.of(context).size.height;
     final width = MediaQuery.of(context).size.width;
     final OnAudioQuery _audioQuery = OnAudioQuery();
@@ -148,8 +151,8 @@ class _SettingScreenState extends State<SettingScreen> {
                             color: Colors.white,
                           ),
                           title: GestureDetector(
-                            onTap: () {
-                              nameBox.clear();
+                            onTap: () async {
+                              Share.share("helllo");
                             },
                             child: Text(
                               "Share The App",
@@ -193,7 +196,7 @@ class _SettingScreenState extends State<SettingScreen> {
                             value: true,
                             size: 27,
                             onChange: (value) {
-                              audioPlayer.showNotification = false;
+                              hello = false;
                             },
                           ),
                           title: Text(
@@ -213,14 +216,19 @@ class _SettingScreenState extends State<SettingScreen> {
                             Icons.arrow_forward_ios,
                             color: Colors.white,
                           ),
-                          title: Text(
-                            "About",
-                            style: GoogleFonts.montserrat(
-                                textStyle: const TextStyle(
-                              fontSize: 20,
-                              color: Colors
-                                  .white, /* fontWeight: FontWeight.w700 */
-                            )),
+                          title: GestureDetector(
+                            onTap: () {
+                              aboutPopUp();
+                            },
+                            child: Text(
+                              "About",
+                              style: GoogleFonts.montserrat(
+                                  textStyle: const TextStyle(
+                                fontSize: 20,
+                                color: Colors
+                                    .white, /* fontWeight: FontWeight.w700 */
+                              )),
+                            ),
                           ),
                         )),
                     SizedBox(
@@ -333,5 +341,25 @@ class _SettingScreenState extends State<SettingScreen> {
         ),
       ),
     );
+  }
+
+  aboutPopUp() {
+    showAboutDialog(
+        context: context,
+        applicationName: "Audik",
+        applicationIcon: Image.asset(
+          "assets/playlogo.png",
+          height: 32,
+          width: 32,
+        ),
+        applicationVersion: "1.0.1",
+        children: [
+          Text(
+              "Audik is an offline music player app which allows use to hear music from their storage and also do functions like add to favorites , create playlists , recently played , mostly played etc."),
+          SizedBox(
+            height: 10,
+          ),
+          Text("App developed by Nandakishor S.")
+        ]);
   }
 }

@@ -18,7 +18,7 @@ opendatabase() async {
 late Box<nickName> nameBox;
 openname() async {
   nameBox = await Hive.openBox<nickName>('name');
-  nameBox.add(nickName(name: "user"));
+  nameBox.add(nickName(name: "User"));
 }
 
 late Box<MostPlayed> mostplayedsongs;

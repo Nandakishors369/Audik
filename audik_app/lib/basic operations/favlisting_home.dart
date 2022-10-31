@@ -102,7 +102,7 @@ class _favHomeState extends State<favHome> {
                                 audioPlayer.open(
                                     Playlist(
                                         audios: allsongs, startIndex: index),
-                                    //showNotification: true,
+                                    showNotification: true,
                                     headPhoneStrategy:
                                         HeadPhoneStrategy.pauseOnUnplug,
                                     loopMode: LoopMode.playlist);

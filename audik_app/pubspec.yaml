@@ -48,6 +48,7 @@ dependencies:
   
   flutter_markdown: ^0.6.12
   switcher_button: ^0.0.4
+  share_plus: ^6.1.0
   
   
  
