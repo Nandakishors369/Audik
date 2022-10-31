@@ -152,7 +152,9 @@ class _SettingScreenState extends State<SettingScreen> {
                           ),
                           title: GestureDetector(
                             onTap: () async {
-                              Share.share("helllo");
+                              Share.share(
+                                  "https://github.com/Nandakishors369/Audik",
+                                  subject: "Git Repo Of The App");
                             },
                             child: Text(
                               "Share The App",
@@ -234,13 +236,16 @@ class _SettingScreenState extends State<SettingScreen> {
                     SizedBox(
                       height: height * 0.4356,
                     ),
-                    Text(
-                      "Version 1.0.1",
-                      style: GoogleFonts.montserrat(
-                          textStyle: const TextStyle(
-                        fontSize: 15,
-                        color: Color.fromARGB(62, 255, 255, 255),
-                      )),
+                    Padding(
+                      padding: const EdgeInsets.all(10.0),
+                      child: Text(
+                        "Version 1.0.1",
+                        style: GoogleFonts.montserrat(
+                            textStyle: const TextStyle(
+                          fontSize: 15,
+                          color: Color.fromARGB(62, 255, 255, 255),
+                        )),
+                      ),
                     ),
                   ],
                 ),

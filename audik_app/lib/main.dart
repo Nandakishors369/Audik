@@ -9,10 +9,12 @@ import 'package:audik_app/Model/recentlyplayed_model.dart';
 import 'package:audik_app/Model/songModel.dart';
 import 'package:audik_app/Model/userName.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:hive_flutter/adapters.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
   await Hive.initFlutter();
 
   Hive.registerAdapter(SongsAdapter());
