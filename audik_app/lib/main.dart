@@ -1,3 +1,4 @@
+import 'package:assets_audio_player/assets_audio_player.dart';
 import 'package:audik_app/Main%20Screens/home.dart';
 import 'package:audik_app/Main%20Screens/navigation.dart';
 import 'package:audik_app/Main%20Screens/splash.dart';

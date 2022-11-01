@@ -29,7 +29,7 @@ class _SettingScreenState extends State<SettingScreen> {
   TextEditingController _textEditingController = TextEditingController();
 
   final formGlobalKey = GlobalKey<FormState>();
-
+  late bool notification;
   @override
   Widget build(BuildContext context) {
     bool hello = audioPlayer.showNotification = true;
@@ -197,9 +197,7 @@ class _SettingScreenState extends State<SettingScreen> {
                           trailing: SwitcherButton(
                             value: true,
                             size: 27,
-                            onChange: (value) {
-                              hello = false;
-                            },
+                            onChange: (value) {},
                           ),
                           title: Text(
                             "Notifications",

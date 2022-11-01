@@ -32,7 +32,7 @@ class _PlayScreenFavState extends State<PlayScreenFav> {
   @override
   Widget build(BuildContext context) {
     fav = favsongsdb.values.toList();
-    print("daaa niiiiii");
+    //print("daaa");
 
     print(dbsongs[widget.index].songname);
     return fav
