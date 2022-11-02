@@ -122,7 +122,7 @@ class librarySearch extends StatelessWidget {
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    headings("Your Playlist "),
+                    headings("Your Playlist"),
                     /*  SizedBox(
                       width: 265,
                     ), */
