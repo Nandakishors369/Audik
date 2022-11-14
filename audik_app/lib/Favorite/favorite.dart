@@ -187,7 +187,6 @@ class _ScreenFavoriteState extends State<ScreenFavorite> {
                                                   favsongsdb.deleteAt(index);
 
                                                   Navigator.pop(context);
-                                                  setState(() {});
                                                 },
                                                 child: const Text("Remove"))
                                           ],
