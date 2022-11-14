@@ -1,15 +1,12 @@
+// ignore_for_file: camel_case_types, unused_local_variable, unnecessary_null_comparison
+
 import 'package:audik_app/Model/dbfunctions.dart';
-import 'package:audik_app/Playlist/addplaylist.dart';
 import 'package:audik_app/Playlist/playlistscreen.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/container.dart';
-import 'package:flutter/src/widgets/framework.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:hive_flutter/adapters.dart';
 import 'package:marquee/marquee.dart';
-import 'package:on_audio_query/on_audio_query.dart';
 
-import '../Model/favoriteModel.dart';
 import '../Model/playlistmodel.dart';
 
 class playlistView extends StatefulWidget {
@@ -27,7 +24,7 @@ class _playlistViewState extends State<playlistView> {
     final width = MediaQuery.of(context).size.width;
     return Column(
       children: [
-        Padding(
+        const Padding(
           padding: EdgeInsets.fromLTRB(10, 5, 0, 0),
         ),
         ValueListenableBuilder<Box<PlaylistSongs>>(
@@ -36,7 +33,7 @@ class _playlistViewState extends State<playlistView> {
               List<PlaylistSongs> playlist = value.values.toList();
               //----------------------------------------If songs are not there--------------------------------------------------
               if (playlistbox.isEmpty) {
-                return SizedBox.shrink();
+                return const SizedBox.shrink();
               }
               //----------------------------------------If the list is null-----------------------------------------------------
               if (playlistbox == null) {
@@ -89,13 +86,13 @@ class _playlistViewState extends State<playlistView> {
                     ),
                   ), */
                   Padding(
-                    padding: EdgeInsets.fromLTRB(0, 0, 0, 0),
+                    padding: const EdgeInsets.fromLTRB(0, 0, 0, 0),
                     child: SizedBox(
                       /*  height: height * 0.224, */
                       height: 220,
                       child: ListView.separated(
                         scrollDirection: Axis.horizontal,
-                        padding: EdgeInsets.all(19),
+                        padding: const EdgeInsets.all(19),
                         itemBuilder: ((context, index) {
                           return GestureDetector(
                             onTap: () {
@@ -114,7 +111,7 @@ class _playlistViewState extends State<playlistView> {
                             child: Column(
                               children: [
                                 Padding(
-                                    padding: EdgeInsets.fromLTRB(0, 0, 0, 0),
+                                    padding: const EdgeInsets.fromLTRB(0, 0, 0, 0),
                                     child: Container(
                                       child: Image.asset(
                                         "assets/Playlist.png",
@@ -164,7 +161,7 @@ class _playlistViewState extends State<playlistView> {
                                     ),
                                   ), */
                                     ),
-                                SizedBox(
+                                const SizedBox(
                                   height: 15,
                                 ),
                                 SizedBox(
@@ -176,7 +173,7 @@ class _playlistViewState extends State<playlistView> {
                                     text:
                                         playlist[index].playlistname.toString(),
                                     style: GoogleFonts.montserrat(
-                                        textStyle: TextStyle(
+                                        textStyle: const TextStyle(
                                             fontSize: 15,
                                             color: Colors.white,
                                             fontWeight: FontWeight.w500)),

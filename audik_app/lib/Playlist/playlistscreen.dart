@@ -1,16 +1,15 @@
-import 'dart:ui';
+
+
+
+// ignore_for_file: must_be_immutable
 
 import 'package:assets_audio_player/assets_audio_player.dart';
-import 'package:audik_app/Main%20Screens/library.dart';
 import 'package:audik_app/Model/dbfunctions.dart';
 import 'package:audik_app/Model/playlistmodel.dart';
 import 'package:audik_app/Model/songModel.dart';
 import 'package:audik_app/other%20screens/screenplayingnow.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/container.dart';
-import 'package:flutter/src/widgets/framework.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:hive/hive.dart';
 import 'package:hive_flutter/adapters.dart';
 import 'package:on_audio_query/on_audio_query.dart';
 
@@ -35,7 +34,7 @@ class _ScreenPlaylistState extends State<ScreenPlaylist> {
 
   @override
   void initState() {
-    // TODO: implement initState
+    
     for (var song in widget.allPlaylistSongs) {
       plstsongs.add(Audio.file(song.songurl.toString(),
           metas: Metas(
@@ -140,7 +139,7 @@ class _ScreenPlaylistState extends State<ScreenPlaylist> {
                   child: Text(
                     "No Songs Added",
                     style: GoogleFonts.montserrat(
-                        textStyle: TextStyle(
+                        textStyle: const TextStyle(
                             color: Colors.white,
                             fontSize: 20,
                             fontWeight: FontWeight.w500)),
@@ -161,7 +160,7 @@ class _ScreenPlaylistState extends State<ScreenPlaylist> {
                     player.open(Playlist(audios: plstsongs, startIndex: index),
                         showNotification: true, loopMode: LoopMode.playlist);
                     Navigator.of(context).push(MaterialPageRoute(
-                      builder: (context) => playingNow(),
+                      builder: (context) => const playingNow(),
                     ));
                     /* Navigator.push(context,
                     MaterialPageRoute(builder: ((context) => playingNow()))); */
@@ -199,14 +198,14 @@ class _ScreenPlaylistState extends State<ScreenPlaylist> {
                         context: context,
                         builder: (context) {
                           return AlertDialog(
-                            title: Text("Delete Playlist"),
-                            content: Text("Are You Sure"),
+                            title: const Text("Delete Playlist"),
+                            content: const Text("Are You Sure"),
                             actions: [
                               TextButton(
                                   onPressed: () {
                                     Navigator.pop(context);
                                   },
-                                  child: Text("Cancel")),
+                                  child: const Text("Cancel")),
                               TextButton(
                                   onPressed: () {
                                     setState(() {
@@ -221,7 +220,7 @@ class _ScreenPlaylistState extends State<ScreenPlaylist> {
                                     setState(() {});
                                     Navigator.pop(context);
                                   },
-                                  child: Text("Delete"))
+                                  child: const Text("Delete"))
                             ],
                           );
                         },

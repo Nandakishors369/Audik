@@ -1,10 +1,9 @@
-import 'dart:ui';
+
+// ignore_for_file: file_names, must_be_immutable, prefer_final_fields, use_build_context_synchronously
 
 import 'package:audik_app/Model/dbfunctions.dart';
 import 'package:audik_app/Model/songModel.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/container.dart';
-import 'package:flutter/src/widgets/framework.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:hive_flutter/adapters.dart';
 
@@ -30,7 +29,7 @@ class _AddToPlalistbuttonState extends State<AddToPlalistbutton> {
 
           Navigator.pop(context);
         },
-        child: Text("Add to Playlist"));
+        child: const Text("Add to Playlist"));
   }
 
   Future<dynamic> playlistBottomSheet(BuildContext context) {
@@ -40,7 +39,7 @@ class _AddToPlalistbuttonState extends State<AddToPlalistbutton> {
         return StatefulBuilder(
             builder: (context, setState) => Container(
                   height: 200,
-                  color: Color.fromARGB(255, 0, 0, 0),
+                  color: const Color.fromARGB(255, 0, 0, 0),
                   child: ValueListenableBuilder(
                     valueListenable: playlistbox.listenable(),
                     builder: (context, Box<PlaylistSongs> playlistbox, _) {
@@ -57,12 +56,12 @@ class _AddToPlalistbuttonState extends State<AddToPlalistbutton> {
                                 Text(
                                   "Create a playlist to add",
                                   style: GoogleFonts.montserrat(
-                                      textStyle: TextStyle(
+                                      textStyle: const TextStyle(
                                           color: Colors.white,
                                           fontSize: 22,
                                           fontWeight: FontWeight.w500)),
                                 ),
-                                SizedBox(
+                                const SizedBox(
                                   height: 20,
                                 ),
                                 ElevatedButton(
@@ -74,7 +73,7 @@ class _AddToPlalistbuttonState extends State<AddToPlalistbutton> {
                                             bottomSheet(context),
                                       );
                                     },
-                                    child: Text("Create Playlist"))
+                                    child: const Text("Create Playlist"))
                               ],
                             ),
                           ),
@@ -165,7 +164,7 @@ class _AddToPlalistbuttonState extends State<AddToPlalistbutton> {
                             Text(
                               "Your Playlists",
                               style: GoogleFonts.montserrat(
-                                  textStyle: TextStyle(
+                                  textStyle: const TextStyle(
                                       color: Colors.white,
                                       fontWeight: FontWeight.w500,
                                       fontSize: 22)),
@@ -175,7 +174,7 @@ class _AddToPlalistbuttonState extends State<AddToPlalistbutton> {
                                     itemCount: playlist.length,
                                     itemBuilder: (context, index) {
                                       return ListTile(
-                                        leading: Icon(
+                                        leading: const Icon(
                                           Icons.music_note,
                                           color: Colors.white,
                                         ),
@@ -183,7 +182,7 @@ class _AddToPlalistbuttonState extends State<AddToPlalistbutton> {
                                           playlist[index]
                                               .playlistname
                                               .toString(),
-                                          style: TextStyle(color: Colors.white),
+                                          style: const TextStyle(color: Colors.white),
                                         ),
                                         onTap: () {
                                           PlaylistSongs? plsongs =
@@ -261,7 +260,7 @@ class _AddToPlalistbuttonState extends State<AddToPlalistbutton> {
           EdgeInsets.only(bottom: MediaQuery.of(context).viewInsets.bottom),
       child: Container(
         height: 250,
-        color: Color.fromARGB(255, 24, 24, 24),
+        color: const Color.fromARGB(255, 24, 24, 24),
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [playlistform(context)],
@@ -279,12 +278,12 @@ class _AddToPlalistbuttonState extends State<AddToPlalistbutton> {
             Text(
               "Create Playlist ",
               style: GoogleFonts.montserrat(
-                  textStyle: TextStyle(
+                  textStyle: const TextStyle(
                       color: Colors.white,
                       fontSize: 18,
                       fontWeight: FontWeight.w500)),
             ),
-            SizedBox(
+            const SizedBox(
               height: 20,
             ),
             Form(
@@ -294,14 +293,14 @@ class _AddToPlalistbuttonState extends State<AddToPlalistbutton> {
                 cursorHeight: 25,
                 decoration: InputDecoration(
                   filled: true,
-                  fillColor: Color.fromARGB(199, 255, 255, 255),
-                  border: OutlineInputBorder(
+                  fillColor: const Color.fromARGB(199, 255, 255, 255),
+                  border: const OutlineInputBorder(
                       borderSide:
                           BorderSide(color: Color.fromARGB(255, 0, 0, 0))),
                   hintText: "Enter a name",
                   hintStyle: GoogleFonts.montserrat(
                       textStyle:
-                          TextStyle(color: Color.fromARGB(255, 69, 69, 69))),
+                          const TextStyle(color: Color.fromARGB(255, 69, 69, 69))),
                 ),
                 validator: (value) {
                   List<PlaylistSongs> values = playlistbox.values.toList();
@@ -324,7 +323,7 @@ class _AddToPlalistbuttonState extends State<AddToPlalistbutton> {
                 },
               ),
             ),
-            SizedBox(
+            const SizedBox(
               height: 20,
             ),
             formButtons(context)
@@ -342,7 +341,7 @@ class _AddToPlalistbuttonState extends State<AddToPlalistbutton> {
             onPressed: () {
               Navigator.pop(context);
             },
-            child: Text("Cancel")),
+            child: const Text("Cancel")),
         ElevatedButton(
             onPressed: () {
               final isValid = formGlobalKey.currentState!.validate();
@@ -353,7 +352,7 @@ class _AddToPlalistbuttonState extends State<AddToPlalistbutton> {
                 Navigator.pop(context);
               }
             },
-            child: Text("Create"))
+            child: const Text("Create"))
       ],
     );
   }

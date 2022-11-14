@@ -1,12 +1,11 @@
+// ignore_for_file: avoid_function_literals_in_foreach_calls
+
 import 'dart:async';
 
 import 'package:assets_audio_player/assets_audio_player.dart';
-import 'package:audik_app/Main%20Screens/home.dart';
 import 'package:audik_app/Model/mostlyplayed_model.dart';
 import 'package:audik_app/Model/songModel.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/container.dart';
-import 'package:flutter/src/widgets/framework.dart';
 import 'package:on_audio_query/on_audio_query.dart';
 //import 'package:video_player/video_player.dart';
 
@@ -38,7 +37,7 @@ class _SplashScreenState extends State<SplashScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color.fromARGB(255, 0, 0, 0),
+      backgroundColor: const Color.fromARGB(255, 0, 0, 0),
       body: SafeArea(
           child: Center(
               child: Image.asset(
@@ -87,9 +86,9 @@ class _SplashScreenState extends State<SplashScreen> {
   }
 
   Future gotoHome() async {
-    Timer(Duration(seconds: 5), (() {
+    Timer(const Duration(seconds: 5), (() {
       Navigator.pushReplacement(
-          context, MaterialPageRoute(builder: (context) => navigationBar()));
+          context, MaterialPageRoute(builder: (context) => const navigationBar()));
     }));
   }
 }

@@ -1,11 +1,10 @@
-import 'dart:ui';
+
+// ignore_for_file: camel_case_types, avoid_print, file_names
 
 import 'package:assets_audio_player/assets_audio_player.dart';
 import 'package:audik_app/Model/dbfunctions.dart';
 import 'package:audik_app/Model/mostlyplayed_model.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/container.dart';
-import 'package:flutter/src/widgets/framework.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:hive_flutter/adapters.dart';
 import 'package:on_audio_query/on_audio_query.dart';
@@ -27,7 +26,7 @@ class _mostlyPlayedState extends State<mostlyPlayed> {
 
   @override
   void initState() {
-    // TODO: implement initState
+    
     List<MostPlayed> songlist = mostplayedsongs.values.toList();
 
     int i = 0;
@@ -117,7 +116,7 @@ class _mostlyPlayedState extends State<mostlyPlayed> {
                         Navigator.push(
                           context,
                           MaterialPageRoute(
-                            builder: ((context) => playingNow()),
+                            builder: ((context) => const playingNow()),
                           ),
                         );
                       }),
@@ -200,7 +199,7 @@ class _mostlyPlayedState extends State<mostlyPlayed> {
                   child: Text(
                     '''Your most played songs will be listed here ''',
                     style: GoogleFonts.montserrat(
-                        textStyle: TextStyle(
+                        textStyle: const TextStyle(
                             color: Colors.white,
                             fontSize: 18,
                             fontWeight: FontWeight.w300)),

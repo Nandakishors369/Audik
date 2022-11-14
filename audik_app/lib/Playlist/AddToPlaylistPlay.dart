@@ -1,7 +1,8 @@
+// ignore: file_names
+// ignore_for_file: must_be_immutable, file_names, duplicate_ignore, prefer_final_fields
+
 import 'package:audik_app/Model/dbfunctions.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/container.dart';
-import 'package:flutter/src/widgets/framework.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:hive_flutter/adapters.dart';
 
@@ -28,7 +29,7 @@ class _PlayScreenPlstState extends State<PlayScreenPlst> {
 
           //Navigator.pop(context);
         },
-        icon: Icon(
+        icon: const Icon(
           Icons.add,
           color: Colors.white,
         ));
@@ -41,7 +42,7 @@ class _PlayScreenPlstState extends State<PlayScreenPlst> {
         return StatefulBuilder(
             builder: (context, setState) => Container(
                   height: 200,
-                  color: Color.fromARGB(255, 0, 0, 0),
+                  color: const Color.fromARGB(255, 0, 0, 0),
                   child: ValueListenableBuilder(
                     valueListenable: playlistbox.listenable(),
                     builder: (context, Box<PlaylistSongs> playlistbox, _) {
@@ -58,12 +59,12 @@ class _PlayScreenPlstState extends State<PlayScreenPlst> {
                                 Text(
                                   "Create a playlist to add",
                                   style: GoogleFonts.montserrat(
-                                      textStyle: TextStyle(
+                                      textStyle: const TextStyle(
                                           color: Colors.white,
                                           fontSize: 22,
                                           fontWeight: FontWeight.w500)),
                                 ),
-                                SizedBox(
+                                const SizedBox(
                                   height: 20,
                                 ),
                                 ElevatedButton(
@@ -75,7 +76,7 @@ class _PlayScreenPlstState extends State<PlayScreenPlst> {
                                             bottomSheet(context),
                                       );
                                     },
-                                    child: Text("Create Playlist"))
+                                    child: const Text("Create Playlist"))
                               ],
                             ),
                           ),
@@ -166,7 +167,7 @@ class _PlayScreenPlstState extends State<PlayScreenPlst> {
                             Text(
                               "Your Playlists",
                               style: GoogleFonts.montserrat(
-                                  textStyle: TextStyle(
+                                  textStyle: const TextStyle(
                                       color: Colors.white,
                                       fontWeight: FontWeight.w500,
                                       fontSize: 22)),
@@ -176,7 +177,7 @@ class _PlayScreenPlstState extends State<PlayScreenPlst> {
                                     itemCount: playlist.length,
                                     itemBuilder: (context, index) {
                                       return ListTile(
-                                        leading: Icon(
+                                        leading: const Icon(
                                           Icons.music_note,
                                           color: Colors.white,
                                         ),
@@ -184,7 +185,7 @@ class _PlayScreenPlstState extends State<PlayScreenPlst> {
                                           playlist[index]
                                               .playlistname
                                               .toString(),
-                                          style: TextStyle(color: Colors.white),
+                                          style: const TextStyle(color: Colors.white),
                                         ),
                                         onTap: () {
                                           PlaylistSongs? plsongs =
@@ -262,7 +263,7 @@ class _PlayScreenPlstState extends State<PlayScreenPlst> {
           EdgeInsets.only(bottom: MediaQuery.of(context).viewInsets.bottom),
       child: Container(
         height: 250,
-        color: Color.fromARGB(255, 24, 24, 24),
+        color: const Color.fromARGB(255, 24, 24, 24),
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [playlistform(context)],
@@ -280,12 +281,12 @@ class _PlayScreenPlstState extends State<PlayScreenPlst> {
             Text(
               "Create Playlist ",
               style: GoogleFonts.montserrat(
-                  textStyle: TextStyle(
+                  textStyle: const TextStyle(
                       color: Colors.white,
                       fontSize: 18,
                       fontWeight: FontWeight.w500)),
             ),
-            SizedBox(
+            const SizedBox(
               height: 20,
             ),
             Form(
@@ -295,14 +296,14 @@ class _PlayScreenPlstState extends State<PlayScreenPlst> {
                 cursorHeight: 25,
                 decoration: InputDecoration(
                   filled: true,
-                  fillColor: Color.fromARGB(199, 255, 255, 255),
-                  border: OutlineInputBorder(
+                  fillColor: const Color.fromARGB(199, 255, 255, 255),
+                  border: const OutlineInputBorder(
                       borderSide:
                           BorderSide(color: Color.fromARGB(255, 0, 0, 0))),
                   hintText: "Enter a name",
                   hintStyle: GoogleFonts.montserrat(
                       textStyle:
-                          TextStyle(color: Color.fromARGB(255, 69, 69, 69))),
+                          const TextStyle(color: Color.fromARGB(255, 69, 69, 69))),
                 ),
                 validator: (value) {
                   List<PlaylistSongs> values = playlistbox.values.toList();
@@ -325,7 +326,7 @@ class _PlayScreenPlstState extends State<PlayScreenPlst> {
                 },
               ),
             ),
-            SizedBox(
+            const SizedBox(
               height: 20,
             ),
             formButtons(context)
@@ -343,7 +344,7 @@ class _PlayScreenPlstState extends State<PlayScreenPlst> {
             onPressed: () {
               Navigator.pop(context);
             },
-            child: Text("Cancel")),
+            child: const Text("Cancel")),
         ElevatedButton(
             onPressed: () {
               final isValid = formGlobalKey.currentState!.validate();
@@ -354,7 +355,7 @@ class _PlayScreenPlstState extends State<PlayScreenPlst> {
                 Navigator.pop(context);
               }
             },
-            child: Text("Create"))
+            child: const Text("Create"))
       ],
     );
   }

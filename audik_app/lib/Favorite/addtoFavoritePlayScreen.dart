@@ -1,8 +1,8 @@
-import 'package:assets_audio_player/assets_audio_player.dart';
+// ignore_for_file: file_names, must_be_immutable, avoid_print, use_build_context_synchronously
+
+
 import 'package:audik_app/Model/dbfunctions.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/container.dart';
-import 'package:flutter/src/widgets/framework.dart';
 
 import '../Model/favoriteModel.dart';
 import '../Model/songModel.dart';
@@ -23,7 +23,7 @@ class _PlayScreenFavState extends State<PlayScreenFav> {
   late List<Songs> dbsongs = box.values.toList();
   @override
   void initState() {
-    // TODO: implement initState
+   
     dbsongs = box.values.toList();
 
     super.initState();
@@ -34,7 +34,7 @@ class _PlayScreenFavState extends State<PlayScreenFav> {
     fav = favsongsdb.values.toList();
     //print("daaa");
 
-    print(dbsongs[widget.index].songname);
+   print(dbsongs[widget.index].songname);
     return fav
             .where(
                 (element) => element.songname == dbsongs[widget.index].songname)
@@ -50,9 +50,9 @@ class _PlayScreenFavState extends State<PlayScreenFav> {
               setState(() {});
               //Navigator.pop(context);
               ScaffoldMessenger.of(context)
-                  .showSnackBar(SnackBar(content: Text("Added to Favorites")));
+                  .showSnackBar(const SnackBar(content: Text("Added to Favorites")));
             },
-            icon: Icon(
+            icon: const Icon(
               Icons.favorite_border,
               color: Colors.white,
             ))
@@ -68,10 +68,10 @@ class _PlayScreenFavState extends State<PlayScreenFav> {
                 setState(() {});
                 // Navigator.pop(context);
                 ScaffoldMessenger.of(context).showSnackBar(
-                    SnackBar(content: Text("Removed From Favorites")));
+                    const SnackBar(content: Text("Removed From Favorites")));
               }
             },
-            icon: Icon(
+            icon: const Icon(
               Icons.favorite,
               color: Colors.white,
             ));

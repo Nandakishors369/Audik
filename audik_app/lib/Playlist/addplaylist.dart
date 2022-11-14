@@ -1,3 +1,5 @@
+// ignore_for_file: camel_case_types, prefer_final_fields, non_constant_identifier_names, unused_local_variable
+
 import 'package:audik_app/Model/dbfunctions.dart';
 import 'package:audik_app/Model/playlistmodel.dart';
 import 'package:audik_app/Playlist/playlistscreen.dart';
@@ -23,6 +25,7 @@ class _addPlaylistState extends State<addPlaylist> {
   TextEditingController controller = TextEditingController();
   final formGlobalKey = GlobalKey<FormState>();
   final formGlobalKey1 = GlobalKey<FormState>();
+ 
 
   List<PlaylistSongs> playlist = [];
   @override
@@ -35,7 +38,7 @@ class _addPlaylistState extends State<addPlaylist> {
             builder: (context) => bottomSheet(context),
           );
         },
-        child: Icon(Icons.add),
+        child: const Icon(Icons.add),
       ),
       backgroundColor: const Color.fromARGB(255, 21, 21, 21),
       body: SafeArea(
@@ -100,6 +103,7 @@ class _addPlaylistState extends State<addPlaylist> {
         valueListenable: playlistbox.listenable(),
         builder: (context, value, child) {
           List<PlaylistSongs> playlist = value.values.toList();
+          
           return Padding(
             padding: const EdgeInsets.all(8.0),
             child: ListView.builder(
@@ -108,6 +112,7 @@ class _addPlaylistState extends State<addPlaylist> {
               itemCount: playlist.length,
               itemBuilder: ((context, index) {
                 if (playlistbox.isEmpty) {
+                  final controller = playlist[index].playlistname!;
                   Center(
                     child: Text(
                       "Playlist Not Created",
@@ -170,7 +175,7 @@ class _addPlaylistState extends State<addPlaylist> {
                                   bottomSheetedit(context, index),
                             );
                           },
-                          icon: Icon(
+                          icon: const Icon(
                             Icons.edit,
                             color: Colors.grey,
                           )),
@@ -180,20 +185,20 @@ class _addPlaylistState extends State<addPlaylist> {
                             context: context,
                             builder: (context) {
                               return AlertDialog(
-                                title: Text("Delete Playlist"),
-                                content: Text("Are You Sure"),
+                                title: const Text("Delete Playlist"),
+                                content: const Text("Are You Sure"),
                                 actions: [
                                   TextButton(
                                       onPressed: () {
                                         Navigator.pop(context);
                                       },
-                                      child: Text("Cancel")),
+                                      child: const Text("Cancel")),
                                   TextButton(
                                       onPressed: () {
                                         playlistbox.deleteAt(index);
                                         Navigator.pop(context);
                                       },
-                                      child: Text("Delete"))
+                                      child: const Text("Delete"))
                                 ],
                               );
                             },
@@ -222,7 +227,7 @@ class _addPlaylistState extends State<addPlaylist> {
             EdgeInsets.only(bottom: MediaQuery.of(context).viewInsets.bottom),
         child: Container(
           height: 423 * 0.7,
-          color: Color.fromARGB(255, 24, 24, 24),
+          color: const Color.fromARGB(255, 24, 24, 24),
           child: Column(
             children: [playlistform(context)],
           ),
@@ -238,7 +243,7 @@ class _addPlaylistState extends State<addPlaylist> {
             EdgeInsets.only(bottom: MediaQuery.of(context).viewInsets.bottom),
         child: Container(
           height: 423 * 0.7,
-          color: Color.fromARGB(255, 24, 24, 24),
+          color: const Color.fromARGB(255, 24, 24, 24),
           child: Column(
             children: [editBottom(context, index)],
           ),
@@ -256,12 +261,12 @@ class _addPlaylistState extends State<addPlaylist> {
             Text(
               "Create Playlist ",
               style: GoogleFonts.montserrat(
-                  textStyle: TextStyle(
+                  textStyle: const TextStyle(
                       color: Colors.white,
                       fontSize: 18,
                       fontWeight: FontWeight.w500)),
             ),
-            SizedBox(
+            const SizedBox(
               height: 20,
             ),
             Form(
@@ -271,14 +276,14 @@ class _addPlaylistState extends State<addPlaylist> {
                 cursorHeight: 25,
                 decoration: InputDecoration(
                   filled: true,
-                  fillColor: Color.fromARGB(199, 255, 255, 255),
-                  border: OutlineInputBorder(
+                  fillColor: const Color.fromARGB(199, 255, 255, 255),
+                  border: const OutlineInputBorder(
                       borderSide:
                           BorderSide(color: Color.fromARGB(255, 0, 0, 0))),
                   hintText: "Enter a name",
                   hintStyle: GoogleFonts.montserrat(
                       textStyle:
-                          TextStyle(color: Color.fromARGB(255, 69, 69, 69))),
+                          const TextStyle(color: Color.fromARGB(255, 69, 69, 69))),
                 ),
                 validator: (value) {
                   List<PlaylistSongs> values = playlistbox.values.toList();
@@ -301,7 +306,7 @@ class _addPlaylistState extends State<addPlaylist> {
                 },
               ),
             ),
-            SizedBox(
+            const SizedBox(
               height: 20,
             ),
             formButtons(context)
@@ -319,7 +324,7 @@ class _addPlaylistState extends State<addPlaylist> {
             onPressed: () {
               Navigator.pop(context);
             },
-            child: Text("cancel")),
+            child: const Text("cancel")),
         ElevatedButton(
             onPressed: () {
               final isValid = formGlobalKey.currentState!.validate();
@@ -330,7 +335,7 @@ class _addPlaylistState extends State<addPlaylist> {
                 Navigator.pop(context);
               }
             },
-            child: Text("Create"))
+            child: const Text("Create"))
       ],
     );
   }
@@ -345,12 +350,12 @@ class _addPlaylistState extends State<addPlaylist> {
             Text(
               "Edit Playlist ",
               style: GoogleFonts.montserrat(
-                  textStyle: TextStyle(
+                  textStyle: const TextStyle(
                       color: Colors.white,
                       fontSize: 18,
                       fontWeight: FontWeight.w500)),
             ),
-            SizedBox(
+            const SizedBox(
               height: 20,
             ),
             Form(
@@ -360,14 +365,14 @@ class _addPlaylistState extends State<addPlaylist> {
                 cursorHeight: 25,
                 decoration: InputDecoration(
                   filled: true,
-                  fillColor: Color.fromARGB(199, 255, 255, 255),
-                  border: OutlineInputBorder(
+                  fillColor: const Color.fromARGB(199, 255, 255, 255),
+                  border: const OutlineInputBorder(
                       borderSide:
                           BorderSide(color: Color.fromARGB(255, 0, 0, 0))),
                   hintText: "Enter a name",
                   hintStyle: GoogleFonts.montserrat(
                       textStyle:
-                          TextStyle(color: Color.fromARGB(255, 69, 69, 69))),
+                          const TextStyle(color: Color.fromARGB(255, 69, 69, 69))),
                 ),
                 validator: (value) {
                   List<PlaylistSongs> values = playlistbox.values.toList();
@@ -386,7 +391,7 @@ class _addPlaylistState extends State<addPlaylist> {
                 },
               ),
             ),
-            SizedBox(
+            const SizedBox(
               height: 20,
             ),
             formButtonsedit(context, index)
@@ -445,7 +450,7 @@ class _addPlaylistState extends State<addPlaylist> {
             onPressed: () {
               Navigator.pop(context);
             },
-            child: Text("cancel")),
+            child: const Text("cancel")),
         ElevatedButton(
             onPressed: () {
               final isValid = formGlobalKey1.currentState!.validate();
@@ -457,7 +462,7 @@ class _addPlaylistState extends State<addPlaylist> {
                 Navigator.pop(context);
               }
             },
-            child: Text("Create"))
+            child: const Text("Create"))
       ],
     );
   }

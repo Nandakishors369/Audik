@@ -1,17 +1,12 @@
+// ignore_for_file: prefer_final_fields, unused_local_variable, no_leading_underscores_for_local_identifiers
+
 import 'package:assets_audio_player/assets_audio_player.dart';
 import 'package:audik_app/Model/dbfunctions.dart';
-import 'package:audik_app/Model/songModel.dart';
 import 'package:audik_app/Model/userName.dart';
-import 'package:audik_app/Recently%20and%20Mostly/mostlyPlayed.dart';
 import 'package:audik_app/other%20screens/settingPopup.dart';
 
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/container.dart';
-import 'package:flutter/src/widgets/framework.dart';
-import 'package:flutter_markdown/flutter_markdown.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:hive/hive.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:on_audio_query/on_audio_query.dart';
 import 'package:share_plus/share_plus.dart';
@@ -23,6 +18,7 @@ class SettingScreen extends StatefulWidget {
   @override
   State<SettingScreen> createState() => _SettingScreenState();
 }
+bool musicNotif = true;
 
 class _SettingScreenState extends State<SettingScreen> {
   AssetsAudioPlayer audioPlayer = AssetsAudioPlayer.withId('0');
@@ -40,10 +36,10 @@ class _SettingScreenState extends State<SettingScreen> {
         valueListenable: nameBox.listenable(),
         builder: (context, value, child) {
           return Scaffold(
-            backgroundColor: Color.fromARGB(255, 21, 21, 21),
+            backgroundColor: const Color.fromARGB(255, 21, 21, 21),
             body: SafeArea(
               child: SingleChildScrollView(
-                physics: ScrollPhysics(),
+                physics: const ScrollPhysics(),
                 child: Column(
                   mainAxisSize: MainAxisSize.min,
                   children: [
@@ -104,7 +100,7 @@ class _SettingScreenState extends State<SettingScreen> {
                                       mdFilename: 'termsandconditons.md');
                                 });
                           },
-                          trailing: Icon(
+                          trailing: const Icon(
                             Icons.arrow_forward_ios,
                             color: Colors.white,
                           ),
@@ -129,7 +125,7 @@ class _SettingScreenState extends State<SettingScreen> {
                                       mdFilename: 'privacypolicy.md');
                                 });
                           },
-                          trailing: Icon(
+                          trailing: const Icon(
                             Icons.arrow_forward_ios,
                             color: Colors.white,
                           ),
@@ -146,7 +142,7 @@ class _SettingScreenState extends State<SettingScreen> {
                     Padding(
                         padding: const EdgeInsets.all(0.0),
                         child: ListTile(
-                          trailing: Icon(
+                          trailing: const Icon(
                             Icons.arrow_forward_ios,
                             color: Colors.white,
                           ),
@@ -177,7 +173,7 @@ class _SettingScreenState extends State<SettingScreen> {
                               builder: (context) => bottomSheet(context),
                             );
                           },
-                          trailing: Icon(
+                          trailing: const Icon(
                             Icons.arrow_forward_ios,
                             color: Colors.white,
                           ),
@@ -197,7 +193,9 @@ class _SettingScreenState extends State<SettingScreen> {
                           trailing: SwitcherButton(
                             value: true,
                             size: 27,
-                            onChange: (value) {},
+                            onChange: (value) {
+                          audioPlayer.showNotification = musicNotif;
+                            },
                           ),
                           title: Text(
                             "Notifications",
@@ -212,7 +210,7 @@ class _SettingScreenState extends State<SettingScreen> {
                     Padding(
                         padding: const EdgeInsets.all(0.0),
                         child: ListTile(
-                          trailing: Icon(
+                          trailing: const Icon(
                             Icons.arrow_forward_ios,
                             color: Colors.white,
                           ),
@@ -262,7 +260,7 @@ class _SettingScreenState extends State<SettingScreen> {
             EdgeInsets.only(bottom: MediaQuery.of(context).viewInsets.bottom),
         child: Container(
           height: width * 0.7,
-          color: Color.fromARGB(255, 24, 24, 24),
+          color: const Color.fromARGB(255, 24, 24, 24),
           child: Column(
             children: [
               Padding(
@@ -273,12 +271,12 @@ class _SettingScreenState extends State<SettingScreen> {
                       Text(
                         "Enter a nick name ",
                         style: GoogleFonts.montserrat(
-                            textStyle: TextStyle(
+                            textStyle: const TextStyle(
                                 color: Colors.white,
                                 fontSize: 18,
                                 fontWeight: FontWeight.w500)),
                       ),
-                      SizedBox(
+                      const SizedBox(
                         height: 20,
                       ),
                       Form(
@@ -288,13 +286,13 @@ class _SettingScreenState extends State<SettingScreen> {
                           cursorHeight: 25,
                           decoration: InputDecoration(
                             filled: true,
-                            fillColor: Color.fromARGB(199, 255, 255, 255),
-                            border: OutlineInputBorder(
+                            fillColor: const Color.fromARGB(199, 255, 255, 255),
+                            border: const OutlineInputBorder(
                                 borderSide: BorderSide(
                                     color: Color.fromARGB(255, 0, 0, 0))),
                             hintText: "Enter a name",
                             hintStyle: GoogleFonts.montserrat(
-                                textStyle: TextStyle(
+                                textStyle: const TextStyle(
                                     color: Color.fromARGB(255, 69, 69, 69))),
                           ),
                           validator: (value) {
@@ -309,7 +307,7 @@ class _SettingScreenState extends State<SettingScreen> {
                           },
                         ),
                       ),
-                      SizedBox(
+                      const SizedBox(
                         height: 20,
                       ),
                       Row(
@@ -319,7 +317,7 @@ class _SettingScreenState extends State<SettingScreen> {
                               onPressed: () {
                                 Navigator.pop(context);
                               },
-                              child: Text("cancel")),
+                              child: const Text("cancel")),
                           ElevatedButton(
                               onPressed: () {
                                 final isValid =
@@ -332,7 +330,7 @@ class _SettingScreenState extends State<SettingScreen> {
                                   Navigator.pop(context);
                                 }
                               },
-                              child: Text("Ok"))
+                              child: const Text("Ok"))
                         ],
                       )
                     ],
@@ -357,12 +355,12 @@ class _SettingScreenState extends State<SettingScreen> {
         ),
         applicationVersion: "1.0.1",
         children: [
-          Text(
+          const Text(
               "Audik is an offline music player app which allows use to hear music from their storage and also do functions like add to favorites , create playlists , recently played , mostly played etc."),
-          SizedBox(
+          const SizedBox(
             height: 10,
           ),
-          Text("App developed by Nandakishor S.")
+          const Text("App developed by Nandakishor S.")
         ]);
   }
 }

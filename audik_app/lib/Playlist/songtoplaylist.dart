@@ -1,6 +1,6 @@
+// ignore_for_file: camel_case_types, non_constant_identifier_names
+
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/container.dart';
-import 'package:flutter/src/widgets/framework.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class songtoPlaylist extends StatefulWidget {
@@ -44,7 +44,7 @@ class _songtoPlaylistState extends State<songtoPlaylist> {
                 ),
               ),
             ),
-            SizedBox(
+            const SizedBox(
               height: 20,
             ),
             button(),
@@ -58,7 +58,7 @@ class _songtoPlaylistState extends State<songtoPlaylist> {
   //----------------------------------------BUTTON TO CREATE PLAYLIST--------------------------------------------------
 
   Widget button() {
-    return ElevatedButton(onPressed: () {}, child: Text("Create"));
+    return ElevatedButton(onPressed: () {}, child: const Text("Create"));
   }
 
   //----------------------------------------CHOOSE PLAYLIST LIST--------------------------------------------------

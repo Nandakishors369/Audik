@@ -1,3 +1,5 @@
+// ignore_for_file: unused_import, camel_case_types, unused_local_variable
+
 import 'package:assets_audio_player/assets_audio_player.dart';
 import 'package:audik_app/Playlist/addplaylist.dart';
 import 'package:audik_app/Favorite/favorite.dart';
@@ -5,10 +7,7 @@ import 'package:audik_app/Playlist/libraryplaylistview.dart';
 import 'package:audik_app/Playlist/playlistscreen.dart';
 import 'package:audik_app/basic%20operations/songfromalbums.dart';
 import 'package:audik_app/other%20screens/screenplayingnow.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/container.dart';
-import 'package:flutter/src/widgets/framework.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:marquee/marquee.dart';
 import 'package:on_audio_query/on_audio_query.dart';
@@ -24,7 +23,7 @@ class librarySearch extends StatelessWidget {
       bottomSheet: playingCard(
           /* index: 0 */
           ),
-      backgroundColor: Color.fromARGB(255, 21, 21, 21),
+      backgroundColor: const Color.fromARGB(255, 21, 21, 21),
       body: SafeArea(
           child: SingleChildScrollView(
         child: Column(
@@ -63,7 +62,7 @@ class librarySearch extends StatelessWidget {
                 Navigator.push(
                     context,
                     MaterialPageRoute(
-                        builder: ((context) => ScreenFavorite())));
+                        builder: ((context) => const ScreenFavorite())));
               },
               child: Padding(
                 padding: const EdgeInsets.fromLTRB(10, 0, 10, 0),
@@ -72,7 +71,7 @@ class librarySearch extends StatelessWidget {
                   width: MediaQuery.of(context).size.width,
                   decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(8),
-                      color: Color.fromARGB(255, 0, 0, 0)),
+                      color: const Color.fromARGB(255, 0, 0, 0)),
                   child: Padding(
                     padding: const EdgeInsets.fromLTRB(10, 0, 10, 0),
                     child: Row(
@@ -80,11 +79,11 @@ class librarySearch extends StatelessWidget {
                       children: [
                         Row(
                           children: [
-                            Icon(
+                            const Icon(
                               Icons.favorite_border,
                               color: Colors.white,
                             ),
-                            SizedBox(
+                            const SizedBox(
                               width: 15,
                             ),
                             Text("Favorite Tracks",
@@ -100,7 +99,7 @@ class librarySearch extends StatelessWidget {
                         /* SizedBox(
                           width: 190,
                         ), */
-                        Icon(
+                        const Icon(
                           Icons.arrow_forward_ios,
                           color: Colors.white,
                           size: 20,
@@ -116,7 +115,7 @@ class librarySearch extends StatelessWidget {
             ),
             GestureDetector(
               onTap: () => Navigator.push(context,
-                  MaterialPageRoute(builder: ((context) => addPlaylist()))),
+                  MaterialPageRoute(builder: ((context) => const addPlaylist()))),
               child: Padding(
                 padding: const EdgeInsets.fromLTRB(0, 10, 20, 0),
                 child: Row(
@@ -126,7 +125,7 @@ class librarySearch extends StatelessWidget {
                     /*  SizedBox(
                       width: 265,
                     ), */
-                    Icon(
+                    const Icon(
                       Icons.arrow_forward_ios,
                       color: Colors.white,
                       size: 20,
@@ -135,13 +134,13 @@ class librarySearch extends StatelessWidget {
                 ),
               ),
             ),
-            playlistView(),
-            SizedBox(
+            const playlistView(),
+            const SizedBox(
                 //height: height * 0.011,
                 ),
             //headings("Folders"),
-            Album(width: 5),
-            SizedBox(height: 20)
+            const Album(width: 5),
+            const SizedBox(height: 20)
           ],
         ),
       )),
@@ -236,7 +235,7 @@ class librarySearch extends StatelessWidget {
 
 class playingCard extends StatefulWidget {
   /* int index; */
-  playingCard({
+  const playingCard({
     super.key,
     /*  required this.index */
   });
@@ -259,7 +258,7 @@ class _playingCardState extends State<playingCard> {
             Navigator.push(context,
                 MaterialPageRoute(builder: ((context) => playingNow())));
           }),
-          contentPadding: EdgeInsets.fromLTRB(5, 2, 5, 10),
+          contentPadding: const EdgeInsets.fromLTRB(5, 2, 5, 10),
           leading: QueryArtworkWidget(
             id: int.parse(playing.audio.audio.metas.id!),
             type: ArtworkType.AUDIO,
@@ -277,9 +276,9 @@ class _playingCardState extends State<playingCard> {
           ),
           title: Marquee(
             text: player.getCurrentAudioTitle,
-            style: TextStyle(color: Colors.white),
+            style: const TextStyle(color: Colors.white),
             blankSpace: 80,
-            pauseAfterRound: Duration(seconds: 2),
+            pauseAfterRound: const Duration(seconds: 2),
           ),
           trailing: PlayerBuilder.isPlaying(
             player: player,
@@ -295,7 +294,7 @@ class _playingCardState extends State<playingCard> {
                           player.pause();
                         }
                       },
-                      icon: Icon(
+                      icon: const Icon(
                         Icons.skip_previous,
                         color: Colors.white,
                       )),
@@ -314,7 +313,7 @@ class _playingCardState extends State<playingCard> {
                         player.pause();
                       }
                     },
-                    icon: Icon(
+                    icon: const Icon(
                       Icons.skip_next,
                       color: Colors.white,
                     ),

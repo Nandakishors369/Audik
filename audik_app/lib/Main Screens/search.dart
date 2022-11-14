@@ -1,15 +1,10 @@
-import 'dart:ui';
+
+// ignore_for_file: prefer_final_fields
 
 import 'package:assets_audio_player/assets_audio_player.dart';
-import 'package:audik_app/Main%20Screens/home.dart';
-import 'package:audik_app/Main%20Screens/splash.dart';
 import 'package:audik_app/Model/songModel.dart';
-import 'package:audik_app/basic%20operations/searchfunction.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/container.dart';
-import 'package:flutter/src/widgets/framework.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:hive/hive.dart';
 import 'package:on_audio_query/on_audio_query.dart';
 
 import '../other screens/screenplayingnow.dart';
@@ -30,7 +25,7 @@ class _ScreenSearchState extends State<ScreenSearch> {
 
   @override
   void initState() {
-    // TODO: implement initState
+    
     dbSongs = box.values.toList();
 
     super.initState();
@@ -77,8 +72,8 @@ class _ScreenSearchState extends State<ScreenSearch> {
                 ),
               ),
             ),
-            Padding(padding: EdgeInsets.all(15), child: searchbar(context)),
-            SizedBox(
+            Padding(padding: const EdgeInsets.all(15), child: searchbar(context)),
+            const SizedBox(
               height: 20,
             ),
             Expanded(child: searchHistory())
@@ -91,29 +86,29 @@ class _ScreenSearchState extends State<ScreenSearch> {
   searchbar(BuildContext context) {
     return TextFormField(
       style: GoogleFonts.montserrat(
-          textStyle: TextStyle(color: Color.fromARGB(255, 255, 255, 255))),
+          textStyle: const TextStyle(color: Color.fromARGB(255, 255, 255, 255))),
       onTap: () {
         //showSearch(context: context, delegate: SearchLocation());
       },
       controller: searchController,
       onChanged: (value) => updateList(value),
       decoration: InputDecoration(
-        focusedBorder: UnderlineInputBorder(
+        focusedBorder: const UnderlineInputBorder(
           borderSide: BorderSide(color: Colors.white),
         ),
-        border: UnderlineInputBorder(
+        border: const UnderlineInputBorder(
           borderSide: BorderSide(color: Colors.white),
         ),
-        prefixIcon: Icon(
+        prefixIcon: const Icon(
           Icons.search_outlined,
           color: Colors.white,
         ),
         focusColor: Colors.white,
         hintText: 'Search song, artist, album or playlist',
         hintStyle: GoogleFonts.montserrat(
-            textStyle: TextStyle(color: Color.fromARGB(113, 158, 158, 158))),
+            textStyle: const TextStyle(color: Color.fromARGB(113, 158, 158, 158))),
         filled: true,
-        fillColor: Color.fromARGB(146, 50, 50, 50),
+        fillColor: const Color.fromARGB(146, 50, 50, 50),
       ),
     );
   }
@@ -121,7 +116,7 @@ class _ScreenSearchState extends State<ScreenSearch> {
   searchHistory() {
     return Padding(
       padding: const EdgeInsets.all(8.0),
-      child: another.length == 0
+      child: another.isEmpty
           ? Center(
               child: Text(
               "No Songs Found",

@@ -1,23 +1,21 @@
+// ignore_for_file: file_names, unused_local_variable, non_constant_identifier_names
+
 import 'package:assets_audio_player/assets_audio_player.dart';
 import 'package:audik_app/Model/dbfunctions.dart';
 import 'package:audik_app/Model/mostlyplayed_model.dart';
 import 'package:audik_app/Model/recentlyplayed_model.dart';
 import 'package:audik_app/Playlist/createPlaylist.dart';
-import 'package:flutter/cupertino.dart';
+import 'package:audik_app/other%20screens/setting.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/container.dart';
-import 'package:flutter/src/widgets/framework.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:hive/hive.dart';
 import 'package:hive_flutter/adapters.dart';
 import 'package:on_audio_query/on_audio_query.dart';
 
 import '../Favorite/addtofavorite.dart';
-import '../Main Screens/splash.dart';
 import '../Model/songModel.dart';
-import '../Playlist/songtoplaylist.dart';
 import '../other screens/screenplayingnow.dart';
 
+// ignore: camel_case_types
 class allSongsScreen extends StatefulWidget {
   const allSongsScreen({super.key});
 
@@ -25,6 +23,7 @@ class allSongsScreen extends StatefulWidget {
   State<allSongsScreen> createState() => _allSongsScreenState();
 }
 
+// ignore: camel_case_types
 class _allSongsScreenState extends State<allSongsScreen> {
   late bool isplaying;
   late bool playerVisibility;
@@ -43,6 +42,7 @@ class _allSongsScreenState extends State<allSongsScreen> {
               id: item.id.toString())));
     }
     setState(() {});
+    // ignore: todo
     // TODO: implement initState
     super.initState();
   }
@@ -58,7 +58,7 @@ class _allSongsScreenState extends State<allSongsScreen> {
           List<MostPlayed> allmostplayedsongs = mostplayedsongs.values.toList();
           //----------------------------------------If songs are not there--------------------------------------------------
           if (allDbSongs.isEmpty) {
-            return Center(child: CircularProgressIndicator());
+            return const Center(child: CircularProgressIndicator());
           }
           //----------------------------------------If the list is null--------------------------------------------------
           if (allDbSongs == null) {
@@ -90,7 +90,7 @@ class _allSongsScreenState extends State<allSongsScreen> {
                       /* updatePlayedSongCount(MPsongs, index); */
                       _audioPlayer.open(
                           Playlist(audios: convertAudios, startIndex: index),
-                          showNotification: true,
+                          showNotification: musicNotif,
                           headPhoneStrategy: HeadPhoneStrategy.pauseOnUnplug,
                           loopMode: LoopMode.playlist);
                       setState(() {});
@@ -132,6 +132,7 @@ class _allSongsScreenState extends State<allSongsScreen> {
                         ),
                       ),
                     ),
+                    //----------------------------------------Trailing Menu Pop UP--------------------------------------------------
                     trailing: IconButton(
                       onPressed: (() {
                         showModalBottomSheet(
@@ -147,10 +148,12 @@ class _allSongsScreenState extends State<allSongsScreen> {
                               height: 130 /* height * 0.13 */,
                               child: Column(
                                 children: [
+                                  //----------------------------------------Add to Playlist--------------------------------------------------
                                   AddToPlalistbutton(songindex: index),
                                   SizedBox(
                                     height: height * 0.011,
                                   ),
+                                  //----------------------------------------Add to Favorite--------------------------------------------------
                                   addToFavorite(
                                     index: index,
                                   )

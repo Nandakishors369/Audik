@@ -1,3 +1,5 @@
+// ignore_for_file: non_constant_identifier_names
+
 import 'package:audik_app/Model/favoriteModel.dart';
 import 'package:audik_app/Model/mostlyplayed_model.dart';
 import 'package:audik_app/Model/playlistmodel.dart';

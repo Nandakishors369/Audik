@@ -1,9 +1,9 @@
+// ignore_for_file: camel_case_types, must_be_immutable, use_build_context_synchronously
+
 import 'package:audik_app/Model/dbfunctions.dart';
 import 'package:audik_app/Model/favoriteModel.dart';
 import 'package:audik_app/Model/songModel.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/container.dart';
-import 'package:flutter/src/widgets/framework.dart';
 
 class addToFavorite extends StatefulWidget {
   int index;
@@ -21,7 +21,7 @@ class _addToFavoriteState extends State<addToFavorite> {
   late List<Songs> dbsongs;
   @override
   void initState() {
-    // TODO: implement initState
+    
     dbsongs = box.values.toList();
     super.initState();
   }
@@ -44,7 +44,7 @@ class _addToFavoriteState extends State<addToFavorite> {
               setState(() {});
               Navigator.pop(context);
               ScaffoldMessenger.of(context)
-                  .showSnackBar(SnackBar(content: Text("Added to Favorites")));
+                  .showSnackBar(const SnackBar(content: Text("Added to Favorites")));
             },
             child: const Text("Add to Favorites"))
         : TextButton(
@@ -57,9 +57,10 @@ class _addToFavoriteState extends State<addToFavorite> {
                     (element) => element.id == dbsongs[widget.index].id);
                 await favsongsdb.deleteAt(currentIndex);
                 setState(() {});
+                
                 Navigator.pop(context);
                 ScaffoldMessenger.of(context).showSnackBar(
-                    SnackBar(content: Text("Removed From Favorites")));
+                    const SnackBar(content: Text("Removed From Favorites")));
               }
             },
             child: const Text("Remove From Favorites"));

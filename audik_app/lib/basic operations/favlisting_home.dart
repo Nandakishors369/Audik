@@ -1,8 +1,9 @@
+// ignore_for_file: camel_case_types
+
 import 'package:assets_audio_player/assets_audio_player.dart';
 import 'package:audik_app/other%20screens/screenplayingnow.dart';
+import 'package:audik_app/other%20screens/setting.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/container.dart';
-import 'package:flutter/src/widgets/framework.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:hive_flutter/adapters.dart';
 import 'package:marquee/marquee.dart';
@@ -23,7 +24,7 @@ class _favHomeState extends State<favHome> {
   AssetsAudioPlayer audioPlayer = AssetsAudioPlayer.withId('0');
   @override
   void initState() {
-    // TODO: implement initState
+    
     final favSongsdb = Hive.box<favSongs>('favsongs').values.toList();
     for (var item in favSongsdb) {
       allsongs.add(Audio.file(item.songurl.toString(),
@@ -41,7 +42,7 @@ class _favHomeState extends State<favHome> {
     final width = MediaQuery.of(context).size.width;
     return Column(
       children: [
-        Padding(
+        const Padding(
           padding: EdgeInsets.fromLTRB(10, 15, 0, 0),
         ),
         ValueListenableBuilder<Box<favSongs>>(
@@ -50,7 +51,7 @@ class _favHomeState extends State<favHome> {
               List<favSongs> allDbSongs = alldbfavsongs.values.toList();
               //----------------------------------------If songs are not there--------------------------------------------------
               if (favsongsdb.isEmpty) {
-                return SizedBox.shrink();
+                return const SizedBox.shrink();
               }
               //----------------------------------------If the list is null-----------------------------------------------------
               if (favsongsdb == null) {
@@ -64,7 +65,7 @@ class _favHomeState extends State<favHome> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Padding(
-                    padding: EdgeInsets.fromLTRB(20, 0, 0, 0),
+                    padding: const EdgeInsets.fromLTRB(20, 0, 0, 0),
                     child: Row(
                       children: [
                         Text(
@@ -80,13 +81,13 @@ class _favHomeState extends State<favHome> {
                     ),
                   ),
                   Padding(
-                    padding: EdgeInsets.fromLTRB(0, 0, 0, 0),
+                    padding: const EdgeInsets.fromLTRB(0, 0, 0, 0),
                     child: SizedBox(
                       /*  height: height * 0.224, */
                       height: 220,
                       child: ListView.separated(
                         scrollDirection: Axis.horizontal,
-                        padding: EdgeInsets.all(19),
+                        padding: const EdgeInsets.all(19),
                         itemBuilder: ((context, index) {
                           return GestureDetector(
                             onTap: () {
@@ -102,7 +103,7 @@ class _favHomeState extends State<favHome> {
                                 audioPlayer.open(
                                     Playlist(
                                         audios: allsongs, startIndex: index),
-                                    showNotification: true,
+                                    showNotification: musicNotif,
                                     headPhoneStrategy:
                                         HeadPhoneStrategy.pauseOnUnplug,
                                     loopMode: LoopMode.playlist);
@@ -143,7 +144,7 @@ class _favHomeState extends State<favHome> {
                                       ),
                                     ),
                                   ),
-                                  SizedBox(
+                                  const SizedBox(
                                     height: 15,
                                   ),
                                   SizedBox(
@@ -154,7 +155,7 @@ class _favHomeState extends State<favHome> {
                                       velocity: 20,
                                       text: allDbSongs[index].songname!,
                                       style: GoogleFonts.montserrat(
-                                          textStyle: TextStyle(
+                                          textStyle: const TextStyle(
                                               fontSize: 15,
                                               color: Colors.white,
                                               fontWeight: FontWeight.w500)),
@@ -185,10 +186,10 @@ class _favHomeState extends State<favHome> {
     final height = MediaQuery.of(context).size.height;
     final width = MediaQuery.of(context).size.width;
     if (favsongsdb.isEmpty) {
-      return SizedBox.shrink();
+      return const SizedBox.shrink();
     }
     return Padding(
-      padding: EdgeInsets.fromLTRB(15, 0, 0, 0),
+      padding: const EdgeInsets.fromLTRB(15, 0, 0, 0),
       child: Row(
         children: [
           Text(

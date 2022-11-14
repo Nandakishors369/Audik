@@ -1,5 +1,5 @@
-import 'package:assets_audio_player/assets_audio_player.dart';
-import 'package:audik_app/basic%20operations/albumView.dart';
+// ignore_for_file: unused_local_variable
+
 import 'package:audik_app/basic%20operations/songbyalbum.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -55,7 +55,7 @@ class _AlbumState extends State<Album> {
           }
 
           if (item.data!.isEmpty) {
-            return Center(
+            return const Center(
               child: Text('No Album Found!',
                   style: TextStyle(color: Colors.white)),
             );
@@ -64,7 +64,7 @@ class _AlbumState extends State<Album> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Padding(
-                padding: EdgeInsets.fromLTRB(0, 0, 0, 0),
+                padding: const EdgeInsets.fromLTRB(0, 0, 0, 0),
                 child: Row(
                   children: [
                     GestureDetector(
@@ -92,13 +92,13 @@ class _AlbumState extends State<Album> {
                 ),
               ),
               Padding(
-                padding: EdgeInsets.fromLTRB(0, 0, 0, 0),
+                padding: const EdgeInsets.fromLTRB(0, 0, 0, 0),
                 child: SizedBox(
                   /*  height: height * 0.224, */
                   height: 220,
                   child: ListView.separated(
                     scrollDirection: Axis.horizontal,
-                    padding: EdgeInsets.all(19),
+                    padding: const EdgeInsets.all(19),
                     itemBuilder: ((BuildContext context, int index) {
                       final height = MediaQuery.of(context).size.height;
                       final width = MediaQuery.of(context).size.width;
@@ -166,7 +166,7 @@ class _AlbumState extends State<Album> {
                                 ),
                               ), */
                                 ),
-                            SizedBox(
+                            const SizedBox(
                               height: 15,
                             ),
                             SizedBox(
@@ -177,7 +177,7 @@ class _AlbumState extends State<Album> {
                                 velocity: 20,
                                 text: albumList[index].album.toString(),
                                 style: GoogleFonts.montserrat(
-                                    textStyle: TextStyle(
+                                    textStyle: const TextStyle(
                                         fontSize: 15,
                                         color: Colors.white,
                                         fontWeight: FontWeight.w500)),

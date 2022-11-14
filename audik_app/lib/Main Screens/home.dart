@@ -1,3 +1,5 @@
+// ignore_for_file: camel_case_types
+
 import 'package:audik_app/Model/dbfunctions.dart';
 import 'package:audik_app/Model/userName.dart';
 import 'package:audik_app/Recently%20and%20Mostly/mostlyPlayed.dart';
@@ -34,7 +36,7 @@ class _homeScreenState extends State<homeScreen> {
     setState(() {
       // userName = nameBox.values.toList();
     });
-    // TODO: implement initState
+   
     super.initState();
   }
 
@@ -70,7 +72,7 @@ class _homeScreenState extends State<homeScreen> {
                           ),
                         ),
                         child: Padding(
-                          padding: EdgeInsets.fromLTRB(20, 15, 15, 15),
+                          padding: const EdgeInsets.fromLTRB(20, 15, 15, 15),
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
@@ -103,7 +105,7 @@ class _homeScreenState extends State<homeScreen> {
                           ),
                         ),
                       ),
-                      favHome(),
+                      const favHome(),
                       /* favoritesHomeListing(), */
                       Padding(
                         padding: EdgeInsets.fromLTRB(
@@ -139,7 +141,7 @@ class _homeScreenState extends State<homeScreen> {
                           ],
                         ),
                       ),
-                      allSongsScreen(),
+                      const allSongsScreen(),
                       SizedBox(
                           height: 80,
                           width: width,
@@ -148,7 +150,7 @@ class _homeScreenState extends State<homeScreen> {
                             child: Text(
                               "End of songs...",
                               style: GoogleFonts.notoSansOldItalic(
-                                  textStyle: TextStyle(color: Colors.grey)),
+                                  textStyle: const TextStyle(color: Colors.grey)),
                             ),
                           ))
                     ],
@@ -172,7 +174,7 @@ class _homeScreenState extends State<homeScreen> {
         height: 200,
         child: ListView.separated(
             scrollDirection: Axis.horizontal,
-            padding: EdgeInsets.all(10),
+            padding: const EdgeInsets.all(10),
             itemBuilder: ((context, index) {
               return GestureDetector(
                 onTap: () {
@@ -196,7 +198,7 @@ class _homeScreenState extends State<homeScreen> {
                         ),
                       ),
                     ),
-                    SizedBox(
+                    const SizedBox(
                       height: 10,
                     ),
                     Text(
@@ -282,7 +284,7 @@ class _homeScreenState extends State<homeScreen> {
               Navigator.push(
                   context,
                   MaterialPageRoute(
-                    builder: (context) => mostlyPlayed(),
+                    builder: (context) => const mostlyPlayed(),
                   ));
             },
             child: Container(
@@ -317,7 +319,7 @@ class _homeScreenState extends State<homeScreen> {
                         style: GoogleFonts.montserrat(
                           textStyle: TextStyle(
                               fontSize: width * 0.065,
-                              color: Color.fromARGB(255, 255, 255, 255),
+                              color: const Color.fromARGB(255, 255, 255, 255),
                               fontWeight: FontWeight.bold),
                         ),
                       ),
@@ -333,7 +335,7 @@ class _homeScreenState extends State<homeScreen> {
                         style: GoogleFonts.montserrat(
                           textStyle: TextStyle(
                               fontSize: width * 0.065,
-                              color: Color.fromARGB(255, 255, 255, 255),
+                              color: const Color.fromARGB(255, 255, 255, 255),
                               fontWeight: FontWeight.bold),
                         ),
                       ),
@@ -351,7 +353,7 @@ class _homeScreenState extends State<homeScreen> {
               Navigator.push(
                   context,
                   MaterialPageRoute(
-                    builder: (context) => recentlyPlayed(),
+                    builder: (context) => const recentlyPlayed(),
                   ));
             },
             child: Container(
@@ -387,7 +389,7 @@ class _homeScreenState extends State<homeScreen> {
                         style: GoogleFonts.montserrat(
                           textStyle: TextStyle(
                               fontSize: width * 0.065,
-                              color: Color.fromARGB(255, 255, 255, 255),
+                              color: const Color.fromARGB(255, 255, 255, 255),
                               fontWeight: FontWeight.bold),
                         ),
                       ),
@@ -403,7 +405,7 @@ class _homeScreenState extends State<homeScreen> {
                         style: GoogleFonts.montserrat(
                           textStyle: TextStyle(
                               fontSize: width * 0.065,
-                              color: Color.fromARGB(255, 255, 255, 255),
+                              color: const Color.fromARGB(255, 255, 255, 255),
                               fontWeight: FontWeight.bold),
                         ),
                       ),
@@ -442,7 +444,7 @@ class _homeScreenState extends State<homeScreen> {
     final height = MediaQuery.of(context).size.height;
     final width = MediaQuery.of(context).size.width;
     if (mp == false) {
-      return SizedBox.shrink();
+      return const SizedBox.shrink();
     }
     return Padding(
       padding: EdgeInsets.all(width * 0.035),
@@ -453,7 +455,7 @@ class _homeScreenState extends State<homeScreen> {
               Navigator.push(
                   context,
                   MaterialPageRoute(
-                    builder: (context) => mostlyPlayed(),
+                    builder: (context) => const mostlyPlayed(),
                   ));
             },
             child: Container(
@@ -489,7 +491,7 @@ class _homeScreenState extends State<homeScreen> {
                         style: GoogleFonts.montserrat(
                           textStyle: TextStyle(
                               fontSize: width * 0.065,
-                              color: Color.fromARGB(255, 255, 255, 255),
+                              color: const Color.fromARGB(255, 255, 255, 255),
                               fontWeight: FontWeight.bold),
                         ),
                       ),
@@ -507,7 +509,7 @@ class _homeScreenState extends State<homeScreen> {
               Navigator.push(
                   context,
                   MaterialPageRoute(
-                    builder: (context) => recentlyPlayed(),
+                    builder: (context) => const recentlyPlayed(),
                   ));
             },
             child: Container(
@@ -544,7 +546,7 @@ class _homeScreenState extends State<homeScreen> {
                         style: GoogleFonts.montserrat(
                           textStyle: TextStyle(
                               fontSize: width * 0.065,
-                              color: Color.fromARGB(255, 255, 255, 255),
+                              color: const Color.fromARGB(255, 255, 255, 255),
                               fontWeight: FontWeight.bold),
                         ),
                       ),

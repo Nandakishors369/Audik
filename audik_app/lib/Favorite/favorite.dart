@@ -1,14 +1,11 @@
+// ignore_for_file: unused_local_variable, unnecessary_null_comparison
+
 import 'package:assets_audio_player/assets_audio_player.dart';
-import 'package:audik_app/Favorite/addtofavorite.dart';
 import 'package:audik_app/Model/dbfunctions.dart';
 import 'package:audik_app/Model/favoriteModel.dart';
-import 'package:audik_app/Playlist/songtoplaylist.dart';
 import 'package:audik_app/other%20screens/screenplayingnow.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/container.dart';
-import 'package:flutter/src/widgets/framework.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:hive/hive.dart';
 import 'package:hive_flutter/adapters.dart';
 import 'package:on_audio_query/on_audio_query.dart';
 
@@ -24,7 +21,6 @@ class _ScreenFavoriteState extends State<ScreenFavorite> {
   AssetsAudioPlayer audioPlayer = AssetsAudioPlayer.withId('0');
   @override
   void initState() {
-    // TODO: implement initState
     final favSongsdb = Hive.box<favSongs>('favsongs').values.toList();
     for (var item in favSongsdb) {
       allsongs.add(Audio.file(item.songurl.toString(),
@@ -41,7 +37,7 @@ class _ScreenFavoriteState extends State<ScreenFavorite> {
     final height = MediaQuery.of(context).size.height;
     final width = MediaQuery.of(context).size.width;
     return Scaffold(
-      backgroundColor: Color.fromARGB(255, 21, 21, 21),
+      backgroundColor: const Color.fromARGB(255, 21, 21, 21),
       body: SafeArea(
           child: SingleChildScrollView(
         child: Column(
@@ -136,7 +132,7 @@ class _ScreenFavoriteState extends State<ScreenFavorite> {
                                 Navigator.push(
                                   context,
                                   MaterialPageRoute(
-                                    builder: ((context) => playingNow()),
+                                    builder: ((context) => const playingNow()),
                                   ),
                                 );
                               }),
@@ -177,26 +173,29 @@ class _ScreenFavoriteState extends State<ScreenFavorite> {
                                       context: context,
                                       builder: (context) {
                                         return AlertDialog(
-                                          title: Text("Remove from favorites"),
-                                          content: Text("Are You Sure ?"),
+                                          title: const Text(
+                                              "Remove from favorites"),
+                                          content: const Text("Are You Sure ?"),
                                           actions: [
                                             TextButton(
                                                 onPressed: () {
                                                   Navigator.pop(context);
                                                 },
-                                                child: Text("Cancel")),
+                                                child: const Text("Cancel")),
                                             TextButton(
                                                 onPressed: () {
                                                   favsongsdb.deleteAt(index);
+
                                                   Navigator.pop(context);
+                                                  setState(() {});
                                                 },
-                                                child: Text("Remove"))
+                                                child: const Text("Remove"))
                                           ],
                                         );
                                       },
                                     );
                                   },
-                                  icon: Icon(
+                                  icon: const Icon(
                                     Icons.heart_broken,
                                     color: Colors.white,
                                   ))),

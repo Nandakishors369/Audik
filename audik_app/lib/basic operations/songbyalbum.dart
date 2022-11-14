@@ -1,10 +1,7 @@
-import 'dart:math';
+
+// ignore_for_file: unused_local_variable
 
 import 'package:assets_audio_player/assets_audio_player.dart';
-import 'package:audik_app/Favorite/addtofavorite.dart';
-import 'package:audik_app/Main%20Screens/home.dart';
-import 'package:audik_app/Model/recentlyplayed_model.dart';
-import 'package:audik_app/Playlist/createPlaylist.dart';
 import 'package:audik_app/other%20screens/screenplayingnow.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
