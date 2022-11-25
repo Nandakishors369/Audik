@@ -1,5 +1,7 @@
 //import 'package:audik_app/Bloc/AllSongs/all_songs_bloc_bloc.dart';
-import 'package:audik_app/Bloc/bloc/allsongs_bloc.dart';
+
+import 'package:audik_app/Bloc/Recently%20Played/recently_played_bloc.dart';
+import 'package:audik_app/Bloc/now%20playing/now_playing_bloc.dart';
 import 'package:audik_app/View/Main%20Screens/splash.dart';
 import 'package:audik_app/Model/dbfunctions.dart';
 import 'package:audik_app/Model/favoriteModel.dart';
@@ -12,6 +14,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hive_flutter/adapters.dart';
+
+import 'Bloc/All Songs/allsongs_bloc.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -35,6 +39,7 @@ Future<void> main() async {
   openmostplayeddb();
 
   Hive.registerAdapter(RecentPlayedAdapter());
+
   openrecentlyplayedDb();
 }
 
@@ -43,8 +48,18 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (context) => AllsongsBloc(),
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider<AllsongsBloc>(
+          create: (context) => AllsongsBloc(),
+        ),
+        BlocProvider<RecentlyPlayedBloc>(
+          create: (context) => RecentlyPlayedBloc(),
+        ),
+        BlocProvider<NowPlayingBloc>(
+          create: (context) => NowPlayingBloc(),
+        )
+      ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
         title: 'Audik',

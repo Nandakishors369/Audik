@@ -1,20 +1,21 @@
 // ignore_for_file: file_names, unused_local_variable, non_constant_identifier_names
 
 import 'package:assets_audio_player/assets_audio_player.dart';
-import 'package:audik_app/Bloc/bloc/allsongs_bloc.dart';
-import 'package:audik_app/Model/dbfunctions.dart';
-import 'package:audik_app/Model/mostlyplayed_model.dart';
-import 'package:audik_app/Model/recentlyplayed_model.dart';
-import 'package:audik_app/View/Playlist/createPlaylist.dart';
-import 'package:audik_app/View/other%20screens/setting.dart';
+import 'package:audik_app/Bloc/All%20Songs/allsongs_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:hive_flutter/adapters.dart';
 import 'package:on_audio_query/on_audio_query.dart';
 
-import '../Favorite/addtofavorite.dart';
+import 'package:audik_app/Model/dbfunctions.dart';
+import 'package:audik_app/Model/mostlyplayed_model.dart';
+import 'package:audik_app/Model/recentlyplayed_model.dart';
+import 'package:audik_app/View/Playlist/createPlaylist.dart';
+import 'package:audik_app/View/other%20screens/setting.dart';
+
 import '../../Model/songModel.dart';
+import '../Favorite/addtofavorite.dart';
 import '../other screens/screenplayingnow.dart';
 
 // ignore: camel_case_types

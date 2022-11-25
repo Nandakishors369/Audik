@@ -156,7 +156,7 @@ class _ScreenPlaylistState extends State<ScreenPlaylist> {
                     player.open(Playlist(audios: plstsongs, startIndex: index),
                         showNotification: true, loopMode: LoopMode.playlist);
                     Navigator.of(context).push(MaterialPageRoute(
-                      builder: (context) => const playingNow(),
+                      builder: (context) => playingNow(),
                     ));
                     /* Navigator.push(context,
                     MaterialPageRoute(builder: ((context) => playingNow()))); */

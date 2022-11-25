@@ -19,38 +19,32 @@ mixin _$AllsongsEvent {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() started,
-    required TResult Function() onTap,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? started,
-    TResult? Function()? onTap,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? started,
-    TResult Function()? onTap,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_Started value) started,
-    required TResult Function(_OnTap value) onTap,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Started value)? started,
-    TResult? Function(_OnTap value)? onTap,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Started value)? started,
-    TResult Function(_OnTap value)? onTap,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -112,7 +106,6 @@ class _$_Started implements _Started {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() started,
-    required TResult Function() onTap,
   }) {
     return started();
   }
@@ -121,7 +114,6 @@ class _$_Started implements _Started {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? started,
-    TResult? Function()? onTap,
   }) {
     return started?.call();
   }
@@ -130,7 +122,6 @@ class _$_Started implements _Started {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? started,
-    TResult Function()? onTap,
     required TResult orElse(),
   }) {
     if (started != null) {
@@ -143,7 +134,6 @@ class _$_Started implements _Started {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_Started value) started,
-    required TResult Function(_OnTap value) onTap,
   }) {
     return started(this);
   }
@@ -152,7 +142,6 @@ class _$_Started implements _Started {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Started value)? started,
-    TResult? Function(_OnTap value)? onTap,
   }) {
     return started?.call(this);
   }
@@ -161,7 +150,6 @@ class _$_Started implements _Started {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Started value)? started,
-    TResult Function(_OnTap value)? onTap,
     required TResult orElse(),
   }) {
     if (started != null) {
@@ -173,106 +161,6 @@ class _$_Started implements _Started {
 
 abstract class _Started implements AllsongsEvent {
   const factory _Started() = _$_Started;
-}
-
-/// @nodoc
-abstract class _$$_OnTapCopyWith<$Res> {
-  factory _$$_OnTapCopyWith(_$_OnTap value, $Res Function(_$_OnTap) then) =
-      __$$_OnTapCopyWithImpl<$Res>;
-}
-
-/// @nodoc
-class __$$_OnTapCopyWithImpl<$Res>
-    extends _$AllsongsEventCopyWithImpl<$Res, _$_OnTap>
-    implements _$$_OnTapCopyWith<$Res> {
-  __$$_OnTapCopyWithImpl(_$_OnTap _value, $Res Function(_$_OnTap) _then)
-      : super(_value, _then);
-}
-
-/// @nodoc
-
-class _$_OnTap implements _OnTap {
-  const _$_OnTap();
-
-  @override
-  String toString() {
-    return 'AllsongsEvent.onTap()';
-  }
-
-  @override
-  bool operator ==(dynamic other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$_OnTap);
-  }
-
-  @override
-  int get hashCode => runtimeType.hashCode;
-
-  @override
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function() started,
-    required TResult Function() onTap,
-  }) {
-    return onTap();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? started,
-    TResult? Function()? onTap,
-  }) {
-    return onTap?.call();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? started,
-    TResult Function()? onTap,
-    required TResult orElse(),
-  }) {
-    if (onTap != null) {
-      return onTap();
-    }
-    return orElse();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(_Started value) started,
-    required TResult Function(_OnTap value) onTap,
-  }) {
-    return onTap(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(_Started value)? started,
-    TResult? Function(_OnTap value)? onTap,
-  }) {
-    return onTap?.call(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(_Started value)? started,
-    TResult Function(_OnTap value)? onTap,
-    required TResult orElse(),
-  }) {
-    if (onTap != null) {
-      return onTap(this);
-    }
-    return orElse();
-  }
-}
-
-abstract class _OnTap implements AllsongsEvent {
-  const factory _OnTap() = _$_OnTap;
 }
 
 /// @nodoc

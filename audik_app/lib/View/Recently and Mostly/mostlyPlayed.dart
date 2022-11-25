@@ -114,7 +114,7 @@ class _mostlyPlayedState extends State<mostlyPlayed> {
                         Navigator.push(
                           context,
                           MaterialPageRoute(
-                            builder: ((context) => const playingNow()),
+                            builder: ((context) => playingNow()),
                           ),
                         );
                       }),

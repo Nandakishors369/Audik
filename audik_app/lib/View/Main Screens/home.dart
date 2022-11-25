@@ -354,7 +354,7 @@ class _homeScreenState extends State<homeScreen> {
               Navigator.push(
                   context,
                   MaterialPageRoute(
-                    builder: (context) => const recentlyPlayed(),
+                    builder: (context) => recentlyPlayed(),
                   ));
             },
             child: Container(
@@ -510,7 +510,7 @@ class _homeScreenState extends State<homeScreen> {
               Navigator.push(
                   context,
                   MaterialPageRoute(
-                    builder: (context) => const recentlyPlayed(),
+                    builder: (context) => recentlyPlayed(),
                   ));
             },
             child: Container(
