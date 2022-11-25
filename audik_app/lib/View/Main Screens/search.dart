@@ -1,4 +1,3 @@
-
 // ignore_for_file: prefer_final_fields
 
 import 'package:assets_audio_player/assets_audio_player.dart';
@@ -25,7 +24,6 @@ class _ScreenSearchState extends State<ScreenSearch> {
 
   @override
   void initState() {
-    
     dbSongs = box.values.toList();
 
     super.initState();
@@ -72,7 +70,8 @@ class _ScreenSearchState extends State<ScreenSearch> {
                 ),
               ),
             ),
-            Padding(padding: const EdgeInsets.all(15), child: searchbar(context)),
+            Padding(
+                padding: const EdgeInsets.all(15), child: searchbar(context)),
             const SizedBox(
               height: 20,
             ),
@@ -86,7 +85,8 @@ class _ScreenSearchState extends State<ScreenSearch> {
   searchbar(BuildContext context) {
     return TextFormField(
       style: GoogleFonts.montserrat(
-          textStyle: const TextStyle(color: Color.fromARGB(255, 255, 255, 255))),
+          textStyle:
+              const TextStyle(color: Color.fromARGB(255, 255, 255, 255))),
       onTap: () {
         //showSearch(context: context, delegate: SearchLocation());
       },
@@ -106,7 +106,8 @@ class _ScreenSearchState extends State<ScreenSearch> {
         focusColor: Colors.white,
         hintText: 'Search song, artist, album or playlist',
         hintStyle: GoogleFonts.montserrat(
-            textStyle: const TextStyle(color: Color.fromARGB(113, 158, 158, 158))),
+            textStyle:
+                const TextStyle(color: Color.fromARGB(113, 158, 158, 158))),
         filled: true,
         fillColor: const Color.fromARGB(146, 50, 50, 50),
       ),

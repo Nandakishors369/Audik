@@ -1,4 +1,6 @@
-import 'package:audik_app/Main%20Screens/splash.dart';
+//import 'package:audik_app/Bloc/AllSongs/all_songs_bloc_bloc.dart';
+import 'package:audik_app/Bloc/bloc/allsongs_bloc.dart';
+import 'package:audik_app/View/Main%20Screens/splash.dart';
 import 'package:audik_app/Model/dbfunctions.dart';
 import 'package:audik_app/Model/favoriteModel.dart';
 import 'package:audik_app/Model/mostlyplayed_model.dart';
@@ -8,6 +10,7 @@ import 'package:audik_app/Model/songModel.dart';
 import 'package:audik_app/Model/userName.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hive_flutter/adapters.dart';
 
 Future<void> main() async {
@@ -40,12 +43,15 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      title: 'Audik',
-      home: const SplashScreen(),
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
+    return BlocProvider(
+      create: (context) => AllsongsBloc(),
+      child: MaterialApp(
+        debugShowCheckedModeBanner: false,
+        title: 'Audik',
+        home: const SplashScreen(),
+        theme: ThemeData(
+          primarySwatch: Colors.blue,
+        ),
       ),
     );
   }

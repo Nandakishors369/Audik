@@ -1,6 +1,6 @@
 // ignore_for_file: unused_local_variable
 
-import 'package:audik_app/basic%20operations/songbyalbum.dart';
+import 'package:audik_app/View/basic%20operations/songbyalbum.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:marquee/marquee.dart';

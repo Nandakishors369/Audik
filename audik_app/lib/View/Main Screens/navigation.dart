@@ -1,6 +1,6 @@
 // ignore_for_file: camel_case_types
 
-import 'package:audik_app/Main%20Screens/search.dart';
+import 'package:audik_app/View/Main%20Screens/search.dart';
 import 'package:flutter/material.dart';
 
 import 'home.dart';

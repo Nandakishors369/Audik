@@ -3,7 +3,7 @@
 import 'package:assets_audio_player/assets_audio_player.dart';
 import 'package:audik_app/Model/dbfunctions.dart';
 import 'package:audik_app/Model/favoriteModel.dart';
-import 'package:audik_app/other%20screens/screenplayingnow.dart';
+import 'package:audik_app/View/other%20screens/screenplayingnow.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:hive_flutter/adapters.dart';

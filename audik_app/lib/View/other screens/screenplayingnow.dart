@@ -1,18 +1,18 @@
 // ignore_for_file: camel_case_types, avoid_print, non_constant_identifier_names
 
 import 'package:assets_audio_player/assets_audio_player.dart';
-import 'package:audik_app/Favorite/addtoFavoritePlayScreen.dart';
+import 'package:audik_app/View/Favorite/addtoFavoritePlayScreen.dart';
 import 'package:audik_app/Model/dbfunctions.dart';
 import 'package:audik_app/Model/mostlyplayed_model.dart';
 import 'package:audik_app/Model/songModel.dart';
-import 'package:audik_app/Playlist/AddToPlaylistPlay.dart';
+import 'package:audik_app/View/Playlist/AddToPlaylistPlay.dart';
 import 'package:audio_video_progress_bar/audio_video_progress_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:marquee/marquee.dart';
 import 'package:on_audio_query/on_audio_query.dart';
 
-import '../Model/recentlyplayed_model.dart';
+import '../../Model/recentlyplayed_model.dart';
 
 class playingNow extends StatefulWidget {
   //int index;
@@ -36,7 +36,7 @@ class _playingNowState extends State<playingNow> {
   @override
   void initState() {
     setState(() {});
-    
+
     dbsongs = box.values.toList();
     super.initState();
     print("kitiii");

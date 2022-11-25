@@ -1,12 +1,12 @@
 // ignore_for_file: unused_import, camel_case_types, unused_local_variable
 
 import 'package:assets_audio_player/assets_audio_player.dart';
-import 'package:audik_app/Playlist/addplaylist.dart';
-import 'package:audik_app/Favorite/favorite.dart';
-import 'package:audik_app/Playlist/libraryplaylistview.dart';
-import 'package:audik_app/Playlist/playlistscreen.dart';
-import 'package:audik_app/basic%20operations/songfromalbums.dart';
-import 'package:audik_app/other%20screens/screenplayingnow.dart';
+import 'package:audik_app/View/Playlist/addplaylist.dart';
+import 'package:audik_app/View/Favorite/favorite.dart';
+import 'package:audik_app/View/Playlist/libraryplaylistview.dart';
+import 'package:audik_app/View/Playlist/playlistscreen.dart';
+import 'package:audik_app/View/basic%20operations/songfromalbums.dart';
+import 'package:audik_app/View/other%20screens/screenplayingnow.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:marquee/marquee.dart';
@@ -114,8 +114,10 @@ class librarySearch extends StatelessWidget {
               height: height * 0.016,
             ),
             GestureDetector(
-              onTap: () => Navigator.push(context,
-                  MaterialPageRoute(builder: ((context) => const addPlaylist()))),
+              onTap: () => Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: ((context) => const addPlaylist()))),
               child: Padding(
                 padding: const EdgeInsets.fromLTRB(0, 10, 20, 0),
                 child: Row(

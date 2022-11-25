@@ -3,7 +3,7 @@
 import 'package:assets_audio_player/assets_audio_player.dart';
 import 'package:audik_app/Model/dbfunctions.dart';
 import 'package:audik_app/Model/userName.dart';
-import 'package:audik_app/other%20screens/settingPopup.dart';
+import 'package:audik_app/View/other%20screens/settingPopup.dart';
 
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -18,6 +18,7 @@ class SettingScreen extends StatefulWidget {
   @override
   State<SettingScreen> createState() => _SettingScreenState();
 }
+
 bool musicNotif = true;
 
 class _SettingScreenState extends State<SettingScreen> {
@@ -194,7 +195,7 @@ class _SettingScreenState extends State<SettingScreen> {
                             value: true,
                             size: 27,
                             onChange: (value) {
-                          audioPlayer.showNotification = musicNotif;
+                              audioPlayer.showNotification = musicNotif;
                             },
                           ),
                           title: Text(

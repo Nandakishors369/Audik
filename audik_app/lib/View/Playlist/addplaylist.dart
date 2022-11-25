@@ -2,8 +2,8 @@
 
 import 'package:audik_app/Model/dbfunctions.dart';
 import 'package:audik_app/Model/playlistmodel.dart';
-import 'package:audik_app/Playlist/playlistscreen.dart';
-import 'package:audik_app/other%20screens/screenplayingnow.dart';
+import 'package:audik_app/View/Playlist/playlistscreen.dart';
+import 'package:audik_app/View/other%20screens/screenplayingnow.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
@@ -25,7 +25,6 @@ class _addPlaylistState extends State<addPlaylist> {
   TextEditingController controller = TextEditingController();
   final formGlobalKey = GlobalKey<FormState>();
   final formGlobalKey1 = GlobalKey<FormState>();
- 
 
   List<PlaylistSongs> playlist = [];
   @override
@@ -103,7 +102,7 @@ class _addPlaylistState extends State<addPlaylist> {
         valueListenable: playlistbox.listenable(),
         builder: (context, value, child) {
           List<PlaylistSongs> playlist = value.values.toList();
-          
+
           return Padding(
             padding: const EdgeInsets.all(8.0),
             child: ListView.builder(
@@ -282,8 +281,8 @@ class _addPlaylistState extends State<addPlaylist> {
                           BorderSide(color: Color.fromARGB(255, 0, 0, 0))),
                   hintText: "Enter a name",
                   hintStyle: GoogleFonts.montserrat(
-                      textStyle:
-                          const TextStyle(color: Color.fromARGB(255, 69, 69, 69))),
+                      textStyle: const TextStyle(
+                          color: Color.fromARGB(255, 69, 69, 69))),
                 ),
                 validator: (value) {
                   List<PlaylistSongs> values = playlistbox.values.toList();
@@ -371,8 +370,8 @@ class _addPlaylistState extends State<addPlaylist> {
                           BorderSide(color: Color.fromARGB(255, 0, 0, 0))),
                   hintText: "Enter a name",
                   hintStyle: GoogleFonts.montserrat(
-                      textStyle:
-                          const TextStyle(color: Color.fromARGB(255, 69, 69, 69))),
+                      textStyle: const TextStyle(
+                          color: Color.fromARGB(255, 69, 69, 69))),
                 ),
                 validator: (value) {
                   List<PlaylistSongs> values = playlistbox.values.toList();

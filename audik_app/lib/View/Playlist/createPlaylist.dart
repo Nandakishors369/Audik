@@ -1,38 +1,34 @@
-// ignore: file_names
-// ignore_for_file: must_be_immutable, file_names, duplicate_ignore, prefer_final_fields
+// ignore_for_file: file_names, must_be_immutable, prefer_final_fields, use_build_context_synchronously
 
 import 'package:audik_app/Model/dbfunctions.dart';
+import 'package:audik_app/Model/songModel.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:hive_flutter/adapters.dart';
 
-import '../Model/playlistmodel.dart';
-import '../Model/songModel.dart';
+import '../../Model/playlistmodel.dart';
 
-class PlayScreenPlst extends StatefulWidget {
+class AddToPlalistbutton extends StatefulWidget {
   int songindex;
-  PlayScreenPlst({super.key, required this.songindex});
+  AddToPlalistbutton({super.key, required this.songindex});
 
   @override
-  State<PlayScreenPlst> createState() => _PlayScreenPlstState();
+  State<AddToPlalistbutton> createState() => _AddToPlalistbuttonState();
 }
 
-class _PlayScreenPlstState extends State<PlayScreenPlst> {
+class _AddToPlalistbuttonState extends State<AddToPlalistbutton> {
   TextEditingController _textEditingController = TextEditingController();
   final formGlobalKey = GlobalKey<FormState>();
 
   @override
   Widget build(BuildContext context) {
-    return IconButton(
+    return TextButton(
         onPressed: () async {
           await playlistBottomSheet(context);
 
-          //Navigator.pop(context);
+          Navigator.pop(context);
         },
-        icon: const Icon(
-          Icons.add,
-          color: Colors.white,
-        ));
+        child: const Text("Add to Playlist"));
   }
 
   Future<dynamic> playlistBottomSheet(BuildContext context) {
@@ -185,7 +181,8 @@ class _PlayScreenPlstState extends State<PlayScreenPlst> {
                                           playlist[index]
                                               .playlistname
                                               .toString(),
-                                          style: const TextStyle(color: Colors.white),
+                                          style: const TextStyle(
+                                              color: Colors.white),
                                         ),
                                         onTap: () {
                                           PlaylistSongs? plsongs =
@@ -302,8 +299,8 @@ class _PlayScreenPlstState extends State<PlayScreenPlst> {
                           BorderSide(color: Color.fromARGB(255, 0, 0, 0))),
                   hintText: "Enter a name",
                   hintStyle: GoogleFonts.montserrat(
-                      textStyle:
-                          const TextStyle(color: Color.fromARGB(255, 69, 69, 69))),
+                      textStyle: const TextStyle(
+                          color: Color.fromARGB(255, 69, 69, 69))),
                 ),
                 validator: (value) {
                   List<PlaylistSongs> values = playlistbox.values.toList();

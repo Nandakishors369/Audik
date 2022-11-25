@@ -1,11 +1,10 @@
 // ignore_for_file: file_names, must_be_immutable, avoid_print, use_build_context_synchronously
 
-
 import 'package:audik_app/Model/dbfunctions.dart';
 import 'package:flutter/material.dart';
 
-import '../Model/favoriteModel.dart';
-import '../Model/songModel.dart';
+import '../../Model/favoriteModel.dart';
+import '../../Model/songModel.dart';
 
 class PlayScreenFav extends StatefulWidget {
   int index;
@@ -23,7 +22,6 @@ class _PlayScreenFavState extends State<PlayScreenFav> {
   late List<Songs> dbsongs = box.values.toList();
   @override
   void initState() {
-   
     dbsongs = box.values.toList();
 
     super.initState();
@@ -34,7 +32,7 @@ class _PlayScreenFavState extends State<PlayScreenFav> {
     fav = favsongsdb.values.toList();
     //print("daaa");
 
-   print(dbsongs[widget.index].songname);
+    print(dbsongs[widget.index].songname);
     return fav
             .where(
                 (element) => element.songname == dbsongs[widget.index].songname)
@@ -49,8 +47,8 @@ class _PlayScreenFavState extends State<PlayScreenFav> {
                   id: dbsongs[widget.index].id));
               setState(() {});
               //Navigator.pop(context);
-              ScaffoldMessenger.of(context)
-                  .showSnackBar(const SnackBar(content: Text("Added to Favorites")));
+              ScaffoldMessenger.of(context).showSnackBar(
+                  const SnackBar(content: Text("Added to Favorites")));
             },
             icon: const Icon(
               Icons.favorite_border,

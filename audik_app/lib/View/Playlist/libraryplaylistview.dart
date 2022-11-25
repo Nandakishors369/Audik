@@ -1,13 +1,13 @@
 // ignore_for_file: camel_case_types, unused_local_variable, unnecessary_null_comparison
 
 import 'package:audik_app/Model/dbfunctions.dart';
-import 'package:audik_app/Playlist/playlistscreen.dart';
+import 'package:audik_app/View/Playlist/playlistscreen.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:hive_flutter/adapters.dart';
 import 'package:marquee/marquee.dart';
 
-import '../Model/playlistmodel.dart';
+import '../../Model/playlistmodel.dart';
 
 class playlistView extends StatefulWidget {
   const playlistView({super.key});
@@ -111,7 +111,8 @@ class _playlistViewState extends State<playlistView> {
                             child: Column(
                               children: [
                                 Padding(
-                                    padding: const EdgeInsets.fromLTRB(0, 0, 0, 0),
+                                    padding:
+                                        const EdgeInsets.fromLTRB(0, 0, 0, 0),
                                     child: Container(
                                       child: Image.asset(
                                         "assets/Playlist.png",

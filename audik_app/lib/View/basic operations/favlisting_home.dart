@@ -1,16 +1,16 @@
 // ignore_for_file: camel_case_types
 
 import 'package:assets_audio_player/assets_audio_player.dart';
-import 'package:audik_app/other%20screens/screenplayingnow.dart';
-import 'package:audik_app/other%20screens/setting.dart';
+import 'package:audik_app/View/other%20screens/screenplayingnow.dart';
+import 'package:audik_app/View/other%20screens/setting.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:hive_flutter/adapters.dart';
 import 'package:marquee/marquee.dart';
 import 'package:on_audio_query/on_audio_query.dart';
 
-import '../Model/dbfunctions.dart';
-import '../Model/favoriteModel.dart';
+import '../../Model/dbfunctions.dart';
+import '../../Model/favoriteModel.dart';
 
 class favHome extends StatefulWidget {
   const favHome({super.key});
@@ -24,7 +24,6 @@ class _favHomeState extends State<favHome> {
   AssetsAudioPlayer audioPlayer = AssetsAudioPlayer.withId('0');
   @override
   void initState() {
-    
     final favSongsdb = Hive.box<favSongs>('favsongs').values.toList();
     for (var item in favSongsdb) {
       allsongs.add(Audio.file(item.songurl.toString(),

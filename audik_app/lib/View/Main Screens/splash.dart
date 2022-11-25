@@ -9,7 +9,7 @@ import 'package:flutter/material.dart';
 import 'package:on_audio_query/on_audio_query.dart';
 //import 'package:video_player/video_player.dart';
 
-import '../Model/dbfunctions.dart';
+import '../../Model/dbfunctions.dart';
 import 'navigation.dart';
 
 class SplashScreen extends StatefulWidget {
@@ -87,8 +87,8 @@ class _SplashScreenState extends State<SplashScreen> {
 
   Future gotoHome() async {
     Timer(const Duration(seconds: 5), (() {
-      Navigator.pushReplacement(
-          context, MaterialPageRoute(builder: (context) => const navigationBar()));
+      Navigator.pushReplacement(context,
+          MaterialPageRoute(builder: (context) => const navigationBar()));
     }));
   }
 }

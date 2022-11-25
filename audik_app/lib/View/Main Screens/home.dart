@@ -2,12 +2,12 @@
 
 import 'package:audik_app/Model/dbfunctions.dart';
 import 'package:audik_app/Model/userName.dart';
-import 'package:audik_app/Recently%20and%20Mostly/mostlyPlayed.dart';
-import 'package:audik_app/Recently%20and%20Mostly/recentlyPlayed.dart';
-import 'package:audik_app/Main%20Screens/library.dart';
+import 'package:audik_app/View/Recently%20and%20Mostly/mostlyPlayed.dart';
+import 'package:audik_app/View/Recently%20and%20Mostly/recentlyPlayed.dart';
+import 'package:audik_app/View/Main%20Screens/library.dart';
 
-import 'package:audik_app/basic%20operations/favlisting_home.dart';
-import 'package:audik_app/other%20screens/setting.dart';
+import 'package:audik_app/View/basic%20operations/favlisting_home.dart';
+import 'package:audik_app/View/other%20screens/setting.dart';
 
 import 'package:flutter/cupertino.dart';
 
@@ -36,7 +36,7 @@ class _homeScreenState extends State<homeScreen> {
     setState(() {
       // userName = nameBox.values.toList();
     });
-   
+
     super.initState();
   }
 
@@ -141,7 +141,7 @@ class _homeScreenState extends State<homeScreen> {
                           ],
                         ),
                       ),
-                      const allSongsScreen(),
+                      allSongsScreen(),
                       SizedBox(
                           height: 80,
                           width: width,
@@ -150,7 +150,8 @@ class _homeScreenState extends State<homeScreen> {
                             child: Text(
                               "End of songs...",
                               style: GoogleFonts.notoSansOldItalic(
-                                  textStyle: const TextStyle(color: Colors.grey)),
+                                  textStyle:
+                                      const TextStyle(color: Colors.grey)),
                             ),
                           ))
                     ],

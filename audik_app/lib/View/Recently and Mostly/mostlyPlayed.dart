@@ -1,4 +1,3 @@
-
 // ignore_for_file: camel_case_types, avoid_print, file_names
 
 import 'package:assets_audio_player/assets_audio_player.dart';
@@ -26,7 +25,6 @@ class _mostlyPlayedState extends State<mostlyPlayed> {
 
   @override
   void initState() {
-    
     List<MostPlayed> songlist = mostplayedsongs.values.toList();
 
     int i = 0;

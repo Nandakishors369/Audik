@@ -1,16 +1,16 @@
 // ignore_for_file: file_names, camel_case_types, unused_local_variable, non_constant_identifier_names
 
 import 'package:assets_audio_player/assets_audio_player.dart';
-import 'package:audik_app/Favorite/addtofavorite.dart';
+import 'package:audik_app/View/Favorite/addtofavorite.dart';
 import 'package:audik_app/Model/dbfunctions.dart';
 import 'package:audik_app/Model/recentlyplayed_model.dart';
-import 'package:audik_app/Playlist/createPlaylist.dart';
+import 'package:audik_app/View/Playlist/createPlaylist.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:hive_flutter/adapters.dart';
 import 'package:on_audio_query/on_audio_query.dart';
 
-import '../Model/mostlyplayed_model.dart';
+import '../../Model/mostlyplayed_model.dart';
 
 class recentlyPlayed extends StatefulWidget {
   const recentlyPlayed({super.key});
@@ -25,7 +25,6 @@ class _recentlyPlayedState extends State<recentlyPlayed> {
 
   @override
   void initState() {
-   
     List<RecentPlayed> rdbsongs =
         recentlyplayedbox.values.toList().reversed.toList();
     for (var item in rdbsongs) {

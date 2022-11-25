@@ -1,13 +1,10 @@
-
-
-
 // ignore_for_file: must_be_immutable
 
 import 'package:assets_audio_player/assets_audio_player.dart';
 import 'package:audik_app/Model/dbfunctions.dart';
 import 'package:audik_app/Model/playlistmodel.dart';
 import 'package:audik_app/Model/songModel.dart';
-import 'package:audik_app/other%20screens/screenplayingnow.dart';
+import 'package:audik_app/View/other%20screens/screenplayingnow.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:hive_flutter/adapters.dart';
@@ -34,7 +31,6 @@ class _ScreenPlaylistState extends State<ScreenPlaylist> {
 
   @override
   void initState() {
-    
     for (var song in widget.allPlaylistSongs) {
       plstsongs.add(Audio.file(song.songurl.toString(),
           metas: Metas(
