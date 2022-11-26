@@ -7,35 +7,27 @@ import 'package:audik_app/Model/mostlyplayed_model.dart';
 import 'package:audik_app/Model/songModel.dart';
 import 'package:flutter/material.dart';
 import 'package:on_audio_query/on_audio_query.dart';
-//import 'package:video_player/video_player.dart';
 
 import '../../Model/dbfunctions.dart';
 import 'navigation.dart';
 
-class SplashScreen extends StatefulWidget {
+class SplashScreen extends StatelessWidget {
   const SplashScreen({super.key});
 
-  @override
-  State<SplashScreen> createState() => _SplashScreenState();
-}
-
-final audioQuery = OnAudioQuery();
-final box = SongBox.getInstance();
-
-List<SongModel> fetchSongs = [];
-List<SongModel> allSongs = [];
-List<Audio> fullsongs = [];
-
-class _SplashScreenState extends State<SplashScreen> {
-  @override
+  /* @override
   void initState() {
     requestStoragePermission();
     gotoHome();
     super.initState();
-  }
+  } */
+  // requestStoragePermission();
+
+  // gotoHome();
 
   @override
   Widget build(BuildContext context) {
+    requestStoragePermission();
+    gotoHome(context);
     return Scaffold(
       backgroundColor: const Color.fromARGB(255, 0, 0, 0),
       body: SafeArea(
@@ -82,13 +74,20 @@ class _SplashScreenState extends State<SplashScreen> {
             songurl: element.uri));
       });
     }
-    setState(() {});
+    //setState(() {});
   }
 
-  Future gotoHome() async {
+  Future gotoHome(BuildContext context) async {
     Timer(const Duration(seconds: 5), (() {
       Navigator.pushReplacement(context,
           MaterialPageRoute(builder: (context) => const navigationBar()));
     }));
   }
 }
+
+final audioQuery = OnAudioQuery();
+final box = SongBox.getInstance();
+
+List<SongModel> fetchSongs = [];
+List<SongModel> allSongs = [];
+List<Audio> fullsongs = [];
