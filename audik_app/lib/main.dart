@@ -13,6 +13,7 @@ import 'package:audik_app/Model/userName.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:get/get.dart';
 import 'package:hive_flutter/adapters.dart';
 
 import 'Bloc/All Songs/allsongs_bloc.dart';
@@ -60,7 +61,7 @@ class MyApp extends StatelessWidget {
           create: (context) => NowPlayingBloc(),
         )
       ],
-      child: MaterialApp(
+      child: GetMaterialApp(
         debugShowCheckedModeBanner: false,
         title: 'Audik',
         home: const SplashScreen(),

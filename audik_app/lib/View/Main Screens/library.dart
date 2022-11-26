@@ -20,9 +20,7 @@ class librarySearch extends StatelessWidget {
     final height = MediaQuery.of(context).size.height;
     final width = MediaQuery.of(context).size.width;
     return Scaffold(
-      bottomSheet: playingCard(
-          /* index: 0 */
-          ),
+      bottomSheet: playingCard(),
       backgroundColor: const Color.fromARGB(255, 21, 21, 21),
       body: SafeArea(
           child: SingleChildScrollView(
@@ -45,10 +43,11 @@ class librarySearch extends StatelessWidget {
                     Text(
                       "My Library",
                       style: GoogleFonts.montserrat(
-                          textStyle: const TextStyle(
-                              fontSize: 32,
-                              color: Colors.white,
-                              fontWeight: FontWeight.w700)),
+                        textStyle: const TextStyle(
+                            fontSize: 32,
+                            color: Colors.white,
+                            fontWeight: FontWeight.w700),
+                      ),
                     ),
                   ],
                 ),
@@ -60,9 +59,11 @@ class librarySearch extends StatelessWidget {
             GestureDetector(
               onTap: () {
                 Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: ((context) => const ScreenFavorite())));
+                  context,
+                  MaterialPageRoute(
+                    builder: ((context) => const ScreenFavorite()),
+                  ),
+                );
               },
               child: Padding(
                 padding: const EdgeInsets.fromLTRB(10, 0, 10, 0),
@@ -70,8 +71,9 @@ class librarySearch extends StatelessWidget {
                   height: height * 0.064,
                   width: MediaQuery.of(context).size.width,
                   decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(8),
-                      color: const Color.fromARGB(255, 0, 0, 0)),
+                    borderRadius: BorderRadius.circular(8),
+                    color: const Color.fromARGB(255, 0, 0, 0),
+                  ),
                   child: Padding(
                     padding: const EdgeInsets.fromLTRB(10, 0, 10, 0),
                     child: Row(
@@ -86,19 +88,17 @@ class librarySearch extends StatelessWidget {
                             const SizedBox(
                               width: 15,
                             ),
-                            Text("Favorite Tracks",
-                                style: GoogleFonts.montserrat(
-                                  textStyle: const TextStyle(
-                                      fontSize: 15,
-                                      color: Colors.white,
-                                      fontWeight: FontWeight.w700),
-                                )),
+                            Text(
+                              "Favorite Tracks",
+                              style: GoogleFonts.montserrat(
+                                textStyle: const TextStyle(
+                                    fontSize: 15,
+                                    color: Colors.white,
+                                    fontWeight: FontWeight.w700),
+                              ),
+                            ),
                           ],
                         ),
-
-                        /* SizedBox(
-                          width: 190,
-                        ), */
                         const Icon(
                           Icons.arrow_forward_ios,
                           color: Colors.white,
@@ -115,9 +115,11 @@ class librarySearch extends StatelessWidget {
             ),
             GestureDetector(
               onTap: () => Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                      builder: ((context) => const addPlaylist()))),
+                context,
+                MaterialPageRoute(
+                  builder: ((context) => const addPlaylist()),
+                ),
+              ),
               child: Padding(
                 padding: const EdgeInsets.fromLTRB(0, 10, 20, 0),
                 child: Row(
@@ -157,10 +159,11 @@ class librarySearch extends StatelessWidget {
           Text(
             name,
             style: GoogleFonts.montserrat(
-                textStyle: const TextStyle(
-                    fontSize: 23,
-                    color: Colors.white,
-                    fontWeight: FontWeight.w700)),
+              textStyle: const TextStyle(
+                  fontSize: 23,
+                  color: Colors.white,
+                  fontWeight: FontWeight.w700),
+            ),
           ),
         ],
       ),
@@ -223,10 +226,11 @@ class librarySearch extends StatelessWidget {
             Text(
               "Name here",
               style: GoogleFonts.montserrat(
-                  textStyle: const TextStyle(
-                      fontSize: 13.43,
-                      color: Colors.white,
-                      fontWeight: FontWeight.w500)),
+                textStyle: const TextStyle(
+                    fontSize: 13.43,
+                    color: Colors.white,
+                    fontWeight: FontWeight.w500),
+              ),
             ),
           ],
         ),
@@ -235,19 +239,13 @@ class librarySearch extends StatelessWidget {
   }
 }
 
-class playingCard extends StatefulWidget {
-  /* int index; */
-  const playingCard({
+class playingCard extends StatelessWidget {
+  playingCard({
     super.key,
-    /*  required this.index */
   });
 
-  @override
-  State<playingCard> createState() => _playingCardState();
-}
-
-class _playingCardState extends State<playingCard> {
   AssetsAudioPlayer player = AssetsAudioPlayer.withId('0');
+
   @override
   Widget build(BuildContext context) {
     return player.builderCurrent(builder: (context, playing) {
@@ -257,8 +255,12 @@ class _playingCardState extends State<playingCard> {
         color: Colors.black,
         child: ListTile(
           onTap: (() {
-            Navigator.push(context,
-                MaterialPageRoute(builder: ((context) => playingNow())));
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: ((context) => playingNow()),
+              ),
+            );
           }),
           contentPadding: const EdgeInsets.fromLTRB(5, 2, 5, 10),
           leading: QueryArtworkWidget(
@@ -291,7 +293,7 @@ class _playingCardState extends State<playingCard> {
                   IconButton(
                       onPressed: () async {
                         await player.previous();
-                        setState(() {});
+
                         if (isPlaying == false) {
                           player.pause();
                         }
@@ -310,7 +312,7 @@ class _playingCardState extends State<playingCard> {
                   IconButton(
                     onPressed: () async {
                       await player.next();
-                      setState(() {});
+
                       if (isPlaying == false) {
                         player.pause();
                       }

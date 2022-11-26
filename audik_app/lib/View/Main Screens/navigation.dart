@@ -17,8 +17,8 @@ class _navigationBarState extends State<navigationBar> {
   int indexx = 0;
 
   final screen = [
-    const homeScreen(),
-    const ScreenSearch(),
+    homeScreen(),
+    ScreenSearch(),
     const librarySearch(),
   ];
   @override
