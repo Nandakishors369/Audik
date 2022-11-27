@@ -67,108 +67,103 @@ class recentlyPlayed extends StatelessWidget {
   Recentlist() {
     return BlocBuilder<RecentlyPlayedBloc, RecentlyPlayedState>(
       builder: (context, state) {
-        return ValueListenableBuilder<Box<RecentPlayed>>(
-            valueListenable: recentlyplayedbox.listenable(),
-            builder: (context, Box<RecentPlayed> recentsongs, _) {
-              final height = MediaQuery.of(context).size.height;
-              final width = MediaQuery.of(context).size.width;
-              List<RecentPlayed> rsongs =
-                  recentsongs.values.toList().reversed.toList();
+        final height = MediaQuery.of(context).size.height;
+        final width = MediaQuery.of(context).size.width;
+        //List<RecentPlayed> rsongs =
+        // recentsongs.values.toList().reversed.toList();
 
-              if (rsongs.isEmpty) {
-                return Padding(
-                  padding: const EdgeInsets.all(20.0),
-                  child: Align(
-                    heightFactor: 7.5,
-                    child: Center(
-                      child: Text(
-                        "You haven't played anything ! Try playing something.",
-                        style: GoogleFonts.montserrat(
-                            textStyle: const TextStyle(color: Colors.white)),
-                      ),
+        if (state.recent.isEmpty) {
+          return Padding(
+            padding: const EdgeInsets.all(20.0),
+            child: Align(
+              heightFactor: 7.5,
+              child: Center(
+                child: Text(
+                  "You haven't played anything ! Try playing something.",
+                  style: GoogleFonts.montserrat(
+                      textStyle: const TextStyle(color: Colors.white)),
+                ),
+              ),
+            ),
+          );
+        }
+        return Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: ListView.builder(
+            physics: const NeverScrollableScrollPhysics(),
+            shrinkWrap: true,
+            itemCount: state.recent.length, //rsongs.length,
+            itemBuilder: ((context, index) {
+              List<MostPlayed> allmostplayedsongs =
+                  mostplayedsongs.values.toList();
+              MostPlayed msongs = allmostplayedsongs[index];
+              return ListTile(
+                leading: QueryArtworkWidget(
+                  artworkFit: BoxFit.cover,
+                  id: state.recent[index].id!, //rsongs[index].id!,
+                  type: ArtworkType.AUDIO,
+                  artworkQuality: FilterQuality.high,
+                  size: 2000,
+                  quality: 100,
+                  artworkBorder: BorderRadius.circular(50),
+                  nullArtworkWidget: ClipRRect(
+                    borderRadius: const BorderRadius.all(Radius.circular(50)),
+                    child: Image.asset(
+                      'assets/Music Brand and App Logo (1).png',
+                      fit: BoxFit.cover,
                     ),
                   ),
-                );
-              }
-              return Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: ListView.builder(
-                  physics: const NeverScrollableScrollPhysics(),
-                  shrinkWrap: true,
-                  itemCount: state.recent.length, //rsongs.length,
-                  itemBuilder: ((context, index) {
-                    List<MostPlayed> allmostplayedsongs =
-                        mostplayedsongs.values.toList();
-                    MostPlayed msongs = allmostplayedsongs[index];
-                    return ListTile(
-                      leading: QueryArtworkWidget(
-                        artworkFit: BoxFit.cover,
-                        id: state.recent[index].id!, //rsongs[index].id!,
-                        type: ArtworkType.AUDIO,
-                        artworkQuality: FilterQuality.high,
-                        size: 2000,
-                        quality: 100,
-                        artworkBorder: BorderRadius.circular(50),
-                        nullArtworkWidget: ClipRRect(
-                          borderRadius:
-                              const BorderRadius.all(Radius.circular(50)),
-                          child: Image.asset(
-                            'assets/Music Brand and App Logo (1).png',
-                            fit: BoxFit.cover,
-                          ),
+                ),
+                title: SingleChildScrollView(
+                  child: Text(
+                    state.recent[index].songname!,
+                    //rsongs[index].songname!,
+                    maxLines: 1,
+                    style: GoogleFonts.montserrat(
+                      textStyle: const TextStyle(
+                          fontSize: 13.43,
+                          color: Colors.white,
+                          fontWeight: FontWeight.w500),
+                    ),
+                  ),
+                ),
+                trailing: IconButton(
+                  onPressed: (() {
+                    showModalBottomSheet(
+                      backgroundColor: Colors.black,
+                      shape: const RoundedRectangleBorder(
+                        borderRadius: BorderRadius.vertical(
+                          top: Radius.circular(20),
                         ),
                       ),
-                      title: SingleChildScrollView(
-                        child: Text(
-                          state.recent[index].songname!,
-                          //rsongs[index].songname!,
-                          maxLines: 1,
-                          style: GoogleFonts.montserrat(
-                            textStyle: const TextStyle(
-                                fontSize: 13.43,
-                                color: Colors.white,
-                                fontWeight: FontWeight.w500),
-                          ),
-                        ),
-                      ),
-                      trailing: IconButton(
-                        onPressed: (() {
-                          showModalBottomSheet(
-                            backgroundColor: Colors.black,
-                            shape: const RoundedRectangleBorder(
-                              borderRadius: BorderRadius.vertical(
-                                top: Radius.circular(20),
+                      context: context,
+                      builder: ((context) {
+                        return SizedBox(
+                          height: 130,
+                          child: Column(
+                            children: [
+                              AddToPlalistbutton(songindex: index),
+                              SizedBox(
+                                height: height * 0.011,
                               ),
-                            ),
-                            context: context,
-                            builder: ((context) {
-                              return SizedBox(
-                                height: 130,
-                                child: Column(
-                                  children: [
-                                    AddToPlalistbutton(songindex: index),
-                                    SizedBox(
-                                      height: height * 0.011,
-                                    ),
-                                    addToFavorite(
-                                      index: index,
-                                    )
-                                  ],
-                                ),
-                              );
-                            }),
-                          );
-                        }),
-                        icon: const Icon(
-                          Icons.more_vert,
-                          color: Colors.grey,
-                        ),
-                      ),
+                              addToFavorite(
+                                index: index,
+                              )
+                            ],
+                          ),
+                        );
+                      }),
                     );
                   }),
+                  icon: const Icon(
+                    Icons.more_vert,
+                    color: Colors.grey,
+                  ),
                 ),
               );
-            });
+            }),
+          ),
+        );
       },
     );
   }

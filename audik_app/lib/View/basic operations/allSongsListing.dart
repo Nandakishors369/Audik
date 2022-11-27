@@ -2,6 +2,7 @@
 
 import 'package:assets_audio_player/assets_audio_player.dart';
 import 'package:audik_app/Bloc/All%20Songs/allsongs_bloc.dart';
+import 'package:audik_app/Bloc/Recently%20Played/recently_played_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -72,6 +73,8 @@ class allSongsScreen extends StatelessWidget {
                         songurl: songs.songurl);
                     updateRecentPlayed(rsongs, index);
                     updatePlayedSongCount(MPsongs, index);
+                    BlocProvider.of<RecentlyPlayedBloc>(context)
+                        .add(RecentlyPlayedEvent.started());
 
                     _audioPlayer.open(
                         Playlist(audios: convertAudios, startIndex: index),

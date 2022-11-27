@@ -1,6 +1,7 @@
 // ignore_for_file: camel_case_types, avoid_print, non_constant_identifier_names
 
 import 'package:assets_audio_player/assets_audio_player.dart';
+import 'package:audik_app/Bloc/Recently%20Played/recently_played_bloc.dart';
 import 'package:audik_app/Bloc/now%20playing/now_playing_bloc.dart';
 import 'package:audik_app/View/Favorite/addtoFavoritePlayScreen.dart';
 import 'package:audik_app/Model/dbfunctions.dart';
@@ -264,6 +265,8 @@ class playingNow extends StatelessWidget {
                                     songurl:
                                         dbsongs[playing.index + 1].songurl);
                                 updateRecentPlayed(rsongs, playing.index + 1);
+                                BlocProvider.of<RecentlyPlayedBloc>(context)
+                                    .add(RecentlyPlayedEvent.started());
                                 updatePlayedSongCount(
                                     MPsongs, playing.index + 1);
                                 if (isPlaying == false) {

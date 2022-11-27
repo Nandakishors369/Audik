@@ -157,8 +157,6 @@ class homeScreen extends StatelessWidget {
         children: [
           GestureDetector(
             onTap: () {
-              BlocProvider.of<RecentlyPlayedBloc>(context)
-                  .add(RecentlyPlayedEvent.started());
               Navigator.push(
                 context,
                 MaterialPageRoute(

@@ -12,7 +12,7 @@ part 'recently_played_bloc.freezed.dart';
 class RecentlyPlayedBloc
     extends Bloc<RecentlyPlayedEvent, RecentlyPlayedState> {
   RecentlyPlayedBloc() : super(RecentlyPlayedState.initial()) {
-    on<_Started>(
-        (event, emit) => emit(RecentlyPlayedState(recent: state.recent)));
+    on<_Started>((event, emit) => emit(RecentlyPlayedState(
+        recent: recentlyplayedbox.values.toList().reversed.toList())));
   }
 }
