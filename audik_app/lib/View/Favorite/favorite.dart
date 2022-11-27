@@ -9,28 +9,12 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:hive_flutter/adapters.dart';
 import 'package:on_audio_query/on_audio_query.dart';
 
-class ScreenFavorite extends StatefulWidget {
-  const ScreenFavorite({super.key});
+class ScreenFavorite extends StatelessWidget {
+  ScreenFavorite({super.key});
 
-  @override
-  State<ScreenFavorite> createState() => _ScreenFavoriteState();
-}
-
-class _ScreenFavoriteState extends State<ScreenFavorite> {
   List<Audio> allsongs = [];
+
   AssetsAudioPlayer audioPlayer = AssetsAudioPlayer.withId('0');
-  @override
-  void initState() {
-    final favSongsdb = Hive.box<favSongs>('favsongs').values.toList();
-    for (var item in favSongsdb) {
-      allsongs.add(Audio.file(item.songurl.toString(),
-          metas: Metas(
-              artist: item.artist,
-              title: item.songname,
-              id: item.id.toString())));
-    }
-    super.initState();
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -64,18 +48,6 @@ class _ScreenFavoriteState extends State<ScreenFavorite> {
                               color: Colors.white,
                               fontWeight: FontWeight.w700)),
                     ),
-                    /* Padding(
-                      padding: const EdgeInsets.fromLTRB(0, 0, 10, 0),
-                      child: FloatingActionButton(
-                        onPressed: () {
-                          /* Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: ((context) => playingNow()))); */
-                        },
-                        child: Icon(Icons.play_arrow),
-                      ),
-                    ) */
                   ],
                 ),
               ),
@@ -119,6 +91,7 @@ class _ScreenFavoriteState extends State<ScreenFavorite> {
                           padding: const EdgeInsets.fromLTRB(0, 5, 0, 2),
                           child: ListTile(
                               onTap: (() {
+                                onplay();
                                 audioPlayer.open(
                                     Playlist(
                                         audios: allsongs, startIndex: index),
@@ -126,9 +99,7 @@ class _ScreenFavoriteState extends State<ScreenFavorite> {
                                     headPhoneStrategy:
                                         HeadPhoneStrategy.pauseOnUnplug,
                                     loopMode: LoopMode.playlist);
-                                setState(() {
-                                  //playerVisibility = true;
-                                });
+
                                 Navigator.push(
                                   context,
                                   MaterialPageRoute(
@@ -205,5 +176,16 @@ class _ScreenFavoriteState extends State<ScreenFavorite> {
         ),
       )),
     );
+  }
+
+  onplay() {
+    final favSongsdb = Hive.box<favSongs>('favsongs').values.toList();
+    for (var item in favSongsdb) {
+      allsongs.add(Audio.file(item.songurl.toString(),
+          metas: Metas(
+              artist: item.artist,
+              title: item.songname,
+              id: item.id.toString())));
+    }
   }
 }

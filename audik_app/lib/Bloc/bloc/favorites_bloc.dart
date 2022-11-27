@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:audik_app/Model/dbfunctions.dart';
 import 'package:audik_app/Model/favoriteModel.dart';
 import 'package:bloc/bloc.dart';
@@ -10,7 +12,9 @@ part 'favorites_bloc.freezed.dart';
 
 class FavoritesBloc extends Bloc<FavoritesEvent, FavoritesState> {
   FavoritesBloc() : super(FavoritesState.initial()) {
-    on<_Started>(
-        (event, emit) => FavoritesState(fav: favsongsdb.values.toList()));
+    on<_Started>((event, emit) {
+      log(favsongsdb.length.toString());
+      FavoritesState(fav: favsongsdb.values.toList());
+    });
   }
 }

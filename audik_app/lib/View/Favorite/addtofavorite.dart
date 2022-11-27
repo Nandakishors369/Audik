@@ -1,5 +1,7 @@
 // ignore_for_file: camel_case_types, must_be_immutable, use_build_context_synchronously
 
+import 'dart:developer';
+
 import 'package:audik_app/Bloc/bloc/favorites_bloc.dart';
 import 'package:audik_app/Model/dbfunctions.dart';
 import 'package:audik_app/Model/favoriteModel.dart';
@@ -36,8 +38,6 @@ class _addToFavoriteState extends State<addToFavorite> {
             .isEmpty
         ? TextButton(
             onPressed: () {
-              BlocProvider.of<FavoritesBloc>(context)
-                  .add(FavoritesEvent.started());
               favsongsdb.add(favSongs(
                   songname: dbsongs[widget.index].songname,
                   artist: dbsongs[widget.index].artist,
@@ -47,6 +47,8 @@ class _addToFavoriteState extends State<addToFavorite> {
               setState(() {});
               BlocProvider.of<FavoritesBloc>(context)
                   .add(FavoritesEvent.started());
+              log("Build Called");
+              log(favsongsdb.length.toString());
               Navigator.pop(context);
               ScaffoldMessenger.of(context).showSnackBar(
                   const SnackBar(content: Text("Added to Favorites")));

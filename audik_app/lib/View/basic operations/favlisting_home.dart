@@ -69,99 +69,96 @@ class favHome extends StatelessWidget {
                           /*  height: height * 0.224, */
                           height: 220,
                           child: ListView.separated(
-                              scrollDirection: Axis.horizontal,
-                              padding: const EdgeInsets.all(19),
-                              itemBuilder: ((context, index) {
-                                return GestureDetector(
-                                  onTap: () {
-                                    /* Navigator.push(
+                            scrollDirection: Axis.horizontal,
+                            padding: const EdgeInsets.all(19),
+                            itemBuilder: ((context, index) {
+                              return GestureDetector(
+                                onTap: () {
+                                  /* Navigator.push(
                             context,
                             MaterialPageRoute(
                               builder: ((context) => const ScreenPlaylist()),
                             ),
                           ); */
-                                  },
-                                  child: GestureDetector(
-                                    onTap: (() {
-                                      audioPlayer.open(
-                                          Playlist(
-                                              audios: allsongs,
-                                              startIndex: index),
-                                          showNotification: musicNotif,
-                                          headPhoneStrategy:
-                                              HeadPhoneStrategy.pauseOnUnplug,
-                                          loopMode: LoopMode.playlist);
-                                      /*  setState(() {
+                                },
+                                child: GestureDetector(
+                                  onTap: (() {
+                                    audioPlayer.open(
+                                        Playlist(
+                                            audios: allsongs,
+                                            startIndex: index),
+                                        showNotification: musicNotif,
+                                        headPhoneStrategy:
+                                            HeadPhoneStrategy.pauseOnUnplug,
+                                        loopMode: LoopMode.playlist);
+                                    /*  setState(() {
                                       //playerVisibility = true;
                                     }); */
-                                      Navigator.push(
-                                        context,
-                                        MaterialPageRoute(
-                                          builder: ((context) => playingNow()),
-                                        ),
-                                      );
-                                    }),
-                                    child: Column(
-                                      children: [
-                                        Padding(
-                                          padding: EdgeInsets.fromLTRB(
-                                              0, height * 0.0106, 0, 0),
-                                          child: QueryArtworkWidget(
-                                            artworkHeight: width * 0.306,
-                                            artworkWidth: width * 0.306,
-                                            artworkFit: BoxFit.cover,
-                                            id: state.fav[index]
-                                                .id!, //allDbSongs[index].id!,
-                                            type: ArtworkType.AUDIO,
-                                            artworkQuality: FilterQuality.high,
-                                            size: 2000,
-                                            quality: 100,
-                                            artworkBorder:
-                                                BorderRadius.circular(8),
-                                            nullArtworkWidget: ClipRRect(
-                                              borderRadius:
-                                                  const BorderRadius.all(
-                                                      Radius.circular(8)),
-                                              child: Image.asset(
-                                                'assets/Music Brand and App Logo (1).png',
-                                                height: width * 0.306,
-                                                width: width * 0.306,
-                                                fit: BoxFit.cover,
-                                              ),
+                                    Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                        builder: ((context) => playingNow()),
+                                      ),
+                                    );
+                                  }),
+                                  child: Column(
+                                    children: [
+                                      Padding(
+                                        padding: EdgeInsets.fromLTRB(
+                                            0, height * 0.0106, 0, 0),
+                                        child: QueryArtworkWidget(
+                                          artworkHeight: width * 0.306,
+                                          artworkWidth: width * 0.306,
+                                          artworkFit: BoxFit.cover,
+                                          id: allDbSongs[index].id!,
+                                          type: ArtworkType.AUDIO,
+                                          artworkQuality: FilterQuality.high,
+                                          size: 2000,
+                                          quality: 100,
+                                          artworkBorder:
+                                              BorderRadius.circular(8),
+                                          nullArtworkWidget: ClipRRect(
+                                            borderRadius:
+                                                const BorderRadius.all(
+                                                    Radius.circular(8)),
+                                            child: Image.asset(
+                                              'assets/Music Brand and App Logo (1).png',
+                                              height: width * 0.306,
+                                              width: width * 0.306,
+                                              fit: BoxFit.cover,
                                             ),
                                           ),
                                         ),
-                                        const SizedBox(
-                                          height: 15,
+                                      ),
+                                      const SizedBox(
+                                        height: 15,
+                                      ),
+                                      SizedBox(
+                                        height: 18,
+                                        width: width * .28,
+                                        child: Marquee(
+                                          blankSpace: 20,
+                                          velocity: 20,
+                                          text: allDbSongs[index].songname!,
+                                          style: GoogleFonts.montserrat(
+                                              textStyle: const TextStyle(
+                                                  fontSize: 15,
+                                                  color: Colors.white,
+                                                  fontWeight: FontWeight.w500)),
                                         ),
-                                        SizedBox(
-                                          height: 18,
-                                          width: width * .28,
-                                          child: Marquee(
-                                            blankSpace: 20,
-                                            velocity: 20,
-                                            text: state.fav[index]
-                                                .songname!, //allDbSongs[index].songname!,
-                                            style: GoogleFonts.montserrat(
-                                                textStyle: const TextStyle(
-                                                    fontSize: 15,
-                                                    color: Colors.white,
-                                                    fontWeight:
-                                                        FontWeight.w500)),
-                                          ),
-                                        )
-                                      ],
-                                    ),
+                                      )
+                                    ],
                                   ),
-                                );
-                              }),
-                              separatorBuilder: ((context, index) {
-                                return SizedBox(
-                                  width: width * 0.024,
-                                );
-                              }),
-                              itemCount: state.fav.length //allDbSongs.length,
-                              ),
+                                ),
+                              );
+                            }),
+                            separatorBuilder: ((context, index) {
+                              return SizedBox(
+                                width: width * 0.024,
+                              );
+                            }),
+                            itemCount: allDbSongs.length,
+                          ),
                         ),
                       ),
                     ],

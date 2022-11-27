@@ -1,6 +1,7 @@
 // ignore_for_file: unused_import, camel_case_types, unused_local_variable
 
 import 'package:assets_audio_player/assets_audio_player.dart';
+import 'package:audik_app/Bloc/bloc/playlist_bloc.dart';
 import 'package:audik_app/View/Playlist/addplaylist.dart';
 import 'package:audik_app/View/Favorite/favorite.dart';
 import 'package:audik_app/View/Playlist/libraryplaylistview.dart';
@@ -8,6 +9,7 @@ import 'package:audik_app/View/Playlist/playlistscreen.dart';
 import 'package:audik_app/View/basic%20operations/songfromalbums.dart';
 import 'package:audik_app/View/other%20screens/screenplayingnow.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:marquee/marquee.dart';
 import 'package:on_audio_query/on_audio_query.dart';
@@ -61,7 +63,7 @@ class librarySearch extends StatelessWidget {
                 Navigator.push(
                   context,
                   MaterialPageRoute(
-                    builder: ((context) => const ScreenFavorite()),
+                    builder: ((context) => ScreenFavorite()),
                   ),
                 );
               },
@@ -114,12 +116,16 @@ class librarySearch extends StatelessWidget {
               height: height * 0.016,
             ),
             GestureDetector(
-              onTap: () => Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: ((context) => const addPlaylist()),
-                ),
-              ),
+              onTap: () {
+                BlocProvider.of<PlaylistBloc>(context)
+                    .add(PlaylistEvent.started());
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: ((context) => const addPlaylist()),
+                  ),
+                );
+              },
               child: Padding(
                 padding: const EdgeInsets.fromLTRB(0, 10, 20, 0),
                 child: Row(
