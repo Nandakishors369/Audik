@@ -1,5 +1,6 @@
 // ignore_for_file: camel_case_types, prefer_const_constructors, must_be_immutable
 
+import 'package:audik_app/Bloc/Recently%20Played/recently_played_bloc.dart';
 import 'package:audik_app/Model/dbfunctions.dart';
 import 'package:audik_app/Model/userName.dart';
 import 'package:audik_app/View/Recently%20and%20Mostly/mostlyPlayed.dart';
@@ -12,6 +13,7 @@ import 'package:audik_app/View/other%20screens/setting.dart';
 import 'package:flutter/cupertino.dart';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'package:google_fonts/google_fonts.dart';
 
@@ -86,7 +88,7 @@ class homeScreen extends StatelessWidget {
                         ),
                       ),
                     ),
-                    const favHome(),
+                    favHome(),
                     Padding(
                       padding: EdgeInsets.fromLTRB(
                           width * 0.05903, 0, 0, height * 0.0094),
@@ -155,6 +157,8 @@ class homeScreen extends StatelessWidget {
         children: [
           GestureDetector(
             onTap: () {
+              BlocProvider.of<RecentlyPlayedBloc>(context)
+                  .add(RecentlyPlayedEvent.started());
               Navigator.push(
                 context,
                 MaterialPageRoute(

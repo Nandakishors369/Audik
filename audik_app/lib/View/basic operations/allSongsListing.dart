@@ -1,4 +1,4 @@
-// ignore_for_file: file_names, unused_local_variable, non_constant_identifier_names
+// ignore_for_file: file_names, unused_local_variable, non_constant_identifier_names, must_be_immutable
 
 import 'package:assets_audio_player/assets_audio_player.dart';
 import 'package:audik_app/Bloc/All%20Songs/allsongs_bloc.dart';
@@ -72,13 +72,13 @@ class allSongsScreen extends StatelessWidget {
                         songurl: songs.songurl);
                     updateRecentPlayed(rsongs, index);
                     updatePlayedSongCount(MPsongs, index);
-                    /* updatePlayedSongCount(MPsongs, index); */
+
                     _audioPlayer.open(
                         Playlist(audios: convertAudios, startIndex: index),
                         showNotification: musicNotif,
                         headPhoneStrategy: HeadPhoneStrategy.pauseOnUnplug,
                         loopMode: LoopMode.playlist);
-                    // setState(() {});
+
                     Navigator.push(
                       context,
                       MaterialPageRoute(
@@ -139,10 +139,7 @@ class allSongsScreen extends StatelessWidget {
                                 //----------------------------------------Add to Favorite--------------------------------------------------
                                 addToFavorite(
                                   index: index,
-                                )
-                                /* TextButton(
-                                                    onPressed: () {},
-                                                    child: const Text("Add to Favorites")) */
+                                ),
                               ],
                             ),
                           );
@@ -172,7 +169,3 @@ class allSongsScreen extends StatelessWidget {
     }
   }
 }
-
-/* if(convertAudios.indexWhere(
-                      (e) => e.songname == playing.audio.audio.metas.title));
-  } */

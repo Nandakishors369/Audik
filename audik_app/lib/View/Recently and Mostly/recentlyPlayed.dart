@@ -65,8 +65,7 @@ class recentlyPlayed extends StatelessWidget {
   }
 
   Recentlist() {
-    return BlocConsumer<RecentlyPlayedBloc, RecentlyPlayedState>(
-      listener: (context, state) => recentlyplayedbox,
+    return BlocBuilder<RecentlyPlayedBloc, RecentlyPlayedState>(
       builder: (context, state) {
         return ValueListenableBuilder<Box<RecentPlayed>>(
             valueListenable: recentlyplayedbox.listenable(),
@@ -96,7 +95,7 @@ class recentlyPlayed extends StatelessWidget {
                 child: ListView.builder(
                   physics: const NeverScrollableScrollPhysics(),
                   shrinkWrap: true,
-                  itemCount: rsongs.length,
+                  itemCount: state.recent.length, //rsongs.length,
                   itemBuilder: ((context, index) {
                     List<MostPlayed> allmostplayedsongs =
                         mostplayedsongs.values.toList();
@@ -104,7 +103,7 @@ class recentlyPlayed extends StatelessWidget {
                     return ListTile(
                       leading: QueryArtworkWidget(
                         artworkFit: BoxFit.cover,
-                        id: rsongs[index].id!,
+                        id: state.recent[index].id!, //rsongs[index].id!,
                         type: ArtworkType.AUDIO,
                         artworkQuality: FilterQuality.high,
                         size: 2000,
@@ -121,7 +120,8 @@ class recentlyPlayed extends StatelessWidget {
                       ),
                       title: SingleChildScrollView(
                         child: Text(
-                          rsongs[index].songname!,
+                          state.recent[index].songname!,
+                          //rsongs[index].songname!,
                           maxLines: 1,
                           style: GoogleFonts.montserrat(
                             textStyle: const TextStyle(

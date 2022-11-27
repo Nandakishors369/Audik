@@ -1,6 +1,7 @@
 //import 'package:audik_app/Bloc/AllSongs/all_songs_bloc_bloc.dart';
 
 import 'package:audik_app/Bloc/Recently%20Played/recently_played_bloc.dart';
+import 'package:audik_app/Bloc/bloc/favorites_bloc.dart';
 import 'package:audik_app/Bloc/now%20playing/now_playing_bloc.dart';
 import 'package:audik_app/View/Main%20Screens/splash.dart';
 import 'package:audik_app/Model/dbfunctions.dart';
@@ -59,6 +60,9 @@ class MyApp extends StatelessWidget {
         ),
         BlocProvider<NowPlayingBloc>(
           create: (context) => NowPlayingBloc(),
+        ),
+        BlocProvider<FavoritesBloc>(
+          create: (context) => FavoritesBloc(),
         )
       ],
       child: GetMaterialApp(
