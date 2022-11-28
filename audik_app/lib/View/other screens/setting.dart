@@ -1,11 +1,13 @@
 // ignore_for_file: prefer_final_fields, unused_local_variable, no_leading_underscores_for_local_identifiers
 
 import 'package:assets_audio_player/assets_audio_player.dart';
+import 'package:audik_app/Bloc/now%20playing/now_playing_bloc.dart';
 import 'package:audik_app/Model/dbfunctions.dart';
 import 'package:audik_app/Model/userName.dart';
 import 'package:audik_app/View/other%20screens/settingPopup.dart';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:on_audio_query/on_audio_query.dart';
@@ -328,6 +330,8 @@ class _SettingScreenState extends State<SettingScreen> {
                                       0,
                                       nickName(
                                           name: _textEditingController.text));
+                                  BlocProvider.of<NowPlayingBloc>(context)
+                                      .add(NowPlayingEvent.name());
                                   Navigator.pop(context);
                                 }
                               },

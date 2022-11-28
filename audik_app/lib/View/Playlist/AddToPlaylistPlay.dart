@@ -1,7 +1,7 @@
 // ignore: file_names
 // ignore_for_file: must_be_immutable, file_names, duplicate_ignore, prefer_final_fields
 
-import 'package:audik_app/Bloc/bloc/playlist_bloc.dart';
+import 'package:audik_app/Bloc/favorite%20and%20playlist/playlist_bloc.dart';
 import 'package:audik_app/Model/dbfunctions.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';

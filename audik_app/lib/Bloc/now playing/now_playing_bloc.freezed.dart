@@ -22,6 +22,7 @@ mixin _$NowPlayingEvent {
     required TResult Function() untapped,
     required TResult Function() ontaped,
     required TResult Function() untap,
+    required TResult Function() name,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -30,6 +31,7 @@ mixin _$NowPlayingEvent {
     TResult? Function()? untapped,
     TResult? Function()? ontaped,
     TResult? Function()? untap,
+    TResult? Function()? name,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -38,6 +40,7 @@ mixin _$NowPlayingEvent {
     TResult Function()? untapped,
     TResult Function()? ontaped,
     TResult Function()? untap,
+    TResult Function()? name,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -47,6 +50,7 @@ mixin _$NowPlayingEvent {
     required TResult Function(_Untapped value) untapped,
     required TResult Function(_Ontaped value) ontaped,
     required TResult Function(_Untap value) untap,
+    required TResult Function(_Name value) name,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -55,6 +59,7 @@ mixin _$NowPlayingEvent {
     TResult? Function(_Untapped value)? untapped,
     TResult? Function(_Ontaped value)? ontaped,
     TResult? Function(_Untap value)? untap,
+    TResult? Function(_Name value)? name,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -63,6 +68,7 @@ mixin _$NowPlayingEvent {
     TResult Function(_Untapped value)? untapped,
     TResult Function(_Ontaped value)? ontaped,
     TResult Function(_Untap value)? untap,
+    TResult Function(_Name value)? name,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -126,6 +132,7 @@ class _$_Tapped implements _Tapped {
     required TResult Function() untapped,
     required TResult Function() ontaped,
     required TResult Function() untap,
+    required TResult Function() name,
   }) {
     return tapped();
   }
@@ -137,6 +144,7 @@ class _$_Tapped implements _Tapped {
     TResult? Function()? untapped,
     TResult? Function()? ontaped,
     TResult? Function()? untap,
+    TResult? Function()? name,
   }) {
     return tapped?.call();
   }
@@ -148,6 +156,7 @@ class _$_Tapped implements _Tapped {
     TResult Function()? untapped,
     TResult Function()? ontaped,
     TResult Function()? untap,
+    TResult Function()? name,
     required TResult orElse(),
   }) {
     if (tapped != null) {
@@ -163,6 +172,7 @@ class _$_Tapped implements _Tapped {
     required TResult Function(_Untapped value) untapped,
     required TResult Function(_Ontaped value) ontaped,
     required TResult Function(_Untap value) untap,
+    required TResult Function(_Name value) name,
   }) {
     return tapped(this);
   }
@@ -174,6 +184,7 @@ class _$_Tapped implements _Tapped {
     TResult? Function(_Untapped value)? untapped,
     TResult? Function(_Ontaped value)? ontaped,
     TResult? Function(_Untap value)? untap,
+    TResult? Function(_Name value)? name,
   }) {
     return tapped?.call(this);
   }
@@ -185,6 +196,7 @@ class _$_Tapped implements _Tapped {
     TResult Function(_Untapped value)? untapped,
     TResult Function(_Ontaped value)? ontaped,
     TResult Function(_Untap value)? untap,
+    TResult Function(_Name value)? name,
     required TResult orElse(),
   }) {
     if (tapped != null) {
@@ -240,6 +252,7 @@ class _$_Untapped implements _Untapped {
     required TResult Function() untapped,
     required TResult Function() ontaped,
     required TResult Function() untap,
+    required TResult Function() name,
   }) {
     return untapped();
   }
@@ -251,6 +264,7 @@ class _$_Untapped implements _Untapped {
     TResult? Function()? untapped,
     TResult? Function()? ontaped,
     TResult? Function()? untap,
+    TResult? Function()? name,
   }) {
     return untapped?.call();
   }
@@ -262,6 +276,7 @@ class _$_Untapped implements _Untapped {
     TResult Function()? untapped,
     TResult Function()? ontaped,
     TResult Function()? untap,
+    TResult Function()? name,
     required TResult orElse(),
   }) {
     if (untapped != null) {
@@ -277,6 +292,7 @@ class _$_Untapped implements _Untapped {
     required TResult Function(_Untapped value) untapped,
     required TResult Function(_Ontaped value) ontaped,
     required TResult Function(_Untap value) untap,
+    required TResult Function(_Name value) name,
   }) {
     return untapped(this);
   }
@@ -288,6 +304,7 @@ class _$_Untapped implements _Untapped {
     TResult? Function(_Untapped value)? untapped,
     TResult? Function(_Ontaped value)? ontaped,
     TResult? Function(_Untap value)? untap,
+    TResult? Function(_Name value)? name,
   }) {
     return untapped?.call(this);
   }
@@ -299,6 +316,7 @@ class _$_Untapped implements _Untapped {
     TResult Function(_Untapped value)? untapped,
     TResult Function(_Ontaped value)? ontaped,
     TResult Function(_Untap value)? untap,
+    TResult Function(_Name value)? name,
     required TResult orElse(),
   }) {
     if (untapped != null) {
@@ -353,6 +371,7 @@ class _$_Ontaped implements _Ontaped {
     required TResult Function() untapped,
     required TResult Function() ontaped,
     required TResult Function() untap,
+    required TResult Function() name,
   }) {
     return ontaped();
   }
@@ -364,6 +383,7 @@ class _$_Ontaped implements _Ontaped {
     TResult? Function()? untapped,
     TResult? Function()? ontaped,
     TResult? Function()? untap,
+    TResult? Function()? name,
   }) {
     return ontaped?.call();
   }
@@ -375,6 +395,7 @@ class _$_Ontaped implements _Ontaped {
     TResult Function()? untapped,
     TResult Function()? ontaped,
     TResult Function()? untap,
+    TResult Function()? name,
     required TResult orElse(),
   }) {
     if (ontaped != null) {
@@ -390,6 +411,7 @@ class _$_Ontaped implements _Ontaped {
     required TResult Function(_Untapped value) untapped,
     required TResult Function(_Ontaped value) ontaped,
     required TResult Function(_Untap value) untap,
+    required TResult Function(_Name value) name,
   }) {
     return ontaped(this);
   }
@@ -401,6 +423,7 @@ class _$_Ontaped implements _Ontaped {
     TResult? Function(_Untapped value)? untapped,
     TResult? Function(_Ontaped value)? ontaped,
     TResult? Function(_Untap value)? untap,
+    TResult? Function(_Name value)? name,
   }) {
     return ontaped?.call(this);
   }
@@ -412,6 +435,7 @@ class _$_Ontaped implements _Ontaped {
     TResult Function(_Untapped value)? untapped,
     TResult Function(_Ontaped value)? ontaped,
     TResult Function(_Untap value)? untap,
+    TResult Function(_Name value)? name,
     required TResult orElse(),
   }) {
     if (ontaped != null) {
@@ -465,6 +489,7 @@ class _$_Untap implements _Untap {
     required TResult Function() untapped,
     required TResult Function() ontaped,
     required TResult Function() untap,
+    required TResult Function() name,
   }) {
     return untap();
   }
@@ -476,6 +501,7 @@ class _$_Untap implements _Untap {
     TResult? Function()? untapped,
     TResult? Function()? ontaped,
     TResult? Function()? untap,
+    TResult? Function()? name,
   }) {
     return untap?.call();
   }
@@ -487,6 +513,7 @@ class _$_Untap implements _Untap {
     TResult Function()? untapped,
     TResult Function()? ontaped,
     TResult Function()? untap,
+    TResult Function()? name,
     required TResult orElse(),
   }) {
     if (untap != null) {
@@ -502,6 +529,7 @@ class _$_Untap implements _Untap {
     required TResult Function(_Untapped value) untapped,
     required TResult Function(_Ontaped value) ontaped,
     required TResult Function(_Untap value) untap,
+    required TResult Function(_Name value) name,
   }) {
     return untap(this);
   }
@@ -513,6 +541,7 @@ class _$_Untap implements _Untap {
     TResult? Function(_Untapped value)? untapped,
     TResult? Function(_Ontaped value)? ontaped,
     TResult? Function(_Untap value)? untap,
+    TResult? Function(_Name value)? name,
   }) {
     return untap?.call(this);
   }
@@ -524,6 +553,7 @@ class _$_Untap implements _Untap {
     TResult Function(_Untapped value)? untapped,
     TResult Function(_Ontaped value)? ontaped,
     TResult Function(_Untap value)? untap,
+    TResult Function(_Name value)? name,
     required TResult orElse(),
   }) {
     if (untap != null) {
@@ -538,9 +568,128 @@ abstract class _Untap implements NowPlayingEvent {
 }
 
 /// @nodoc
+abstract class _$$_NameCopyWith<$Res> {
+  factory _$$_NameCopyWith(_$_Name value, $Res Function(_$_Name) then) =
+      __$$_NameCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$$_NameCopyWithImpl<$Res>
+    extends _$NowPlayingEventCopyWithImpl<$Res, _$_Name>
+    implements _$$_NameCopyWith<$Res> {
+  __$$_NameCopyWithImpl(_$_Name _value, $Res Function(_$_Name) _then)
+      : super(_value, _then);
+}
+
+/// @nodoc
+
+class _$_Name implements _Name {
+  const _$_Name();
+
+  @override
+  String toString() {
+    return 'NowPlayingEvent.name()';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType && other is _$_Name);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() tapped,
+    required TResult Function() untapped,
+    required TResult Function() ontaped,
+    required TResult Function() untap,
+    required TResult Function() name,
+  }) {
+    return name();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? tapped,
+    TResult? Function()? untapped,
+    TResult? Function()? ontaped,
+    TResult? Function()? untap,
+    TResult? Function()? name,
+  }) {
+    return name?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? tapped,
+    TResult Function()? untapped,
+    TResult Function()? ontaped,
+    TResult Function()? untap,
+    TResult Function()? name,
+    required TResult orElse(),
+  }) {
+    if (name != null) {
+      return name();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_Tapped value) tapped,
+    required TResult Function(_Untapped value) untapped,
+    required TResult Function(_Ontaped value) ontaped,
+    required TResult Function(_Untap value) untap,
+    required TResult Function(_Name value) name,
+  }) {
+    return name(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_Tapped value)? tapped,
+    TResult? Function(_Untapped value)? untapped,
+    TResult? Function(_Ontaped value)? ontaped,
+    TResult? Function(_Untap value)? untap,
+    TResult? Function(_Name value)? name,
+  }) {
+    return name?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_Tapped value)? tapped,
+    TResult Function(_Untapped value)? untapped,
+    TResult Function(_Ontaped value)? ontaped,
+    TResult Function(_Untap value)? untap,
+    TResult Function(_Name value)? name,
+    required TResult orElse(),
+  }) {
+    if (name != null) {
+      return name(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _Name implements NowPlayingEvent {
+  const factory _Name() = _$_Name;
+}
+
+/// @nodoc
 mixin _$NowPlayingState {
   Color get loop => throw _privateConstructorUsedError;
   Color get shuffle => throw _privateConstructorUsedError;
+  List<nickName> get nmae => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $NowPlayingStateCopyWith<NowPlayingState> get copyWith =>
@@ -553,7 +702,7 @@ abstract class $NowPlayingStateCopyWith<$Res> {
           NowPlayingState value, $Res Function(NowPlayingState) then) =
       _$NowPlayingStateCopyWithImpl<$Res, NowPlayingState>;
   @useResult
-  $Res call({Color loop, Color shuffle});
+  $Res call({Color loop, Color shuffle, List<nickName> nmae});
 }
 
 /// @nodoc
@@ -571,6 +720,7 @@ class _$NowPlayingStateCopyWithImpl<$Res, $Val extends NowPlayingState>
   $Res call({
     Object? loop = null,
     Object? shuffle = null,
+    Object? nmae = null,
   }) {
     return _then(_value.copyWith(
       loop: null == loop
@@ -581,6 +731,10 @@ class _$NowPlayingStateCopyWithImpl<$Res, $Val extends NowPlayingState>
           ? _value.shuffle
           : shuffle // ignore: cast_nullable_to_non_nullable
               as Color,
+      nmae: null == nmae
+          ? _value.nmae
+          : nmae // ignore: cast_nullable_to_non_nullable
+              as List<nickName>,
     ) as $Val);
   }
 }
@@ -593,7 +747,7 @@ abstract class _$$_NowPlayingStateCopyWith<$Res>
       __$$_NowPlayingStateCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({Color loop, Color shuffle});
+  $Res call({Color loop, Color shuffle, List<nickName> nmae});
 }
 
 /// @nodoc
@@ -609,6 +763,7 @@ class __$$_NowPlayingStateCopyWithImpl<$Res>
   $Res call({
     Object? loop = null,
     Object? shuffle = null,
+    Object? nmae = null,
   }) {
     return _then(_$_NowPlayingState(
       loop: null == loop
@@ -619,6 +774,10 @@ class __$$_NowPlayingStateCopyWithImpl<$Res>
           ? _value.shuffle
           : shuffle // ignore: cast_nullable_to_non_nullable
               as Color,
+      nmae: null == nmae
+          ? _value._nmae
+          : nmae // ignore: cast_nullable_to_non_nullable
+              as List<nickName>,
     ));
   }
 }
@@ -626,16 +785,26 @@ class __$$_NowPlayingStateCopyWithImpl<$Res>
 /// @nodoc
 
 class _$_NowPlayingState implements _NowPlayingState {
-  const _$_NowPlayingState({required this.loop, required this.shuffle});
+  const _$_NowPlayingState(
+      {required this.loop,
+      required this.shuffle,
+      required final List<nickName> nmae})
+      : _nmae = nmae;
 
   @override
   final Color loop;
   @override
   final Color shuffle;
+  final List<nickName> _nmae;
+  @override
+  List<nickName> get nmae {
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_nmae);
+  }
 
   @override
   String toString() {
-    return 'NowPlayingState(loop: $loop, shuffle: $shuffle)';
+    return 'NowPlayingState(loop: $loop, shuffle: $shuffle, nmae: $nmae)';
   }
 
   @override
@@ -644,11 +813,13 @@ class _$_NowPlayingState implements _NowPlayingState {
         (other.runtimeType == runtimeType &&
             other is _$_NowPlayingState &&
             (identical(other.loop, loop) || other.loop == loop) &&
-            (identical(other.shuffle, shuffle) || other.shuffle == shuffle));
+            (identical(other.shuffle, shuffle) || other.shuffle == shuffle) &&
+            const DeepCollectionEquality().equals(other._nmae, _nmae));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, loop, shuffle);
+  int get hashCode => Object.hash(
+      runtimeType, loop, shuffle, const DeepCollectionEquality().hash(_nmae));
 
   @JsonKey(ignore: true)
   @override
@@ -660,12 +831,15 @@ class _$_NowPlayingState implements _NowPlayingState {
 abstract class _NowPlayingState implements NowPlayingState {
   const factory _NowPlayingState(
       {required final Color loop,
-      required final Color shuffle}) = _$_NowPlayingState;
+      required final Color shuffle,
+      required final List<nickName> nmae}) = _$_NowPlayingState;
 
   @override
   Color get loop;
   @override
   Color get shuffle;
+  @override
+  List<nickName> get nmae;
   @override
   @JsonKey(ignore: true)
   _$$_NowPlayingStateCopyWith<_$_NowPlayingState> get copyWith =>

@@ -1,6 +1,7 @@
 // ignore_for_file: camel_case_types, prefer_const_constructors, must_be_immutable
 
 import 'package:audik_app/Bloc/Recently%20Played/recently_played_bloc.dart';
+import 'package:audik_app/Bloc/now%20playing/now_playing_bloc.dart';
 import 'package:audik_app/Model/dbfunctions.dart';
 import 'package:audik_app/Model/userName.dart';
 import 'package:audik_app/View/Recently%20and%20Mostly/mostlyPlayed.dart';
@@ -33,10 +34,12 @@ class homeScreen extends StatelessWidget {
     final height = MediaQuery.of(context).size.height;
     final width = MediaQuery.of(context).size.width;
 
-    return ValueListenableBuilder(
-      valueListenable: nameBox.listenable(),
-      builder: (context, value, child) {
-        userName = nameBox.values.toList();
+    return BlocBuilder<NowPlayingBloc, NowPlayingState>(
+      builder: (context, state) {
+        /* return ValueListenableBuilder(
+          valueListenable: nameBox.listenable(),
+          builder: (context, value, child) { */
+        userName = state.nmae; //nameBox.values.toList();
         return Scaffold(
           bottomSheet: playingCard(),
           backgroundColor: const Color.fromARGB(255, 21, 21, 21),

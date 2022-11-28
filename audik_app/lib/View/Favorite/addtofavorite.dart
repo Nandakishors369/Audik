@@ -2,7 +2,7 @@
 
 import 'dart:developer';
 
-import 'package:audik_app/Bloc/bloc/favorites_bloc.dart';
+import 'package:audik_app/Bloc/favorite%20and%20playlist/favorites_bloc.dart';
 import 'package:audik_app/Model/dbfunctions.dart';
 import 'package:audik_app/Model/favoriteModel.dart';
 import 'package:audik_app/Model/songModel.dart';

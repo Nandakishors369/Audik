@@ -1,7 +1,8 @@
 // ignore_for_file: must_be_immutable
 
 import 'package:assets_audio_player/assets_audio_player.dart';
-import 'package:audik_app/Bloc/bloc/playlist_bloc.dart';
+
+import 'package:audik_app/Bloc/favorite%20and%20playlist/playlist_bloc.dart';
 import 'package:audik_app/Model/dbfunctions.dart';
 import 'package:audik_app/Model/playlistmodel.dart';
 import 'package:audik_app/Model/songModel.dart';

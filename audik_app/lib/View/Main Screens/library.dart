@@ -1,7 +1,8 @@
 // ignore_for_file: unused_import, camel_case_types, unused_local_variable
 
 import 'package:assets_audio_player/assets_audio_player.dart';
-import 'package:audik_app/Bloc/bloc/playlist_bloc.dart';
+
+import 'package:audik_app/Bloc/favorite%20and%20playlist/playlist_bloc.dart';
 import 'package:audik_app/View/Playlist/addplaylist.dart';
 import 'package:audik_app/View/Favorite/favorite.dart';
 import 'package:audik_app/View/Playlist/libraryplaylistview.dart';
@@ -149,7 +150,7 @@ class librarySearch extends StatelessWidget {
                 //height: height * 0.011,
                 ),
             //headings("Folders"),
-            const Album(width: 5),
+            Album(width: 5),
             const SizedBox(height: 20)
           ],
         ),

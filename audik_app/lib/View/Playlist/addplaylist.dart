@@ -1,6 +1,6 @@
 // ignore_for_file: camel_case_types, prefer_final_fields, non_constant_identifier_names, unused_local_variable
 
-import 'package:audik_app/Bloc/bloc/playlist_bloc.dart';
+import 'package:audik_app/Bloc/favorite%20and%20playlist/playlist_bloc.dart';
 import 'package:audik_app/Model/dbfunctions.dart';
 import 'package:audik_app/Model/playlistmodel.dart';
 import 'package:audik_app/View/Playlist/playlistscreen.dart';

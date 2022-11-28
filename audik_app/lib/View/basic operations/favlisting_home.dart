@@ -1,7 +1,8 @@
 // ignore_for_file: camel_case_types
 
 import 'package:assets_audio_player/assets_audio_player.dart';
-import 'package:audik_app/Bloc/bloc/favorites_bloc.dart';
+
+import 'package:audik_app/Bloc/favorite%20and%20playlist/favorites_bloc.dart';
 import 'package:audik_app/View/other%20screens/screenplayingnow.dart';
 import 'package:audik_app/View/other%20screens/setting.dart';
 import 'package:flutter/material.dart';

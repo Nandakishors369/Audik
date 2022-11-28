@@ -8,19 +8,16 @@ import 'package:marquee/marquee.dart';
 
 import 'package:on_audio_query/on_audio_query.dart';
 
-class SongsByAlbumScreen extends StatefulWidget {
+class SongsByAlbumScreen extends StatelessWidget {
   final String albumName;
   final int albumId;
-  const SongsByAlbumScreen(
+  SongsByAlbumScreen(
       {super.key, required this.albumName, required this.albumId});
 
-  @override
-  State<SongsByAlbumScreen> createState() => _SongsByAlbumScreenState();
-}
-
-class _SongsByAlbumScreenState extends State<SongsByAlbumScreen> {
   final OnAudioQuery fetchAlbumSongs = OnAudioQuery();
+
   final AssetsAudioPlayer _audioPlayer = AssetsAudioPlayer.withId('0');
+
   int itemId = 0;
 
   @override
@@ -51,7 +48,7 @@ class _SongsByAlbumScreenState extends State<SongsByAlbumScreen> {
                           blankSpace: 40,
                           velocity: 40,
                           // pauseAfterRound: Duration(seconds: 2),
-                          text: "${widget.albumName}   ",
+                          text: "$albumName   ",
                           style: GoogleFonts.montserrat(
                               textStyle: const TextStyle(
                                   fontSize: 25,
@@ -65,7 +62,7 @@ class _SongsByAlbumScreenState extends State<SongsByAlbumScreen> {
               ),
               FutureBuilder<List<SongModel>>(
                 future: fetchAlbumSongs.queryAudiosFrom(
-                    AudiosFromType.ALBUM_ID, widget.albumId,
+                    AudiosFromType.ALBUM_ID, albumId,
                     sortType: SongSortType.TITLE,
                     orderType: OrderType.ASC_OR_SMALLER),
                 builder: (context, item) {
@@ -104,7 +101,7 @@ class _SongsByAlbumScreenState extends State<SongsByAlbumScreen> {
                                 headPhoneStrategy:
                                     HeadPhoneStrategy.pauseOnUnplug,
                                 loopMode: LoopMode.playlist);
-                            setState(() {});
+                            //setState(() {});
                             Navigator.push(
                               context,
                               MaterialPageRoute(
@@ -144,52 +141,7 @@ class _SongsByAlbumScreenState extends State<SongsByAlbumScreen> {
                             ),
                           ),
                         ),
-                      ); /* ListTile(
-                    onTap: () {
-                      _audioPlayer.open(
-                        Playlist(audios: songsByAlbums, startIndex: index),
-                        showNotification: true,
                       );
-        
-                      const homeScreen();
-                      Navigator.of(context).push(
-                        MaterialPageRoute(
-                          builder: (context) {
-                            return Text(
-                                "hello"); /* (
-                                  index: index,
-                                ); */
-                          },
-                        ),
-                      );
-                    },
-                    leading: QueryArtworkWidget(
-                      artworkBorder: BorderRadius.circular(15),
-                      artworkHeight: 90,
-                      artworkWidth: 60,
-                      id: itemId,
-                      type: ArtworkType.AUDIO,
-                      artworkFit: BoxFit.cover,
-                      nullArtworkWidget: ClipRRect(
-                          borderRadius: BorderRadius.circular(15),
-                          child: Image.asset(
-                            'assets/Music Brand and App Logo (1).png',
-                            width: 60,
-                            height: 90,
-                            fit: BoxFit.cover,
-                          )),
-                    ),
-                    title: Text(
-                      songsByAlbums[index].metas.title.toString(),
-                      style: TextStyle(color: Color.fromARGB(255, 0, 0, 0)),
-                    ),
-                    subtitle: Text(
-                      songsByAlbums[index].metas.album.toString(),
-                      style: TextStyle(color: Color.fromARGB(255, 0, 0, 0)),
-                      overflow: TextOverflow.ellipsis,
-                    ),
-                    // trailing: favPlayListIcons(),
-                  ); */
                     },
                     itemCount: item.data!.length,
                   );
